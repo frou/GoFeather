@@ -2,24 +2,24 @@
 
 # Description
 
-I didn't get on with [Sublime Text]'s [Go] package(s) (NIH...?). Here is my own
-take on supporting Go in Sublime.
+I didn't get on with [Sublime Text]'s existing [Go] packages (NIH...?). Here is
+my take on a minimalist package to work with Go in Sublime.
 
-You might like the classifications this package makes for syntax-highlighting
-better than the default package's.
+It parses source for syntax-highlighting purposes in a KISS manner. You might
+like the results better than what other packages give.
 
-There is also basic integration of:
+There is also integration of:
 
 ## go doc
 
-__Alt+Enter__
+Pressing __Alt+Enter__:
 
 Shows an input panel and then runs `go doc` with what was submitted from the
 panel as an argument. The result then shows in an output panel.
 
 For example, try: `json` or `builin.make` or `bytes.Buffer.Reset`
 
-__Shift+Enter__
+Pressing __Shift+Enter__:
 
 * With a text selection: Runs `go doc` with the text selection as an argument
 and shows the result in an output panel.
@@ -29,7 +29,7 @@ current Go source file is in and shows the result in an output panel.
 
 ## godoc.org
 
-__Ctrl+Enter__
+Pressing __Ctrl+Enter__:
 
 * With a text selection: Considers the text selection a package path and
 launches your web browser showing godoc.org for that package. Surrounding
