@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>name</key>
+    <string>GoFeather</string>
+
+    <key>scopeName</key>
+    <string>source.go</string>
+
+    <key>fileTypes</key>
+    <array>
+        <string>go</string>
+    </array>
+
+    <key>author</key>
+    <string>https://github.com/frou</string>
+
+    <key>patterns</key>
+    <array>
+        <!-- Comment -->
+        <dict>
+            <key>name</key>
+            <string>comment.block.go</string>
+
+            <key>begin</key>
+            <string>/\*</string>
+
+            <key>end</key>
+            <string>\*/</string>
+        </dict>
+
+        <dict>
+            <key>name</key>
+            <string>comment.line.double-slash.go</string>
+
+            <key>begin</key>
+            <string>//</string>
+
+            <key>end</key>
+            <string>$</string>
+        </dict>
+
+        <!-- String -->
+        <dict>
+            <key>name</key>
+            <string>string.quoted.other.raw.go</string>
+
+            <key>begin</key>
+            <string>`</string>
+
+            <key>end</key>
+            <string>`</string>
+        </dict>
+
+        <dict>
+            <key>name</key>
+            <string>string.quoted.double.go</string>
+
+            <key>match</key>
+            <string>"(|.*?[^\\]|.*?(?&lt;!\\)(\\\\)*)"</string>
+        </dict>
+
+        <!-- Constant -->
+        <dict>
+            <key>name</key>
+            <string>constant.language.go</string>
+
+            <key>match</key>
+            <string>\b(true|false|nil|iota)\b</string>
+        </dict>
+
+        <dict>
+            <key>name</key>
+            <string>constant.numeric.floating-point.go</string>
+
+            <key>match</key>
+            <string>\b((\d+\.(\d+)?([eE][+-]?\d+)?|\d+[eE][+-]?\d+|\.\d+([eE][+-]?\d+)?)i?)\b</string>
+        </dict>
+
+        <dict>
+            <key>name</key>
+            <string>constant.numeric.integer.go</string>
+
+            <key>match</key>
+            <string>\b(\d+i|0[xX][0-9A-Fa-f]+|0[0-7]*|[1-9][0-9]*)\b</string>
+        </dict>
+
+        <dict>
+            <key>name</key>
+            <string>constant.other.rune.go</string>
+
+            <key>match</key>
+            <string>'([^\\]+?|\\[^\\]+?|\\\\)'</string>
+        </dict>
+
+        <!-- Storage -->
+        <dict>
+            <key>name</key>
+            <string>storage.type.go</string>
+
+            <key>match</key>
+            <string>\b(bool|byte|complex(64|128)|error|float(32|64)|rune|string|u?int(8|16|32|64)?|uintptr)\b</string>
+        </dict>
+
+        <!-- Keyword -->
+        <dict>
+            <key>name</key>
+            <string>keyword.other.go</string>
+
+            <key>match</key>
+            <string>\b(break|case|chan|const|continue|default|defer|else|fallthrough|for|func|go|goto|if|import|interface|map|package|range|return|select|struct|switch|type|var)\b</string>
+        </dict>
+
+        <!-- Entity -->
+        <dict>
+            <key>name</key>
+            <string>entity.name.function.go</string>
+
+            <key>match</key>
+            <string>(?&lt;=(\Afunc|...\))\s)\b(\w+)\b(?=\()</string>
+        </dict>
+
+        <dict>
+            <key>name</key>
+            <string>entity.name.function.go</string>
+
+            <key>match</key>
+            <string>(?&lt;=(\sfunc|....\))\s)\b(\w+)\b(?=\()</string>
+        </dict>
+
+        <dict>
+            <key>name</key>
+            <string>entity.name.type.go</string>
+
+            <key>match</key>
+            <string>(?&lt;=\Atype\s)\b(\w+)\b</string>
+        </dict>
+
+        <dict>
+            <key>name</key>
+            <string>entity.name.type.go</string>
+
+            <key>match</key>
+            <string>(?&lt;=\stype\s)\b(\w+)\b</string>
+        </dict>
+
+        <!-- Support -->
+        <dict>
+            <key>name</key>
+            <string>support.function.builtin.go</string>
+
+            <key>match</key>
+            <string>\b(append|cap|close|complex|copy|delete|imag|len|make|new|panic|print|println|real|recover)\b</string>
+        </dict>
+
+        <dict>
+            <key>name</key>
+            <string>support.function.go</string>
+
+            <key>match</key>
+            <string>\b(\w+)\b(?=\()</string>
+        </dict>
+    </array>
+</dict>
+</plist>

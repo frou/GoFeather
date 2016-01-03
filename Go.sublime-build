@@ -1,0 +1,19 @@
+{
+    "selector": "source.go",
+    "shell": true,
+    "cmd": ["goimports -l -w . && go install"],
+    "file_regex": "^(.+?):([0-9]+):([0-9]+)?:? (.+)$",
+    "variants":
+    [
+        {
+            "name": "Build In Package Directory",
+            "shell": true,
+            "cmd": ["goimports -l -w . && go build"],
+        },
+        {
+            "name": "Run Tests",
+            "shell": true,
+            "cmd": ["goimports -l -w . && go test"],
+        }
+    ]
+}
