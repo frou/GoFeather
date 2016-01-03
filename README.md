@@ -8,26 +8,28 @@ take on supporting Go in Sublime.
 You might like the classifications this package makes for syntax-highlighting
 better than the default package's.
 
-There is also basic [integration] of:
+There is also basic integration of:
 
 ## go doc
 
-### Shift+Enter
+__Alt+Enter__
+
+Shows an input panel and then runs `go doc` with what was submitted from the
+panel as an argument. The result then shows in an output panel.
+
+For example, try: `json` or `builin.make` or `bytes.Buffer.Reset`
+
+__Shift+Enter__
 
 * With a text selection: Runs `go doc` with the text selection as an argument
 and shows the result in an output panel.
 
-* Without a text selection: Runs `go doc` on the package the current source
-file is in and shows the result in an output panel.
-
-### Alt+Enter
-
-Shows an input panel and then runs `go doc` with what was submitted as an
-argument and shows the result in an output panel.
+* Without a text selection: Runs `go doc` on the directory (package) that the
+current Go source file is in and shows the result in an output panel.
 
 ## godoc.org
 
-### Ctrl+Enter
+__Ctrl+Enter__
 
 * With a text selection: Considers the text selection a package path and
 launches your web browser showing godoc.org for that package. Surrounding
@@ -80,4 +82,3 @@ SOFTWARE.
 [shot]: https://raw.githubusercontent.com/frou/GoFeather/master/screenshot.png
 [sublime text]: https://www.sublimetext.com/
 [go]: https://www.golang.org/
-[integration]: https://github.com/frou/GoFeather/blob/master/document.py
