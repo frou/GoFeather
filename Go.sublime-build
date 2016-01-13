@@ -1,19 +1,24 @@
 {
     "selector": "source.go",
     "shell": true,
-    "cmd": ["goimports -l -w . && go install"],
+    "cmd": ["goimports -w . || gofmt -w . && go build"],
     "file_regex": "^(.+?):([0-9]+):([0-9]+)?:? (.+)$",
     "variants":
     [
         {
-            "name": "Build In Package Directory",
+            "name": "Install",
             "shell": true,
-            "cmd": ["goimports -l -w . && go build"],
+            "cmd": ["goimports -w . || gofmt -w . && go install"],
         },
         {
-            "name": "Run Tests",
+            "name": "Test",
             "shell": true,
-            "cmd": ["goimports -l -w . && go test"],
+            "cmd": ["goimports -w . || gofmt -w . && go test"],
+        },
+        {
+            "name": "Run (Single File)",
+            "shell": true,
+            "cmd": ["goimports -w $file || gofmt -w $file && go run $file"],
         }
     ]
 }

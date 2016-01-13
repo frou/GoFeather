@@ -2,11 +2,14 @@
 
 # Description
 
-I didn't get on with [Sublime Text]'s existing [Go] packages (NIH...?). Here is
-my take on a minimalist package to work with Go in Sublime.
+I didn't get on with [Sublime Text]'s existing [Go] packages. Here is my take
+on a simple, up-to-date package to work with Go in Sublime.
 
-It parses source for syntax-highlighting purposes in a KISS manner. You might
-like the results better than what other packages give.
+It parses source for syntax-highlighting purposes in a non-hierarchical manner.
+You might like the results better than what other packages give.
+
+It defines a Build System around `go (build|install|test|run)`. Files are
+automatically formatted using `goimports` (falling back to `gofmt`).
 
 There is also integration of:
 
@@ -17,7 +20,7 @@ Pressing __Alt+Enter__:
 Shows an input panel and then runs `go doc` with what was submitted from the
 panel as an argument. The result then shows in an output panel.
 
-For example, try: `json` or `builin.make` or `bytes.Buffer.Reset`
+For example, try: `json` or `builtin.make` or `bytes.Buffer.Reset`
 
 Pressing __Shift+Enter__:
 
@@ -49,9 +52,6 @@ Preferences.
 
 * If you aren't using OS X or want different key bindings, rename or edit the
 `.sublime-keymap` file, respectively.
-
-* s/goimports/gofmt/ in the `.sublime-build` file if you don't want to use
-`goimports`.
 
 # License
 
