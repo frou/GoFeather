@@ -19,6 +19,11 @@
             "name": "Run (Single File)",
             "shell": true,
             "cmd": ["goimports -w $file || gofmt -w $file && go run $file"],
+        },
+        {
+            "name": "Quality Control",
+            "shell": true,
+            "cmd": ["goimports -w . && echo 'Vet\n---' ; go vet . ; echo '\nLint\n----' ; golint ; echo '\nErrcheck\n--------' ; errcheck -abspath -ignore 'Close' ; echo" ]
         }
     ]
 }
