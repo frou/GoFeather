@@ -126,6 +126,14 @@
             <string>entity.name.function.go</string>
 
             <key>match</key>
+            <string>(?&lt;=\A\s)\w+(?= :?= func\()</string>
+        </dict>
+
+        <dict>
+            <key>name</key>
+            <string>entity.name.function.go</string>
+
+            <key>match</key>
             <string>(?&lt;=(\sfunc|....\))\s)\b(\w+)\b(?=\()</string>
         </dict>
 
