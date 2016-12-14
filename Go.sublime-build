@@ -3,6 +3,12 @@
     "shell": true,
     "cmd": ["goimports -w . || gofmt -w . && go build"],
     "file_regex": "^\\s*(.+?):([0-9]+):([0-9]+)?:? (.+)$",
+
+    "windows":
+    {
+        "cmd": ["goimports", "-w", ".", "&&", "go", "build"]
+    },
+
     "variants":
     [
         {
@@ -19,16 +25,31 @@
             "name": "Test",
             "shell": true,
             "cmd": ["(goimports -w . || gofmt -w .) && go test"],
+
+            "windows":
+            {
+                "cmd": ["echo", "TODO"]
+            }
         },
         {
             "name": "Run (Single File)",
             "shell": true,
             "cmd": ["(goimports -w $file || gofmt -w $file) && go run $file"],
+
+            "windows":
+            {
+                "cmd": ["echo", "TODO"]
+            }
         },
         {
             "name": "Quality Control",
             "shell": true,
-            "cmd": ["goimports -w . && echo 'Vet\n---' ; go vet . ; echo '\nLint\n----' ; golint | grep -E -v '(should have comment|comment on exported|which can be annoying to use|so drop this else and outdent its block|should not use dot imports)' ; echo '\nErrcheck\n--------' ; errcheck -abspath -ignore 'Close,bytes:Write(Rune|String)' ; echo" ]
+            "cmd": ["goimports -w . && echo 'Vet\n---' ; go vet . ; echo '\nLint\n----' ; golint | grep -E -v '(should have comment|comment on exported|which can be annoying to use|so drop this else and outdent its block|should not use dot imports)' ; echo '\nErrcheck\n--------' ; errcheck -abspath -ignore 'Close,bytes:Write(Rune|String)' ; echo" ],
+
+            "windows":
+            {
+                "cmd": ["echo", "TODO"]
+            }
         }
     ]
 }
