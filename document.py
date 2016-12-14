@@ -39,6 +39,7 @@ def get_doc(cmd_wd, cmd_arg):
             cmd.append('-u')
         cmd.append(cmd_arg)
     try:
+        # TODO: Fix this not working on Windows
         cmd_output = subprocess.check_output(cmd, cwd=cmd_wd)
     except:
         sublime.status_message('FAILED: ' + ' '.join(cmd))
