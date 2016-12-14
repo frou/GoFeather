@@ -9,6 +9,11 @@
             "name": "Install",
             "shell": true,
             "cmd": ["(goimports -w . || gofmt -w .) && go install"],
+
+            "windows":
+            {
+                "cmd": ["goimports", "-w", ".", "&&", "go", "install"]
+            }
         },
         {
             "name": "Test",
