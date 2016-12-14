@@ -8,17 +8,17 @@
         {
             "name": "Install",
             "shell": true,
-            "cmd": ["goimports -w . || gofmt -w . && go install"],
+            "cmd": ["(goimports -w . || gofmt -w .) && go install"],
         },
         {
             "name": "Test",
             "shell": true,
-            "cmd": ["goimports -w . || gofmt -w . && go test"],
+            "cmd": ["(goimports -w . || gofmt -w .) && go test"],
         },
         {
             "name": "Run (Single File)",
             "shell": true,
-            "cmd": ["goimports -w $file || gofmt -w $file && go run $file"],
+            "cmd": ["(goimports -w $file || gofmt -w $file) && go run $file"],
         },
         {
             "name": "Quality Control",
