@@ -28,7 +28,7 @@
 
             "windows":
             {
-                "cmd": ["echo", "TODO"]
+                "cmd": ["goimports", "-w", ".", "&&", "go", "test"]
             }
         },
         {
@@ -38,7 +38,7 @@
 
             "windows":
             {
-                "cmd": ["echo", "TODO"]
+                "cmd": ["goimports", "-w", "$file", "&&", "go", "run", "$file"],
             }
         },
         {
