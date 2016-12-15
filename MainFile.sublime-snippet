@@ -3,18 +3,29 @@
 package main
 
 import (
+    "flag"
     "fmt"
     "log"
 )
 
+const (
+    hw = "hello, world"
+)
+
+var (
+    flagConfigPath = flag.String("-config", "path/to/config", "")
+)
+
 func main() {
+    flag.Parse()
+
     if err := run(); err != nil {
         log.Fatal(err)
     }
 }
 
 func run() error {
-    fmt.Println("hello, world")
+    fmt.Println(hw)
 
     return nil
 }
