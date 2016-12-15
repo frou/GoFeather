@@ -1,16 +1,27 @@
 {
-    "selector": "source.go",
     "shell": true,
     "cmd": ["goimports -w . || gofmt -w . && go build"],
-    "file_regex": "^\\s*(.+?):([0-9]+):([0-9]+)?:? (.+)$",
 
     "windows":
     {
         "cmd": ["goimports", "-w", ".", "&&", "go", "build"]
     },
 
+    "selector": "source.go",
+    "file_regex": "^\\s*(.+?):([0-9]+):([0-9]+)?:? (.+)$",
+
     "variants":
     [
+        {
+            "name": "Build (Single File)",
+            "shell": true,
+            "cmd": ["goimports -w $file || gofmt -w $file && go build $file"],
+
+            "windows":
+            {
+                "cmd": ["goimports", "-w", "$file", "&&", "go", "build", "$file"],
+            }
+        },
         {
             "name": "Install",
             "shell": true,
