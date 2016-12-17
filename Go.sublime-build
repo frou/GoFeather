@@ -1,3 +1,4 @@
+// TODO(DH): Given shell mode is enabled, why am I still having to split the tokens up on Windows?
 {
     "shell": true,
     "cmd": ["goimports -w . || gofmt -w . && go build"],
@@ -55,11 +56,11 @@
         {
             "name": "Meta Linter",
             "shell": true,
-            "cmd": ["goimports -w . && gometalinter --config=gometalinter.json ./..."],
+            "cmd": ["goimports -w . && gometalinter --config=gometalinter.json ."],
 
             "windows":
             {
-                "cmd": ["goimports", "-w", ".", "&&", "gometalinter", "--config=gometalinter.json", "./..."]
+                "cmd": ["goimports", "-w", ".", "&&", "gometalinter", "--config=gometalinter.json", "."]
             }
         }
     ]
