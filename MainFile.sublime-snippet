@@ -13,7 +13,7 @@ const (
 )
 
 var (
-    flagConfigPath = flag.String("-config", "path/to/config", "")
+    flagConfigPath = flag.String("config", "path/to/config.json", "")
 )
 
 func main() {
