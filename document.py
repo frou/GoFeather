@@ -115,4 +115,5 @@ class launch_gddo_from_view(sublime_plugin.TextCommand):
             launcher = 'open'
         elif sys.platform == 'win32':
             launcher = 'start'
+        # TODO(DH): Use subprocess. like in 'get_doc' to avoid Win cmd popup?
         os.system(launcher + ' https://godoc.org/' + pkg.lower())
