@@ -50,7 +50,7 @@ def run_process(wd, cmd):
         si = subprocess.STARTUPINFO()
         si.dwFlags |= subprocess.STARTF_USESHOWWINDOW
         si.wShowWindow = subprocess.SW_HIDE
-        return subprocess.check_output(cmd, cwd=wd, startupinfo=si)
+        return subprocess.check_output(cmd, cwd=wd, startupinfo=si, shell=True)
     else:
         return subprocess.check_output(cmd, cwd=wd)
 
