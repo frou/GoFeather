@@ -39,19 +39,20 @@ def get_doc(cmd_wd, cmd_arg):
             cmd.append('-u')
         cmd.append(cmd_arg)
     try:
-        if sys.platform == 'win32':
-            si = subprocess.STARTUPINFO()
-            si.dwFlags |= subprocess.STARTF_USESHOWWINDOW
-            si.wShowWindow = subprocess.SW_HIDE
-            cmd_output = subprocess.check_output(
-                cmd, cwd=cmd_wd, startupinfo=si)
-        else:
-            cmd_output = subprocess.check_output(cmd, cwd=cmd_wd)
+        cmd_output = run_process(cmd_wd, cmd)
     except:
         sublime.status_message('FAILED: ' + ' '.join(cmd))
         return
     return cmd_output.decode('utf-8')
 
+def run_process(wd, cmd):
+    if sys.platform == 'win32':
+        si = subprocess.STARTUPINFO()
+        si.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+        si.wShowWindow = subprocess.SW_HIDE
+        return subprocess.check_output(cmd, cwd=wd, startupinfo=si)
+    else:
+        return subprocess.check_output(cmd, cwd=wd)
 
 def show_doc(window, doc):
     if doc == None:
@@ -98,12 +99,14 @@ class show_go_doc_from_panel(sublime_plugin.WindowCommand):
         self.window.run_command('select_all')
 
 
-class launch_gddo_from_view(sublime_plugin.TextCommand):
+class launch_browser_docs_from_view(sublime_plugin.TextCommand):
     def run(self, args):
         view = self.view
+        # Show the stdlib documentation on the official site?
+        default_docs = False
         non_empty_selections = [sl for sl in view.sel() if not sl.empty()]
         if len(non_empty_selections) == 0:
-            pkg = '-/go'  # Will show list of standard library packages.
+            default_docs = True
         if len(non_empty_selections) == 1:
             pkg = view.substr(non_empty_selections[0])
             pkg = pkg.strip(' \t\r\n"')
@@ -115,5 +118,7 @@ class launch_gddo_from_view(sublime_plugin.TextCommand):
             launcher = 'open'
         elif sys.platform == 'win32':
             launcher = 'start'
-        # TODO(DH): Use subprocess. like in 'get_doc' to avoid Win cmd popup?
-        os.system(launcher + ' https://godoc.org/' + pkg.lower())
+        if default_docs:
+            run_process('.', [launcher, 'https://golang.org/pkg/'])
+        else:
+            run_process('.', [launcher, 'https://godoc.org/' + pkg.lower()])
