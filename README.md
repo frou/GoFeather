@@ -8,21 +8,22 @@ on a simple, up-to-date package to work with Go in Sublime.
 It parses source for syntax-highlighting purposes in a non-hierarchical manner.
 You might like the results better than what other packages give.
 
-It defines a Build System around `go (build|install|test|run)`. Files are
-automatically formatted using `goimports` (falling back to `gofmt`).
+It defines a Build System around `go (build|install|test|run)` and
+`gometalinter`. Files are automatically formatted using `goimports` (falling
+back to `gofmt`).
 
 There is also integration of:
 
-## go doc
+## go doc (command-line documentation tool)
 
-Pressing __Alt+Enter__:
+### Pressing Alt+Enter:
 
-Shows an input panel and then runs `go doc` with what was submitted from the
-panel as an argument. The result then shows in an output panel.
+Shows an input panel which runs `go doc` on what is submitted. The result is
+shown in an output panel.
 
 For example, try: `json` or `builtin.make` or `bytes.Buffer.Reset`
 
-Pressing __Shift+Enter__:
+### Pressing Shift+Enter:
 
 * With a text selection: Runs `go doc` with the text selection as an argument
 and shows the result in an output panel.
@@ -30,28 +31,36 @@ and shows the result in an output panel.
 * Without a text selection: Runs `go doc` on the directory (package) that the
 current Go source file is in and shows the result in an output panel.
 
-## godoc.org
+## godoc.org & golang.org (web documentation)
 
-Pressing __Ctrl+Enter__:
+### Pressing Ctrl+Enter:
 
-* With a text selection: Considers the text selection a package path and
-launches your web browser showing godoc.org for that package. Surrounding
+* With a text selection: Considers the text selection a package import path and
+launches your web browser showing `godoc.org` for that package. Surrounding
 whitespace and double-quotes are automatically stripped.
 
-* Without a text selection: Launches your web browser showing godoc.org for the
-standard library.
+* Without a text selection: Launches your web browser showing the official
+standard library documentation at `golang.org`.
 
-# Setup
+# Installation
 
-* Get the package. e.g. on OS X:
-`cd ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User &&
+* Either
+
+    * Manually get the package. e.g. on macOS:
+`cd ~/Library/Application\ Support/Sublime\ Text\ 3/Packages &&
 git clone https://github.com/frou/GoFeather.git`
 
-* Add `"Go"` (the default package) to `"ignored_packages"` in your User
-Preferences.
+    * ...Or install it using `Package Control` by bringing up Sublime's command
+palette and running `Package Control: Add Repository` and then pasting in this
+repository's URL: `https://github.com/frou/GoFeather`
 
-* If you aren't using OS X or want different key bindings, rename or edit the
-`.sublime-keymap` file, respectively.
+* Add `"Go"` (the default package that ships with Sublime) to the
+`"ignored_packages"` array in Sublime's general User Settings file. This makes
+it so that two conflicting packages for the Go language aren't enabled at the
+same time.
+
+* (If you additionally want the colour scheme used in the screenshot you can
+find it [here][colour])
 
 # License
 
@@ -80,5 +89,6 @@ SOFTWARE.
 ```
 
 [shot]: https://raw.githubusercontent.com/frou/GoFeather/master/screenshot.png
+[colour]: https://github.com/frou/Humid
 [sublime text]: https://www.sublimetext.com/
 [go]: https://www.golang.org/
