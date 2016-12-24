@@ -58,11 +58,11 @@
         {
             "name": "Meta Linter",
             "shell": true,
-            "cmd": ["goimports -w . || gofmt -w . && gometalinter --config ~/.gometalinter ."],
+            "cmd": ["goimports -w . || gofmt -w . && gometalinter --config .gometalinter ."],
 
             "windows":
             {
-                "cmd": ["goimports", "-w", ".", "&&", "gometalinter", "--config", "%HOMEDRIVE%%HOMEPATH%\\.gometalinter", "."]
+                "cmd": ["goimports", "-w", ".", "&&", "gometalinter", "--config", ".gometalinter", "."]
             }
         }
     ]
