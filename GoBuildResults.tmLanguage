@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>name</key>
+    <string>GoBuildResults</string>
+
+    <key>scopeName</key>
+    <string>source.gobuildresults</string>
+
+    <key>author</key>
+    <string>https://github.com/frou</string>
+
+    <key>patterns</key>
+    <array>
+
+        <dict>
+            <key>name</key>
+            <string>comment.sublime-inband.gobuildresults</string>
+
+            <key>match</key>
+            <string>^\[.+\]$</string>
+        </dict>
+
+        <dict>
+            <key>name</key>
+            <string>entity.package.gobuildresults</string>
+
+            <key>match</key>
+            <string>^# .+</string>
+        </dict>
+
+        <dict>
+            <key>name</key>
+            <string>constant.location.gobuildresults</string>
+
+            <key>match</key>
+            <string>^\s*(.+?):([0-9]+):([0-9]+)?:?</string>
+        </dict>
+
+        <!-- gometalinter results -->
+        <dict>
+            <key>name</key>
+            <string>keyword.linter.gobuildresults</string>
+
+            <key>match</key>
+            <string>\s\(\w+\)$</string>
+        </dict>
+
+    </array>
+</dict>
+</plist>
