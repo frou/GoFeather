@@ -11,6 +11,8 @@
     "selector": "source.go",
     "file_regex": "^\\s*(.+?):([0-9]+):([0-9]+)?:?\\s*(.+)$",
 
+    "syntax": "Packages/GoFeather/GoBuildResults.tmLanguage",
+
     "variants":
     [
         {
