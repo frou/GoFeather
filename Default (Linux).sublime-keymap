@@ -1,0 +1,5 @@
+[
+    {"keys": ["shift+enter"], "command": "show_go_doc_from_view", "context": [{"key": "selector", "operator": "equal", "operand": "source.go"}]},
+    {"keys": ["alt+enter"], "command": "show_go_doc_from_panel", "context": [{"key": "selector", "operator": "equal", "operand": "source.go"}]},
+    {"keys": ["ctrl+enter"], "command": "launch_browser_docs_from_view", "context": [{"key": "selector", "operator": "equal", "operand": "source.go"}]},
+]
