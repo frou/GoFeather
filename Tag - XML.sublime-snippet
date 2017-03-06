@@ -1,0 +1,5 @@
+<snippet>
+    <content><![CDATA[ `xml:"$1"`]]></content>
+    <tabTrigger>txml</tabTrigger>
+    <scope>source.go</scope>
+</snippet>
