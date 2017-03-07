@@ -1,11 +1,11 @@
 // TODO(DH): Given shell mode is enabled, why am I still having to split the tokens up on Windows?
 {
     "shell": true,
-    "cmd": ["goimports -w . || gofmt -w . && go build"],
+    "cmd": ["goimports -w $file || gofmt -w $file"],
 
     "windows":
     {
-        "cmd": ["goimports", "-w", ".", "&&", "go", "build"]
+        "cmd": ["goimports", "-w", "$file"],
     },
 
     "selector": "source.go",
@@ -15,6 +15,16 @@
 
     "variants":
     [
+        {
+            "name": "Build",
+            "shell": true,
+            "cmd": ["goimports -w . || gofmt -w . && go build"],
+
+            "windows":
+            {
+                "cmd": ["goimports", "-w", ".", "&&", "go", "build"]
+            }
+        },
         {
             "name": "Build (Single File)",
             "shell": true,
@@ -53,16 +63,6 @@
             "windows":
             {
                 "cmd": ["goimports", "-w", "$file", "&&", "go", "run", "$file"],
-            }
-        },
-        {
-            "name": "Format",
-            "shell": true,
-            "cmd": ["goimports -w $file || gofmt -w $file"],
-
-            "windows":
-            {
-                "cmd": ["goimports", "-w", "$file"],
             }
         },
         {
