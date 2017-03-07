@@ -46,6 +46,16 @@
             }
         },
         {
+            "name": "Clean",
+            "shell": true,
+            "cmd": ["go clean ."],
+
+            "windows":
+            {
+                "cmd": ["go", "clean", "."],
+            }
+        },
+        {
             "name": "Test",
             "shell": true,
             "cmd": ["goimports -w . || gofmt -w . && go test"],
@@ -63,16 +73,6 @@
             "windows":
             {
                 "cmd": ["goimports", "-w", "$file", "&&", "go", "run", "$file"],
-            }
-        },
-        {
-            "name": "Clean",
-            "shell": true,
-            "cmd": ["go clean ."],
-
-            "windows":
-            {
-                "cmd": ["go", "clean", "."],
             }
         },
         {
