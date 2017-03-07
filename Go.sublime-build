@@ -1,11 +1,11 @@
 // TODO(DH): Given shell mode is enabled, why am I still having to split the tokens up on Windows?
 {
     "shell": true,
-    "cmd": ["goimports -w $file || gofmt -w $file"],
+    "cmd": ["goimports -w . || gofmt -w ."],
 
     "windows":
     {
-        "cmd": ["goimports", "-w", "$file"],
+        "cmd": ["goimports", "-w", "."],
     },
 
     "selector": "source.go",
