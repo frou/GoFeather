@@ -44,7 +44,7 @@
             <string>keyword.linter.gobuildresults</string>
 
             <key>match</key>
-            <string>\s\(\w+\)$</string>
+            <string>\s\([\w\-]+\)$</string>
         </dict>
 
     </array>
