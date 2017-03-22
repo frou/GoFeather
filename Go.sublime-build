@@ -78,11 +78,11 @@
         {
             "name": "Meta Linter",
             "shell": true,
-            "cmd": ["goimports -w . || gofmt -w . && gometalinter --config $folder/gometalinter.json $file_path"],
+            "cmd": ["goimports -w . || gofmt -w . && gometalinter --config gometalinter.json $file_path"],
 
             "windows":
             {
-                "cmd": ["goimports", "-w", ".", "&&", "gometalinter", "--config", "$folder\\gometalinter.json", "$file_path"]
+                "cmd": ["goimports", "-w", ".", "&&", "gometalinter", "--config", "gometalinter.json", "$file_path"]
             }
         }
     ]
