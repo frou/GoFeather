@@ -39,12 +39,21 @@
         </dict>
 
         <!-- gometalinter results -->
+
         <dict>
             <key>name</key>
             <string>keyword.linter.gobuildresults</string>
 
             <key>match</key>
             <string>\s\([\w\-]+\)$</string>
+        </dict>
+
+        <dict>
+            <key>name</key>
+            <string>storage.type.severity.gobuildresults</string>
+
+            <key>match</key>
+            <string>(?&lt;=:)(warning|error):\s</string>
         </dict>
 
     </array>
