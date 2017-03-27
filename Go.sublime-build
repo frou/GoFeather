@@ -76,7 +76,7 @@
             }
         },
         {
-            "name": "Meta Linter",
+            "name": "Metalint Package",
             "shell": true,
             "cmd": ["goimports -w . || gofmt -w . && gometalinter --config gometalinter.json $file_path"],
 
