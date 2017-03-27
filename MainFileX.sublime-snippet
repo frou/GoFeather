@@ -4,7 +4,8 @@ package main
 
 import (
     "flag"
-    "log"
+
+    "github.com/frou/stdext"
 )
 
 var (
@@ -13,9 +14,7 @@ var (
 
 func main() {
     flag.Parse()
-    if err := run(); err != nil {
-        log.Fatal(err)
-    }
+    stdext.Exit(run())
 }
 
 func run() error {
@@ -24,6 +23,6 @@ func run() error {
     return nil
 }
 ]]></content>
-    <tabTrigger>mf</tabTrigger>
+    <tabTrigger>mfx</tabTrigger>
     <scope>source.go</scope>
 </snippet>
