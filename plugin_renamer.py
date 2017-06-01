@@ -7,54 +7,6 @@ import subprocess, sys
 # Also, rewrite the README to be more comprehesible and have more screenshots
 # (with less huge font size too).
 
-def do_rename(view, byte_offset, new_name, simulate):
-    new_name = new_name.strip()
-    if new_name == '':
-        sublime.status_message('CANNOT RENAME TO EMPTY IDENTIFIER')
-        return
-
-    cmd_output = ''
-    cmd_output_is_diff = simulate
-
-    cmd = [
-        'gorename',
-        # '-v',
-        '-offset',
-        view.file_name()+':#'+str(byte_offset),
-        '-to',
-        new_name
-    ]
-    if simulate:
-        cmd.append('-d')
-    # print(cmd)
-
-    try:
-        if sys.platform == 'win32':
-            # Stop a visible cmd.exe window from appearing.
-            si = subprocess.STARTUPINFO()
-            si.dwFlags |= subprocess.STARTF_USESHOWWINDOW
-            si.wShowWindow = subprocess.SW_HIDE
-            cmd_output = subprocess.check_output(cmd, stderr=subprocess.STDOUT, startupinfo=si)
-        else:
-            cmd_output = subprocess.check_output(cmd, stderr=subprocess.STDOUT)
-    except subprocess.CalledProcessError as e:
-        cmd_output = e.output
-        cmd_output_is_diff = False
-        sublime.status_message('RENAME FAILED')
-
-    view.window().new_file().run_command("show_refactor_result", {
-        "result": str(cmd_output, 'utf-8'),
-        "is_diff": cmd_output_is_diff
-    })
-
-    # Deselect the region as if the left arrow key was pressed. This is needed
-    # since if the file was modified as a result of gorename and then reloaded
-    # from disk by Sublime, the region we had selected previously might span
-    # something unrelated now.
-    view.run_command('move', {'by': 'characters', 'forward': False})
-
-# ------------------------------------------------------------
-
 class RenameSelectedIdentifier(sublime_plugin.TextCommand):
     def run(self, args, simulate=False):
         view = self.view
@@ -104,3 +56,50 @@ class RenameSelectedIdentifier(sublime_plugin.TextCommand):
         # Allow immediate type-over in the input panel.
         window.run_command('select_all')
 
+# ------------------------------------------------------------
+
+def do_rename(view, byte_offset, new_name, simulate):
+    new_name = new_name.strip()
+    if new_name == '':
+        sublime.status_message('CANNOT RENAME TO EMPTY IDENTIFIER')
+        return
+
+    cmd_output = ''
+    cmd_output_is_diff = simulate
+
+    cmd = [
+        'gorename',
+        # '-v',
+        '-offset',
+        view.file_name()+':#'+str(byte_offset),
+        '-to',
+        new_name
+    ]
+    if simulate:
+        cmd.append('-d')
+    # print(cmd)
+
+    try:
+        if sys.platform == 'win32':
+            # Stop a visible cmd.exe window from appearing.
+            si = subprocess.STARTUPINFO()
+            si.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+            si.wShowWindow = subprocess.SW_HIDE
+            cmd_output = subprocess.check_output(cmd, stderr=subprocess.STDOUT, startupinfo=si)
+        else:
+            cmd_output = subprocess.check_output(cmd, stderr=subprocess.STDOUT)
+    except subprocess.CalledProcessError as e:
+        cmd_output = e.output
+        cmd_output_is_diff = False
+        sublime.status_message('RENAME FAILED')
+
+    view.window().new_file().run_command("show_refactor_result", {
+        "result": str(cmd_output, 'utf-8'),
+        "is_diff": cmd_output_is_diff
+    })
+
+    # Deselect the region as if the left arrow key was pressed. This is needed
+    # since if the file was modified as a result of gorename and then reloaded
+    # from disk by Sublime, the region we had selected previously might span
+    # something unrelated now.
+    view.run_command('move', {'by': 'characters', 'forward': False})

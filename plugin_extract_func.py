@@ -1,49 +1,6 @@
 import sublime, sublime_plugin
 import subprocess, sys
 
-# TODO(DH): DRY the common code between this and rename.py (python import ./common.py ?)
-# TODO(DH): Make another one of these for godoctor's extract as local variable refactoring.
-
-def do_extraction(view, begin_line, begin_col, end_line, end_col, name):
-    name = name.strip()
-    if name == '':
-        sublime.status_message('FUNCTION NAME CANNOT BE EMPTY')
-        return
-
-    cmd = [
-        'godoctor',
-        '-file', view.file_name(),
-        '-pos',  '%d,%d:%d,%d' % (begin_line, begin_col, end_line, end_col),
-        '-w',
-        'extract',
-        name
-    ]
-
-    try:
-        if sys.platform == 'win32':
-            # Stop a visible cmd.exe window from appearing.
-            si = subprocess.STARTUPINFO()
-            si.dwFlags |= subprocess.STARTF_USESHOWWINDOW
-            si.wShowWindow = subprocess.SW_HIDE
-            subprocess.check_output(cmd, stderr=subprocess.STDOUT, startupinfo=si)
-        else:
-            subprocess.check_output(cmd, stderr=subprocess.STDOUT)
-    except subprocess.CalledProcessError as e:
-        view.run_command('undo')
-        view.run_command('save')
-        view.window().new_file().run_command("show_refactor_result", {
-            "result": str(e.output, 'utf-8'),
-            "is_diff": False
-        })
-
-    # Deselect the region as if the left arrow key was pressed. This is needed
-    # since if the file was modified as a result of godoctor and then reloaded
-    # from disk by Sublime, the region we had selected previously might span
-    # something unrelated now.
-    view.run_command('move', {'by': 'characters', 'forward': False})
-
-# ------------------------------------------------------------
-
 class ExtractSelectionAsFunction(sublime_plugin.TextCommand):
     def run(self, args):
         view = self.view
@@ -93,3 +50,43 @@ class ExtractSelectionAsFunction(sublime_plugin.TextCommand):
                 name),
             None,
             None)
+
+# ------------------------------------------------------------
+
+def do_extraction(view, begin_line, begin_col, end_line, end_col, name):
+    name = name.strip()
+    if name == '':
+        sublime.status_message('FUNCTION NAME CANNOT BE EMPTY')
+        return
+
+    cmd = [
+        'godoctor',
+        '-file', view.file_name(),
+        '-pos',  '%d,%d:%d,%d' % (begin_line, begin_col, end_line, end_col),
+        '-w',
+        'extract',
+        name
+    ]
+
+    try:
+        if sys.platform == 'win32':
+            # Stop a visible cmd.exe window from appearing.
+            si = subprocess.STARTUPINFO()
+            si.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+            si.wShowWindow = subprocess.SW_HIDE
+            subprocess.check_output(cmd, stderr=subprocess.STDOUT, startupinfo=si)
+        else:
+            subprocess.check_output(cmd, stderr=subprocess.STDOUT)
+    except subprocess.CalledProcessError as e:
+        view.run_command('undo')
+        view.run_command('save')
+        view.window().new_file().run_command("show_refactor_result", {
+            "result": str(e.output, 'utf-8'),
+            "is_diff": False
+        })
+
+    # Deselect the region as if the left arrow key was pressed. This is needed
+    # since if the file was modified as a result of godoctor and then reloaded
+    # from disk by Sublime, the region we had selected previously might span
+    # something unrelated now.
+    view.run_command('move', {'by': 'characters', 'forward': False})
