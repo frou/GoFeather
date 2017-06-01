@@ -1,11 +1,16 @@
 import sublime, sublime_plugin
 import os, subprocess, sys
 
-def gorename(file_path, byte_offset, new_name, simulate):
+# TODO(DH): Document this plugin's functionality in GoFeather's README
+
+def do_rename(window, file_path, byte_offset, new_name, simulate):
     new_name = new_name.strip()
     if new_name == '':
         sublime.status_message('CANNOT RENAME TO EMPTY IDENTIFIER')
         return
+
+    cmd_output = ''
+    cmd_output_is_diff = simulate
 
     cmd = [
         'gorename',
@@ -18,37 +23,43 @@ def gorename(file_path, byte_offset, new_name, simulate):
         cmd.append('-d')
     # print(cmd)
 
-    # TODO(DH): Use the technique I use in document.py to make it so that the
-    # process does not cause a visible cmd.exe window to appear on Windows.
-    print(subprocess.check_output(cmd))
+    try:
+        if sys.platform == 'win32':
+            si = subprocess.STARTUPINFO()
+            si.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+            si.wShowWindow = subprocess.SW_HIDE
+            cmd_output = subprocess.check_output(cmd, stderr=subprocess.STDOUT, startupinfo=si)
+        else:
+            cmd_output = subprocess.check_output(cmd, stderr=subprocess.STDOUT)
+    except subprocess.CalledProcessError as e:
+        cmd_output = e.output
+        cmd_output_is_diff = False
+        sublime.status_message('RENAME FAILED')
 
-    # TODO(DH): If simulating, open a new view and present the output of the
-    # command with Diff syntax highlighting enabled.
-
-    # TODO(DH): Like in document.py, show a failure status message if the
-    # process fails (throws)
+    window.new_file().run_command("show_gorename_result", {
+        "result": str(cmd_output, 'utf-8'),
+        "is_diff": cmd_output_is_diff
+    })
 
 # ------------------------------------------------------------
 
-# TODO(DH): class simulate_rename_selected_identifier
+class ShowGorenameResult(sublime_plugin.TextCommand):
+    def run(self, edit, result, is_diff):
+        view = self.view
+        view.set_scratch(True)
+        if is_diff:
+            view.set_syntax_file('Packages/Diff/Diff.sublime-syntax')
+        view.insert(edit, 0, result)
 
-class rename_selected_identifier(sublime_plugin.TextCommand):
-    def run(self, args):
+# ------------------------------------------------------------
+
+class RenameSelectedIdentifier(sublime_plugin.TextCommand):
+    def run(self, args, simulate=False):
         view = self.view
         window = view.window()
 
-        selections = view.sel()
-        if len(selections) != 1:
-            sublime.status_message('RENAME EXPECTS SINGLE SELECTION')
-            return
-
-        sel0 = selections[0]
-        if sel0.size() == 0:
-            window.run_command('find_under_expand')
-            sel0 = view.sel()[0]
-
-        # Enforce that the current file has Unix line-endings (LF and not CRLF)
-        # and is encoded as UTF-8. It may seem obnoxious to automatically
+        # Enforce that the current file has Unix line-endings (LF as opposed to
+        # CRLF) and is encoded as UTF-8. It may seem obnoxious to automatically
         # perform this, but, after all, it is the official format of Go source
         # files (as written out by gofmt). This ensures that Sublime's notion
         # of character offsets is interchangable with the gorename tool's
@@ -60,12 +71,30 @@ class rename_selected_identifier(sublime_plugin.TextCommand):
         # in Sublime's memory, so it's essential to do this.
         window.run_command('save_all')
 
+        selections = view.sel()
+        if len(selections) != 1:
+            sublime.status_message('RENAME ONLY WORKS WITH SINGLE CURSOR')
+            return
+
+        sel0 = selections[0]
+        # If there is no identifier selected, select the one the cursor is on.
+        if sel0.size() == 0:
+            window.run_command('find_under_expand')
+            sel0 = view.sel()[0]
+
+        input_label = 'Rename "' + view.substr(sel0) + '" (across all packages) to'
+        if simulate:
+            input_label = 'SIMULATE ' + input_label
+
         window.show_input_panel(
-            'Rename "' + view.substr(sel0) + '" (GOPATH-wide) to',
+            input_label,
             '',
-            lambda name: gorename(view.file_name(), sel0.begin(), name, False),
+            lambda name: do_rename(
+                window,
+                view.file_name(),
+                sel0.begin(),
+                name,
+                simulate),
             None,
             None)
 
-# TODO(DH): Once this plugin is finished, update the GoFeather README to
-# mention it.
