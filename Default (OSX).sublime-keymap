@@ -3,6 +3,8 @@
     {"keys": ["alt+enter"], "command": "show_go_doc_from_panel", "context": [{"key": "selector", "operator": "equal", "operand": "source.go"}]},
     {"keys": ["ctrl+enter"], "command": "launch_browser_docs_from_view", "context": [{"key": "selector", "operator": "equal", "operand": "source.go"}]},
 
-    {"keys": ["alt+r"], "command": "rename_selected_identifier", "context": [{"key": "selector", "operator": "equal", "operand": "source.go"}]},
+    {"keys": ["alt+r"],       "command": "rename_selected_identifier", "args": {},                 "context": [{"key": "selector", "operator": "equal", "operand": "source.go"}]},
     {"keys": ["shift+alt+r"], "command": "rename_selected_identifier", "args": {"simulate": true}, "context": [{"key": "selector", "operator": "equal", "operand": "source.go"}]},
+
+    {"keys": ["alt+f"],       "command": "extract_selection_as_function", "args": {}, "context": [{"key": "selector", "operator": "equal", "operand": "source.go"}]},
 ]

@@ -4,6 +4,8 @@ import subprocess, sys
 # TODO(DH): Document this plugin's functionality in GoFeather's README
 # Mention: go get -u golang.org/x/tools/cmd/gorename
 # and that `diff` must be on PATH for simulate mode to work.
+# Also, rewrite the README to be more comprehesible and have more screenshots
+# (with less huge font size too).
 
 def do_rename(view, byte_offset, new_name, simulate):
     new_name = new_name.strip()
