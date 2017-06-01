@@ -31,8 +31,9 @@ def do_extraction(view, begin_line, begin_col, end_line, end_col, name):
     except subprocess.CalledProcessError as e:
         view.run_command('undo')
         view.run_command('save')
-        view.window().new_file().run_command("show_godoctor_result", {
+        view.window().new_file().run_command("show_refactor_result", {
             "result": str(e.output, 'utf-8'),
+            "is_diff": False
         })
 
     # Deselect the region as if the left arrow key was pressed. This is needed
@@ -40,14 +41,6 @@ def do_extraction(view, begin_line, begin_col, end_line, end_col, name):
     # from disk by Sublime, the region we had selected previously might span
     # something unrelated now.
     view.run_command('move', {'by': 'characters', 'forward': False})
-
-# ------------------------------------------------------------
-
-class ShowGodoctorResult(sublime_plugin.TextCommand):
-    def run(self, edit, result):
-        view = self.view
-        view.set_scratch(True)
-        view.insert(edit, 0, result)
 
 # ------------------------------------------------------------
 

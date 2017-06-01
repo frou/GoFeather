@@ -42,7 +42,7 @@ def do_rename(view, byte_offset, new_name, simulate):
         cmd_output_is_diff = False
         sublime.status_message('RENAME FAILED')
 
-    view.window().new_file().run_command("show_gorename_result", {
+    view.window().new_file().run_command("show_refactor_result", {
         "result": str(cmd_output, 'utf-8'),
         "is_diff": cmd_output_is_diff
     })
@@ -52,16 +52,6 @@ def do_rename(view, byte_offset, new_name, simulate):
     # from disk by Sublime, the region we had selected previously might span
     # something unrelated now.
     view.run_command('move', {'by': 'characters', 'forward': False})
-
-# ------------------------------------------------------------
-
-class ShowGorenameResult(sublime_plugin.TextCommand):
-    def run(self, edit, result, is_diff):
-        view = self.view
-        view.set_scratch(True)
-        if is_diff:
-            view.set_syntax_file('Packages/Diff/Diff.sublime-syntax')
-        view.insert(edit, 0, result)
 
 # ------------------------------------------------------------
 
