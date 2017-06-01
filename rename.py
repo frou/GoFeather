@@ -91,14 +91,16 @@ class RenameSelectedIdentifier(sublime_plugin.TextCommand):
             window.run_command('find_under_expand')
             sel0 = view.sel()[0]
 
-        input_label = 'Rename'
+        selected_text = view.substr(sel0)
+
+        input_label = 'Semantically rename'
         if simulate:
-            input_label = 'Simulate renaming'
-        input_label += ' "' + view.substr(sel0) + '" to'
+            input_label = 'Simulate semantically renaming'
+        input_label += ' "' + selected_text + '" to'
 
         window.show_input_panel(
             input_label,
-            '',
+            selected_text,
             lambda name: do_rename(
                 view,
                 sel0.begin(),
@@ -106,4 +108,6 @@ class RenameSelectedIdentifier(sublime_plugin.TextCommand):
                 simulate),
             None,
             None)
+        # Allow immediate type-over in the input panel.
+        window.run_command('select_all')
 

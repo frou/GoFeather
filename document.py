@@ -96,7 +96,8 @@ class show_go_doc_from_panel(sublime_plugin.WindowCommand):
             'Document', window.settings().get(settings_key_panel_replay, ''),
             lambda s: submit_panel(window, cmd_wd, cmd_wd_is_go_pkg, s), None,
             None)
-        self.window.run_command('select_all')
+        # Allow immediate type-over in the input panel.
+        window.run_command('select_all')
 
 
 class launch_browser_docs_from_view(sublime_plugin.TextCommand):
