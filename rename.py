@@ -1,9 +1,11 @@
 import sublime, sublime_plugin
-import os, subprocess, sys
+import subprocess, sys
 
 # TODO(DH): Document this plugin's functionality in GoFeather's README
+# Mention: go get -u golang.org/x/tools/cmd/gorename
+# and that `diff` must be on PATH for simulate mode to work.
 
-def do_rename(window, file_path, byte_offset, new_name, simulate):
+def do_rename(view, byte_offset, new_name, simulate):
     new_name = new_name.strip()
     if new_name == '':
         sublime.status_message('CANNOT RENAME TO EMPTY IDENTIFIER')
@@ -15,7 +17,7 @@ def do_rename(window, file_path, byte_offset, new_name, simulate):
     cmd = [
         'gorename',
         '-offset',
-        file_path+':#'+str(byte_offset),
+        view.file_name()+':#'+str(byte_offset),
         '-to',
         new_name
     ]
@@ -25,6 +27,7 @@ def do_rename(window, file_path, byte_offset, new_name, simulate):
 
     try:
         if sys.platform == 'win32':
+            # Stop a visible cmd.exe window from appearing.
             si = subprocess.STARTUPINFO()
             si.dwFlags |= subprocess.STARTF_USESHOWWINDOW
             si.wShowWindow = subprocess.SW_HIDE
@@ -36,10 +39,16 @@ def do_rename(window, file_path, byte_offset, new_name, simulate):
         cmd_output_is_diff = False
         sublime.status_message('RENAME FAILED')
 
-    window.new_file().run_command("show_gorename_result", {
+    view.window().new_file().run_command("show_gorename_result", {
         "result": str(cmd_output, 'utf-8'),
         "is_diff": cmd_output_is_diff
     })
+
+    # Deselect the region as if the left arrow key was pressed. This is needed
+    # since if the file was modified as a result of gorename and then reloaded
+    # from disk by Sublime, the region we had selected previously might span
+    # something unrelated now.
+    view.run_command('move', {'by': 'characters', 'forward': False})
 
 # ------------------------------------------------------------
 
@@ -82,16 +91,16 @@ class RenameSelectedIdentifier(sublime_plugin.TextCommand):
             window.run_command('find_under_expand')
             sel0 = view.sel()[0]
 
-        input_label = 'Rename "' + view.substr(sel0) + '" (across all packages) to'
+        input_label = 'Rename'
         if simulate:
-            input_label = 'SIMULATE ' + input_label
+            input_label = 'Simulate renaming'
+        input_label += ' "' + view.substr(sel0) + '" to'
 
         window.show_input_panel(
             input_label,
             '',
             lambda name: do_rename(
-                window,
-                view.file_name(),
+                view,
                 sel0.begin(),
                 name,
                 simulate),
