@@ -16,6 +16,7 @@ def do_rename(view, byte_offset, new_name, simulate):
 
     cmd = [
         'gorename',
+        # '-v',
         '-offset',
         view.file_name()+':#'+str(byte_offset),
         '-to',
