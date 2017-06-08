@@ -94,7 +94,7 @@ def do_rename(view, byte_offset, new_name, simulate):
         sublime.status_message('RENAME FAILED')
 
     view.window().new_file().run_command("show_refactor_result", {
-        "result": str(cmd_output, 'utf-8'),
+        "result": cmd_output.decode('utf-8'),
         "is_diff": cmd_output_is_diff
     })
 

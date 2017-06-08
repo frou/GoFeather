@@ -81,7 +81,7 @@ def do_extraction(view, begin_line, begin_col, end_line, end_col, name):
         view.run_command('undo')
         view.run_command('save')
         view.window().new_file().run_command("show_refactor_result", {
-            "result": str(e.output, 'utf-8'),
+            "result": e.output.decode('utf-8'),
             "is_diff": False
         })
 
