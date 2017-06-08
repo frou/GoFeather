@@ -78,7 +78,9 @@ def do_extraction(view, begin_line, begin_col, end_line, end_col, name):
         else:
             subprocess.check_output(cmd, stderr=subprocess.STDOUT)
     except subprocess.CalledProcessError as e:
-        view.run_command('undo')
+        # TODO(DH): When does the tool write the file even when it fails/warns?
+        # In that case, its changes should be undone.
+        # view.run_command('undo')
         view.run_command('save')
         view.window().new_file().run_command("show_refactor_result", {
             "result": e.output.decode('utf-8'),
