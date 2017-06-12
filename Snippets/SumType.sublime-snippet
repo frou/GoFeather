@@ -1,0 +1,20 @@
+<snippet>
+    <content><![CDATA[
+//go-sumtype:decl $1
+
+type ${1:fooOptional} interface {
+    $1()
+}
+
+type ${1/Optional//}None struct {}
+func (*${1/Optional//}None) $1() {}
+
+type ${1/Optional//}Some struct {
+    ${1/Optional//} ${2:int}
+}
+func (*${1/Optional//}Some) $1() {}
+
+]]></content>
+    <tabTrigger>sum</tabTrigger>
+    <scope>source.go</scope>
+</snippet>
