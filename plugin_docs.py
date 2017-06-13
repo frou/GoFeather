@@ -60,6 +60,7 @@ def show_doc(window, doc):
     output_name = 'show_go_doc'
     output = window.create_output_panel(output_name)
     output.run_command('append', {'characters': doc})
+    #output.set_syntax_file('Packages/GoFeather/Go.tmLanguage')
     window.run_command('show_panel', {'panel': 'output.' + output_name})
 
 
