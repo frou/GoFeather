@@ -103,6 +103,30 @@
             <string>\b(bool|byte|complex(64|128)|error|float(32|64)|rune|string|u?int(8|16|32|64)?|uintptr)\b</string>
         </dict>
 
+        <!-- Entity (Type Alias) -->
+        <dict>
+            <key>match</key>
+            <string>\b(type)\s(\w+)\s=\s(?:\w+\.)?(\w+)\b</string>
+            <key>captures</key>
+            <dict>
+                <key>1</key>
+                <dict>
+                    <key>name</key>
+                    <string>keyword.other.go</string>
+                </dict>
+                <key>2</key>
+                <dict>
+                    <key>name</key>
+                    <string>entity.name.type-alias.go</string>
+                </dict>
+                <key>3</key>
+                <dict>
+                    <key>name</key>
+                    <string>entity.name.type.go</string>
+                </dict>
+            </dict>
+        </dict>
+
         <!-- Keyword -->
         <dict>
             <key>name</key>
@@ -112,7 +136,7 @@
             <string>\b(break|case|chan|const|continue|default|defer|else|fallthrough|for|func|go|goto|if|import|interface|map|package|range|return|select|struct|switch|type|var)\b</string>
         </dict>
 
-        <!-- Entity -->
+        <!-- Entity (Others) -->
         <dict>
             <key>name</key>
             <string>entity.name.function.go</string>
