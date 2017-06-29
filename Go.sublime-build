@@ -1,5 +1,6 @@
 // TODO(DH): Given shell mode is enabled, why am I still having to split the tokens up on Windows?
 {
+    // TODO(DH): Can I get goimports/gofmt to not touch files in ./vendor ?
     "shell": true,
     "cmd": ["goimports -w . || gofmt -w ."],
 
