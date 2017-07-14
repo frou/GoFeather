@@ -1,5 +1,6 @@
 import sublime_plugin
 
+
 class ShowRefactorResult(sublime_plugin.TextCommand):
     def run(self, edit, result, is_diff):
         view = self.view

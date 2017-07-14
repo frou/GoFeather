@@ -1,6 +1,7 @@
 import sublime, sublime_plugin
 import subprocess, sys
 
+
 class ExtractSelectionAsFunction(sublime_plugin.TextCommand):
     def run(self, args):
         view = self.view
@@ -31,27 +32,21 @@ class ExtractSelectionAsFunction(sublime_plugin.TextCommand):
             return
 
         begin_line, begin_col = view.rowcol(sel0.begin())
-        end_line, end_col     = view.rowcol(sel0.end())
+        end_line, end_col = view.rowcol(sel0.end())
         # ST uses 0-indexed, godoctor wants 1-indexed
         begin_line = begin_line + 1
-        begin_col  = begin_col  + 1
-        end_line   = end_line   + 1
-        end_col    = end_col    + 1
+        begin_col = begin_col + 1
+        end_line = end_line + 1
+        end_col = end_col + 1
 
         window.show_input_panel(
-            'Extract selection as function named',
-            '',
-            lambda name: do_extraction(
-                view,
-                begin_line,
-                begin_col,
-                end_line,
-                end_col,
-                name),
-            None,
-            None)
+            'Extract selection as function named', '',
+            lambda name: do_extraction(view, begin_line, begin_col, end_line, end_col, name),
+            None, None)
+
 
 # ------------------------------------------------------------
+
 
 def do_extraction(view, begin_line, begin_col, end_line, end_col, name):
     name = name.strip()
@@ -60,12 +55,10 @@ def do_extraction(view, begin_line, begin_col, end_line, end_col, name):
         return
 
     cmd = [
-        'godoctor',
-        '-file', view.file_name(),
-        '-pos',  '%d,%d:%d,%d' % (begin_line, begin_col, end_line, end_col),
-        '-w',
-        'extract',
-        name
+        'godoctor', '-file',
+        view.file_name(), '-pos',
+        '%d,%d:%d,%d' % (begin_line, begin_col, end_line, end_col), '-w',
+        'extract', name
     ]
 
     try:
@@ -74,7 +67,8 @@ def do_extraction(view, begin_line, begin_col, end_line, end_col, name):
             si = subprocess.STARTUPINFO()
             si.dwFlags |= subprocess.STARTF_USESHOWWINDOW
             si.wShowWindow = subprocess.SW_HIDE
-            subprocess.check_output(cmd, stderr=subprocess.STDOUT, startupinfo=si)
+            subprocess.check_output(
+                cmd, stderr=subprocess.STDOUT, startupinfo=si)
         else:
             subprocess.check_output(cmd, stderr=subprocess.STDOUT)
     except subprocess.CalledProcessError as e:
@@ -83,8 +77,10 @@ def do_extraction(view, begin_line, begin_col, end_line, end_col, name):
         # view.run_command('undo')
         view.run_command('save')
         view.window().new_file().run_command("show_refactor_result", {
-            "result": e.output.decode('utf-8'),
-            "is_diff": False
+            "result":
+            e.output.decode('utf-8'),
+            "is_diff":
+            False
         })
 
     # Deselect the region as if the left arrow key was pressed. This is needed

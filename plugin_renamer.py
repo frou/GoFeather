@@ -7,6 +7,7 @@ import subprocess, sys
 # Also, rewrite the README to be more comprehesible and have more screenshots
 # (with less huge font size too).
 
+
 class RenameSelectedIdentifier(sublime_plugin.TextCommand):
     def run(self, args, simulate=False):
         view = self.view
@@ -44,19 +45,15 @@ class RenameSelectedIdentifier(sublime_plugin.TextCommand):
         input_label += ' "' + selected_text + '" to'
 
         window.show_input_panel(
-            input_label,
-            selected_text,
-            lambda name: do_rename(
-                view,
-                sel0.begin(),
-                name,
-                simulate),
-            None,
+            input_label, selected_text,
+            lambda name: do_rename(view, sel0.begin(), name, simulate), None,
             None)
         # Allow immediate type-over in the input panel.
         window.run_command('select_all')
 
+
 # ------------------------------------------------------------
+
 
 def do_rename(view, byte_offset, new_name, simulate):
     new_name = new_name.strip()
@@ -71,7 +68,7 @@ def do_rename(view, byte_offset, new_name, simulate):
         'gorename',
         # '-v',
         '-offset',
-        view.file_name()+':#'+str(byte_offset),
+        view.file_name() + ':#' + str(byte_offset),
         '-to',
         new_name
     ]
@@ -85,7 +82,8 @@ def do_rename(view, byte_offset, new_name, simulate):
             si = subprocess.STARTUPINFO()
             si.dwFlags |= subprocess.STARTF_USESHOWWINDOW
             si.wShowWindow = subprocess.SW_HIDE
-            cmd_output = subprocess.check_output(cmd, stderr=subprocess.STDOUT, startupinfo=si)
+            cmd_output = subprocess.check_output(
+                cmd, stderr=subprocess.STDOUT, startupinfo=si)
         else:
             cmd_output = subprocess.check_output(cmd, stderr=subprocess.STDOUT)
     except subprocess.CalledProcessError as e:

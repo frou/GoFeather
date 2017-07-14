@@ -31,7 +31,11 @@ def submit_panel(window, cmd_wd, cmd_wd_is_go_pkg, s):
 
 
 def get_doc(cmd_wd, cmd_arg):
-    cmd = ['go', 'doc', '-c', ]
+    cmd = [
+        'go',
+        'doc',
+        '-c',
+    ]
     if cmd_arg:
         # Most of the interesting identifiers in the pseudo-package builtin are
         # considered unexported because they start with lowercase.
@@ -45,6 +49,7 @@ def get_doc(cmd_wd, cmd_arg):
         return
     return cmd_output.decode('utf-8')
 
+
 def run_process(wd, cmd):
     if sys.platform == 'win32':
         si = subprocess.STARTUPINFO()
@@ -53,6 +58,7 @@ def run_process(wd, cmd):
         return subprocess.check_output(cmd, cwd=wd, startupinfo=si, shell=True)
     else:
         return subprocess.check_output(cmd, cwd=wd)
+
 
 def show_doc(window, doc):
     if doc == None:
@@ -94,7 +100,8 @@ class show_go_doc_from_panel(sublime_plugin.WindowCommand):
         cmd_wd, cmd_wd_is_go_pkg = determine_wd_for_cmd(view)
 
         window.show_input_panel(
-            'Document', window.settings().get(settings_key_panel_replay, ''),
+            'Document',
+            window.settings().get(settings_key_panel_replay, ''),
             lambda s: submit_panel(window, cmd_wd, cmd_wd_is_go_pkg, s), None,
             None)
         # Allow immediate type-over in the input panel.
