@@ -3,10 +3,10 @@
 <plist version="1.0">
 <dict>
     <key>name</key>
-    <string>GoBuildResults</string>
+    <string>Build Results - Go</string>
 
     <key>scopeName</key>
-    <string>source.gobuildresults</string>
+    <string>source.build-results-go</string>
 
     <key>author</key>
     <string>https://github.com/frou</string>
@@ -16,7 +16,7 @@
 
         <dict>
             <key>name</key>
-            <string>comment.sublime-inband.gobuildresults</string>
+            <string>comment.sublime-inband.build-results-go</string>
 
             <key>match</key>
             <string>^\[.+\]$</string>
@@ -24,7 +24,7 @@
 
         <dict>
             <key>name</key>
-            <string>entity.package.gobuildresults</string>
+            <string>entity.package.build-results-go</string>
 
             <key>match</key>
             <string>^# .+</string>
@@ -32,7 +32,7 @@
 
         <dict>
             <key>name</key>
-            <string>constant.location.gobuildresults</string>
+            <string>constant.location.build-results-go</string>
 
             <key>match</key>
             <string>^\s*(.+?):([0-9]+):([0-9]+)?:?</string>
@@ -42,7 +42,7 @@
 
         <dict>
             <key>name</key>
-            <string>keyword.linter.gobuildresults</string>
+            <string>keyword.linter.build-results-go</string>
 
             <key>match</key>
             <string>\s\([\w\-]+\)$</string>
@@ -50,7 +50,7 @@
 
         <dict>
             <key>name</key>
-            <string>storage.type.severity.gobuildresults</string>
+            <string>storage.type.severity.build-results-go</string>
 
             <key>match</key>
             <string>(?&lt;=:)(warning|error):\s</string>
