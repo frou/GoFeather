@@ -1,9 +1,0 @@
-<snippet>
-    <content><![CDATA[
-const (
-    $1
-)
-]]></content>
-    <tabTrigger>co</tabTrigger>
-    <scope>source.go</scope>
-</snippet>

@@ -1,7 +1,0 @@
-<snippet>
-    <content><![CDATA[
-panic("unimplemented")
-]]></content>
-    <tabTrigger>pu</tabTrigger>
-    <scope>source.go</scope>
-</snippet>
