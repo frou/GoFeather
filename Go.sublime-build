@@ -33,8 +33,8 @@
             "cmd": ["goimports", "-w", "."]
         },
         {
-            "name": "Metalint Package",
-            "cmd": ["gometalinter", "--config", "gometalinter.json", "$file_path"]
+            "name": "Metalint Current Package",
+            "cmd": ["gometalinter", "--deadline", "1m", "--sort", "linter", "$file_path"]
         }
     ]
 }
