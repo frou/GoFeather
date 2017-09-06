@@ -1,89 +1,40 @@
-// TODO(DH): Given shell mode is enabled, why am I still having to split the tokens up on Windows?
 {
     "selector": "source.go",
     "file_regex": "^\\s*(.+?):([0-9]+):([0-9]+)?:?\\s*(.+)$",
     "syntax": "Packages/GoFeather/Build Results - Go.tmLanguage",
 
-    // TODO(DH): Can I get goimports/gofmt to not touch files in ./vendor ?
-    "shell": true,
-    "cmd": ["go build"],
-
-    "windows":
-    {
-        "cmd": ["go", "build"]
-    },
+    "cmd": ["go", "build"],
 
     "variants":
     [
         {
             "name": "Build (Single File)",
-            "shell": true,
-            "cmd": ["goimports -w $file || gofmt -w $file && go build $file"],
-
-            "windows":
-            {
-                "cmd": ["goimports", "-w", "$file", "&&", "go", "build", "$file"],
-            }
+            "cmd": ["go", "build", "$file"]
         },
         {
             "name": "Install",
-            "shell": true,
-            "cmd": ["goimports -w . || gofmt -w . && go install"],
-
-            "windows":
-            {
-                "cmd": ["goimports", "-w", ".", "&&", "go", "install"]
-            }
+            "cmd": ["go", "install"]
         },
         {
             "name": "Clean",
-            "shell": true,
-            "cmd": ["go clean ."],
-
-            "windows":
-            {
-                "cmd": ["go", "clean", "."],
-            }
+            "cmd": ["go", "clean"]
         },
         {
             "name": "Test",
-            "shell": true,
-            "cmd": ["goimports -w . || gofmt -w . && go test"],
-
-            "windows":
-            {
-                "cmd": ["goimports", "-w", ".", "&&", "go", "test"]
-            }
+            "cmd": ["go", "test"]
         },
         {
             "name": "Run (Single File)",
-            "shell": true,
-            "cmd": ["goimports -w $file || gofmt -w $file && go run $file"],
-
-            "windows":
-            {
-                "cmd": ["goimports", "-w", "$file", "&&", "go", "run", "$file"],
-            }
+            "cmd": ["go", "run", "$file"]
         },
         {
+            // TODO(DH): Can I get goimports to not touch files in vendor diretories?
             "name": "Format",
-            "shell": true,
-            "cmd": ["goimports -w . || gofmt -w ."],
-
-            "windows":
-            {
-                "cmd": ["goimports", "-w", "."],
-            },
+            "cmd": ["goimports", "-w", "."]
         },
         {
             "name": "Metalint Package",
-            "shell": true,
-            "cmd": ["goimports -w . || gofmt -w . && gometalinter --config gometalinter.json $file_path"],
-
-            "windows":
-            {
-                "cmd": ["goimports", "-w", ".", "&&", "gometalinter", "--config", "gometalinter.json", "$file_path"]
-            }
+            "cmd": ["gometalinter", "--config", "gometalinter.json", "$file_path"]
         }
     ]
 }
