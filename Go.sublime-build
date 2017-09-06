@@ -1,31 +1,20 @@
 // TODO(DH): Given shell mode is enabled, why am I still having to split the tokens up on Windows?
 {
+    "selector": "source.go",
+    "file_regex": "^\\s*(.+?):([0-9]+):([0-9]+)?:?\\s*(.+)$",
+    "syntax": "Packages/GoFeather/Build Results - Go.tmLanguage",
+
     // TODO(DH): Can I get goimports/gofmt to not touch files in ./vendor ?
     "shell": true,
-    "cmd": ["goimports -w . || gofmt -w ."],
+    "cmd": ["go build"],
 
     "windows":
     {
-        "cmd": ["goimports", "-w", "."],
+        "cmd": ["go", "build"]
     },
-
-    "selector": "source.go",
-    "file_regex": "^\\s*(.+?):([0-9]+):([0-9]+)?:?\\s*(.+)$",
-
-    "syntax": "Packages/GoFeather/Build Results - Go.tmLanguage",
 
     "variants":
     [
-        {
-            "name": "Build",
-            "shell": true,
-            "cmd": ["goimports -w . || gofmt -w . && go build"],
-
-            "windows":
-            {
-                "cmd": ["goimports", "-w", ".", "&&", "go", "build"]
-            }
-        },
         {
             "name": "Build (Single File)",
             "shell": true,
@@ -75,6 +64,16 @@
             {
                 "cmd": ["goimports", "-w", "$file", "&&", "go", "run", "$file"],
             }
+        },
+        {
+            "name": "Format",
+            "shell": true,
+            "cmd": ["goimports -w . || gofmt -w ."],
+
+            "windows":
+            {
+                "cmd": ["goimports", "-w", "."],
+            },
         },
         {
             "name": "Metalint Package",
