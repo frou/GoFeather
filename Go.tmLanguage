@@ -155,8 +155,7 @@
 
         <dict>
             <key>name</key>
-            <!-- TODO(DH): Should be .constant. (need to make a 'Symbol List.tmPreferences' that explicitly whitelists scopes) -->
-            <string>entity.name.type.go</string>
+            <string>entity.name.constant.go</string>
 
             <key>match</key>
             <!-- only global constants -->
@@ -165,8 +164,7 @@
 
         <dict>
             <key>name</key>
-            <!-- TODO(DH): Should be .variable. (need to make a 'Symbol List.tmPreferences' that explicitly whitelists scopes) -->
-            <string>entity.name.type.go</string>
+            <string>entity.name.variable.go</string>
 
             <key>match</key>
             <!-- only global variables -->
