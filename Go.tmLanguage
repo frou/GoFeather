@@ -153,6 +153,26 @@
             <string>(?&lt;=\stype\s)\b(\w+)\b</string>
         </dict>
 
+        <dict>
+            <key>name</key>
+            <!-- TODO(DH): Should be .constant. (need to make a 'Symbol List.tmPreferences' that explicitly whitelists scopes) -->
+            <string>entity.name.type.go</string>
+
+            <key>match</key>
+            <!-- only global constants -->
+            <string>(?&lt;=\Aconst\s)\b(\w+)\b</string>
+        </dict>
+
+        <dict>
+            <key>name</key>
+            <!-- TODO(DH): Should be .variable. (need to make a 'Symbol List.tmPreferences' that explicitly whitelists scopes) -->
+            <string>entity.name.type.go</string>
+
+            <key>match</key>
+            <!-- only global variables -->
+            <string>(?&lt;=\Avar\s)\b(\w+)\b</string>
+        </dict>
+
         <!-- Support -->
         <dict>
             <key>name</key>
