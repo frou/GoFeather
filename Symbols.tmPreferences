@@ -6,7 +6,7 @@
         <string>Symbol List</string>
 
         <key>scope</key>
-        <string>source.go entity.name.function.go, source.go entity.name.type.go, source.go entity.name.constant.go, source.go entity.name.variable.go</string>
+        <string>source.go entity.name.constant.go, source.go entity.name.variable.go</string>
 
         <key>settings</key>
         <dict>
