@@ -24,7 +24,9 @@ class RenameSelectedIdentifier(sublime_plugin.TextCommand):
 
         # The gorename tool operates with what's on the filesystem, not what's
         # in Sublime's memory, so it's essential to do this.
+        view.settings().set('Suppress_SublimeOnSaveBuild', True)
         window.run_command('save_all')
+        view.settings().erase('Suppress_SublimeOnSaveBuild')
 
         selections = view.sel()
         if len(selections) != 1:

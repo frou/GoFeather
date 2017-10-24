@@ -17,7 +17,9 @@ class ExtractSelectionAsFunction(sublime_plugin.TextCommand):
 
         # The godoctor tool operates with what's on the filesystem, not what's
         # in Sublime's memory, so it's essential to do this.
+        view.settings().set('Suppress_SublimeOnSaveBuild', True)
         window.run_command('save')
+        view.settings().erase('Suppress_SublimeOnSaveBuild')
 
         bail_msg = 'EXTRACT FUNCTION EXPECTS SINGLE NON-EMPTY SELECTION'
 
