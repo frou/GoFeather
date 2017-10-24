@@ -28,9 +28,12 @@
             "cmd": ["go", "run", "$file"]
         },
         {
-            // TODO(DH): Can I get goimports to not touch files in vendor diretories?
             "name": "Format",
             "cmd": ["goimports", "-w", "."]
+            // I wish goimports had native support for ignoring vendor directories (like `go fmt` (but not gofmt) does)
+            // https://github.com/golang/go/issues/22173
+            // "shell": true,
+            // "cmd": "goimports -w $(find . -type f -name '*.go' -not -path './vendor/*')"
         },
         {
             "name": "Metalint Current Package",
