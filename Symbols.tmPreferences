@@ -3,7 +3,7 @@
 <plist version="1.0">
     <dict>
         <key>scope</key>
-        <string>source.go entity.name.constant.go, source.go entity.name.variable.go</string>
+        <string>source.go entity.name.package.go, source.go entity.name.constant.go, source.go entity.name.variable.go</string>
 
         <key>settings</key>
         <dict>

@@ -171,6 +171,14 @@
             <string>(?&lt;=\Avar\s)\b(\w+)\b</string>
         </dict>
 
+        <dict>
+            <key>name</key>
+            <string>entity.name.package.go</string>
+
+            <key>match</key>
+            <string>(?&lt;=\Apackage\s)\b(\w+)\b</string>
+        </dict>
+
         <!-- Support -->
         <dict>
             <key>name</key>
