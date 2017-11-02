@@ -36,8 +36,9 @@
             // "cmd": "goimports -w $(find . -type f -name '*.go' -not -path './vendor/*')"
         },
         {
-            "name": "Metalint Current Package",
-            "cmd": ["gometalinter", "--deadline", "1m", "--sort", "linter", "$file_path"]
+            "name": "Analyze",
+            "shell": true,
+            "cmd": "echo golint ; golint | grep -E -v '(should have comment|comment .* should be of the form|unexported .* which can be annoying to use)' ; echo go vet ; go vet ; echo megacheck ; megacheck -unused.enabled=false"
         }
     ]
 }
