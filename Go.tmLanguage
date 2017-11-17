@@ -75,7 +75,14 @@
             <string>constant.numeric.floating-point.go</string>
 
             <key>match</key>
-            <string>\b((\d+\.(\d+)?([eE][+-]?\d+)?|\d+[eE][+-]?\d+|\.\d+([eE][+-]?\d+)?)i?)\b</string>
+            <string>(?x)(
+                \b\d+\.(\d+)?([eE][+-]?\d+)?i?(?!\w)
+                |
+                \b\d+[eE][+-]?\d+i?\b
+                |
+                (?&lt;!\w)\.\d+([eE][+-]?\d+)?i?\b
+            )
+            </string>
         </dict>
 
         <dict>
