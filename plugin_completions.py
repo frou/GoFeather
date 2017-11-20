@@ -16,12 +16,15 @@ class AutocompleteUsingGocode(sublime_plugin.ViewEventListener):
         view = self.view
         src = view.substr(sublime.Region(0, view.size()))
         filename = view.file_name()
-        cloc = "c{0}".format(locations[0])
+
+        cmd = ["gocode", "-f=csv", "autocomplete"]
+        if filename:
+            cmd.append(filename)
+        cmd.append("c{0}".format(locations[0]))
 
         gocode = subprocess.Popen(
-            ["gocode", "-f=csv", "autocomplete", filename, cloc],
-            stdin=subprocess.PIPE,
-            stdout=subprocess.PIPE)
+            cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+
         out = gocode.communicate(src.encode())[0].decode()
 
         result = []
