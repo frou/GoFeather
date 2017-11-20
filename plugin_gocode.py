@@ -1,3 +1,9 @@
+#
+# This file originated in the repository of the `gocode` daemon (MIT):
+#     https://github.com/nsf/gocode/blob/master/subl3/gocode.py
+# and has been further developed.
+#
+
 import sublime, sublime_plugin, subprocess, difflib
 
 # go to balanced pair, e.g.:
