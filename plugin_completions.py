@@ -27,8 +27,8 @@ class AutocompleteUsingGocode(sublime_plugin.ViewEventListener):
         result = []
         for line in filter(bool, out.split("\n")):
             arg = line.split(",,")
-            hint, subj = hint_and_subj(*arg)
-            result.append([hint, subj])
+            hint, replacement = hint_and_replacement(*arg)
+            result.append([hint, replacement])
 
         return (result, sublime.INHIBIT_WORD_COMPLETIONS)
 
@@ -101,10 +101,10 @@ def extract_arguments_and_returns(sig):
     return args, returns
 
 
-# takes gocode's candidate and returns sublime's hint and subj
-def hint_and_subj(category, name, type):
+# takes gocode's candidate and returns sublime's hint and replacement
+def hint_and_replacement(category, name, type):
     hint = category.ljust(6) + name
-    subj = name
+    replacement = name
     if category == "func":
         args, returns = extract_arguments_and_returns(type)
         if returns:
@@ -114,9 +114,9 @@ def hint_and_subj(category, name, type):
             for i, a in enumerate(args):
                 ea = a.replace("{", "\\{").replace("}", "\\}")
                 sargs.append("${{{0}:{1}}}".format(i + 1, ea))
-            subj += "(" + ", ".join(sargs) + ")"
+            replacement += "(" + ", ".join(sargs) + ")"
         else:
-            subj += "()"
+            replacement += "()"
     else:
         hint += "\t" + type
-    return hint, subj
+    return hint, replacement
