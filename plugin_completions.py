@@ -7,6 +7,32 @@
 import sublime, sublime_plugin, subprocess, difflib
 
 
+class AutocompleteUsingGocode(sublime_plugin.ViewEventListener):
+    @classmethod
+    def is_applicable(cls, settings):
+        return settings.get("syntax") == "Packages/GoFeather/Go.tmLanguage"
+
+    def on_query_completions(self, prefix, locations):
+        view = self.view
+        src = view.substr(sublime.Region(0, view.size()))
+        filename = view.file_name()
+        cloc = "c{0}".format(locations[0])
+
+        gocode = subprocess.Popen(
+            ["gocode", "-f=csv", "autocomplete", filename, cloc],
+            stdin=subprocess.PIPE,
+            stdout=subprocess.PIPE)
+        out = gocode.communicate(src.encode())[0].decode()
+
+        result = []
+        for line in filter(bool, out.split("\n")):
+            arg = line.split(",,")
+            hint, subj = hint_and_subj(*arg)
+            result.append([hint, subj])
+
+        return (result, sublime.INHIBIT_WORD_COMPLETIONS)
+
+
 # go to balanced pair, e.g.:
 # ((abc(def)))
 # ^
@@ -94,27 +120,3 @@ def hint_and_subj(cls, name, type):
     else:
         hint = cls + " " + name + "\t" + type
     return hint, subj
-
-
-class Gocode(sublime_plugin.EventListener):
-    def on_query_completions(self, view, prefix, locations):
-        loc = locations[0]
-        if not view.match_selector(loc, "source.go"):
-            return None
-
-        src = view.substr(sublime.Region(0, view.size()))
-        filename = view.file_name()
-        cloc = "c{0}".format(loc)
-        gocode = subprocess.Popen(
-            ["gocode", "-f=csv", "autocomplete", filename, cloc],
-            stdin=subprocess.PIPE,
-            stdout=subprocess.PIPE)
-        out = gocode.communicate(src.encode())[0].decode()
-
-        result = []
-        for line in filter(bool, out.split("\n")):
-            arg = line.split(",,")
-            hint, subj = hint_and_subj(*arg)
-            result.append([hint, subj])
-
-        return (result, sublime.INHIBIT_WORD_COMPLETIONS)
