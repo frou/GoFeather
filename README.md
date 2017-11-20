@@ -42,6 +42,28 @@ whitespace and double-quotes are automatically stripped.
 * Without a text selection: Launches your web browser showing the official
 standard library documentation at `golang.org`.
 
+## gocode (autocompletion daemon)
+
+Presents intelligent autocompletion for function, type, variable and constant
+names using Sublime's standard autocompletion dropdown. If a function name
+completion is selected, snippets are then inserted denoting the arguments it
+expects.
+
+By default, Sublime does not present its standard autocompletion dropdown when
+typing 'dot' after an identifier. To get this useful behaviour, create a
+'syntax specific' settings file for Go in your User package
+(Packages/User/Go.sublime-settings) with this content:
+
+    {
+      "auto_complete_triggers": [
+        {
+          "characters": ".",
+          "selector": "source.go - comment - string - constant.numeric"
+        }
+      ]
+    }
+
+
 # Installation
 
 * Either
