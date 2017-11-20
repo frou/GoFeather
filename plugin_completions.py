@@ -13,25 +13,22 @@ class AutocompleteUsingGocode(sublime_plugin.ViewEventListener):
         return settings.get("syntax") == "Packages/GoFeather/Go.tmLanguage"
 
     def on_query_completions(self, prefix, locations):
-        view = self.view
-        src = view.substr(sublime.Region(0, view.size()))
-        filename = view.file_name()
-
         cmd = ["gocode", "-f=csv", "autocomplete"]
-        if filename:
-            cmd.append(filename)
+        view_path = self.view.file_name()
+        if view_path:
+            cmd.append(view_path)
         cmd.append("c{0}".format(locations[0]))
 
         gocode = subprocess.Popen(
             cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
 
-        out = gocode.communicate(src.encode())[0].decode()
+        gocode_input = self.view.substr(sublime.Region(0, self.view.size()))
+        gocode_output = gocode.communicate(gocode_input.encode())[0].decode()
 
         result = []
-        for line in filter(bool, out.split("\n")):
-            arg = line.split(",,")
-            hint, replacement = hint_and_replacement(*arg)
-            result.append([hint, replacement])
+        for line in filter(bool, gocode_output.split("\n")):
+            components = line.split(",,")
+            result.append(hint_and_replacement(*components))
 
         return (result, sublime.INHIBIT_WORD_COMPLETIONS)
 
