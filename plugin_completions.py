@@ -102,10 +102,10 @@ def extract_arguments_and_returns(sig):
 
 
 # takes gocode's candidate and returns sublime's hint and subj
-def hint_and_subj(cls, name, type):
+def hint_and_subj(category, name, type):
+    hint = category.ljust(6) + name
     subj = name
-    if cls == "func":
-        hint = cls + " " + name
+    if category == "func":
         args, returns = extract_arguments_and_returns(type)
         if returns:
             hint += "\t" + ", ".join(returns)
@@ -118,5 +118,5 @@ def hint_and_subj(cls, name, type):
         else:
             subj += "()"
     else:
-        hint = cls + " " + name + "\t" + type
+        hint += "\t" + type
     return hint, subj
