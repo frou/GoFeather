@@ -63,6 +63,8 @@ typing 'dot' after an identifier. To get this useful behaviour, create a
       ]
     }
 
+If you do not already have the `gocode` binary on your system, you should [install it](https://github.com/nsf/gocode#setup).
+
 
 # Installation
 
