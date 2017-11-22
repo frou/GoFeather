@@ -102,11 +102,11 @@ def extract_arguments_and_returns(sig):
 
 
 # takes gocode's candidate and returns sublime's hint and replacement
-def hint_and_replacement(category, name, type):
+def hint_and_replacement(category, name, go_type):
     hint = category.ljust(7) + " " + name
     replacement = name
     if category == "func":
-        args, returns = extract_arguments_and_returns(type)
+        args, returns = extract_arguments_and_returns(go_type)
         if args:
             hint += " (…)"
             sargs = []
@@ -120,5 +120,5 @@ def hint_and_replacement(category, name, type):
         if returns:
             hint += "\t" + ", ".join(returns)
     else:
-        hint += "\t" + type
+        hint += "\t" + go_type
     return hint, replacement
