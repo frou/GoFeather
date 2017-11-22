@@ -91,6 +91,27 @@ class show_go_doc_from_view(sublime_plugin.TextCommand):
 
         show_doc(window, get_doc(cmd_wd, cmd_arg))
 
+class quick_show_go_doc_from_view(sublime_plugin.TextCommand):
+    def run(self, args):
+        view = self.view
+
+        deselect = lambda: view.run_command('move', {'by': 'characters', 'forward': True})
+
+        non_empty_selections = [sl for sl in view.sel() if not sl.empty()]
+        if len(non_empty_selections) > 1:
+            sublime.status_message('TOO MANY SELECTIONS')
+            return
+        elif len(non_empty_selections) == 1:
+            deselect()
+
+        # There are presently 0 selections
+        view.run_command('move', {"by": "words", "forward": False})
+        view.run_command('move', {"by": "words", "forward": False})
+        view.run_command('move', {"by": "word_ends", "extend": True, "forward": True})
+        view.run_command('move', {"by": "word_ends", "extend": True, "forward": True})
+        view.run_command('show_go_doc_from_view')
+        deselect()
+
 
 class show_go_doc_from_panel(sublime_plugin.WindowCommand):
     def run(self):
