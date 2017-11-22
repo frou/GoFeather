@@ -107,16 +107,18 @@ def hint_and_replacement(category, name, type):
     replacement = name
     if category == "func":
         args, returns = extract_arguments_and_returns(type)
-        if returns:
-            hint += "\t" + ", ".join(returns)
         if args:
+            hint += " (…)"
             sargs = []
             for i, a in enumerate(args):
                 ea = a.replace("{", "\\{").replace("}", "\\}")
                 sargs.append("${{{0}:{1}}}".format(i + 1, ea))
             replacement += "(" + ", ".join(sargs) + ")"
         else:
+            hint += " ()"
             replacement += "()"
+        if returns:
+            hint += "\t" + ", ".join(returns)
     else:
         hint += "\t" + type
     return hint, replacement
