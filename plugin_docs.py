@@ -104,7 +104,10 @@ class quick_show_go_doc_from_view(sublime_plugin.TextCommand):
         elif len(non_empty_selections) == 1:
             deselect()
 
-        # There are presently 0 selections
+        # TODO(DH): It only makes sense to double the following commands when
+        # the caret is on an identifier preceded by a `pkg.` prefix. If that is
+        # not the case (e.g. with an identifier defined in the current packge),
+        # just do these once:
         view.run_command('move', {"by": "words", "forward": False})
         view.run_command('move', {"by": "words", "forward": False})
         view.run_command('move', {"by": "word_ends", "extend": True, "forward": True})
