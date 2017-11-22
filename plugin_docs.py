@@ -91,29 +91,36 @@ class show_go_doc_from_view(sublime_plugin.TextCommand):
 
         show_doc(window, get_doc(cmd_wd, cmd_arg))
 
+
 class quick_show_go_doc_from_view(sublime_plugin.TextCommand):
     def run(self, args):
         view = self.view
 
-        deselect = lambda: view.run_command('move', {'by': 'characters', 'forward': True})
-
         non_empty_selections = [sl for sl in view.sel() if not sl.empty()]
-        if len(non_empty_selections) > 1:
+        if len(non_empty_selections) != 0:
             sublime.status_message('TOO MANY SELECTIONS')
             return
-        elif len(non_empty_selections) == 1:
-            deselect()
 
-        # TODO(DH): It only makes sense to double the following commands when
-        # the caret is on an identifier preceded by a `pkg.` prefix. If that is
-        # not the case (e.g. with an identifier defined in the current packge),
-        # just do these once:
-        view.run_command('move', {"by": "words", "forward": False})
-        view.run_command('move', {"by": "words", "forward": False})
-        view.run_command('move', {"by": "word_ends", "extend": True, "forward": True})
-        view.run_command('move', {"by": "word_ends", "extend": True, "forward": True})
+        # Select the current word plus the character before it.
+        view.run_command('move', {'by': 'wordends', 'forward': True})
+        view.run_command('move', {'by': 'words', 'forward': False, 'extend': True})
+        view.run_command('move', {'by': 'characters', 'forward': False, 'extend': True})
+
+        # Is the character before the current word a dot?
+        provisional_selection = view.substr(view.sel()[0])
+        if provisional_selection.startswith('.'):
+            # Yes: Extend the selection to cover the word before the dot too.
+            view.run_command('move', {'by': 'words', 'forward': False, 'extend': True})
+        else:
+            # No: Don't have the dot selected any more.
+            view.run_command('move', {'by': 'characters', 'forward': True, 'extend': True})
+
+        # Get and show the documentation for the selection.
         view.run_command('show_go_doc_from_view')
-        deselect()
+
+        # End up with the caret at the start of the word it was initially in, and with no selection.
+        view.run_command('move', {'by': 'characters', 'forward': True})
+        view.run_command('move', {'by': 'words', 'forward': False, 'extend': False})
 
 
 class show_go_doc_from_panel(sublime_plugin.WindowCommand):
