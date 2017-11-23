@@ -96,8 +96,7 @@ class quick_show_go_doc_from_view(sublime_plugin.TextCommand):
     def run(self, args):
         view = self.view
 
-        non_empty_selections = [sl for sl in view.sel() if not sl.empty()]
-        if len(non_empty_selections) != 0:
+        if len([sl for sl in view.sel() if not sl.empty()]) != 0:
             sublime.status_message('TOO MANY SELECTIONS')
             return
 
