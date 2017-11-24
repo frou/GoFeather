@@ -66,12 +66,15 @@ def run_process(wd, cmd):
 
 
 def show_doc(window, doc):
+    panel_name_suffix = 'show_go_doc'
+    panel_name_full = 'output.' + panel_name_suffix
     if doc is None:
+        if window.active_panel() == panel_name_full:
+            window.run_command("hide_panel")
         return
-    output_name = 'show_go_doc'
-    output = window.create_output_panel(output_name)
+    output = window.create_output_panel(panel_name_suffix)
     output.run_command('append', {'characters': doc})
-    window.run_command('show_panel', {'panel': 'output.' + output_name})
+    window.run_command('show_panel', {'panel': panel_name_full})
 
 
 class ShowGoDocFromView(sublime_plugin.TextCommand):
