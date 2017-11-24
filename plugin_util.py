@@ -51,10 +51,3 @@ def run_tool(cmd_parts):
         print(e.output)
         sublime.status_message(cmd_parts[0].upper() + ' FAILED')
     return cmd_output
-
-
-# When a file has been modified and reloaded, an existing selection might span
-# something unrelated now. Doing the equivalent of a left arrow press
-# deselects.
-def break_selection(view):
-    view.run_command('move', {'by': 'characters', 'forward': False})

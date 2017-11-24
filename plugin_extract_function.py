@@ -49,3 +49,4 @@ def do_extraction(view, begin_line, begin_col, end_line, end_col, name):
         'extract', name
     ]
     run_tool(cmd)
+    view.sel().clear()
