@@ -10,6 +10,7 @@ class SettingsKeys:
 
 
 def save_to_disk(view):
+    # This will ensure the file is UTF-8 with no BOM and with LF line-endings.
     view.window().run_command('build', {'variant': 'Format'})
 
 
