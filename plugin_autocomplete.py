@@ -4,7 +4,9 @@
 # and has been further developed.
 #
 
-import sublime, sublime_plugin, subprocess, difflib
+import sublime
+import sublime_plugin
+import subprocess
 
 
 class AutocompleteUsingGocode(sublime_plugin.ViewEventListener):

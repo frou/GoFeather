@@ -1,5 +1,8 @@
-import sublime, sublime_plugin
-import os, subprocess, sys
+import sublime
+import sublime_plugin
+import os
+import subprocess
+import sys
 
 from .plugin_util import *
 
@@ -63,12 +66,11 @@ def run_process(wd, cmd):
 
 
 def show_doc(window, doc):
-    if doc == None:
+    if doc is None:
         return
     output_name = 'show_go_doc'
     output = window.create_output_panel(output_name)
     output.run_command('append', {'characters': doc})
-    #output.set_syntax_file('Packages/GoFeather/Go.tmLanguage')
     window.run_command('show_panel', {'panel': 'output.' + output_name})
 
 

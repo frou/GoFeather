@@ -1,6 +1,4 @@
 import sublime
-import sublime_plugin
-
 import subprocess
 import sys
 import uuid
