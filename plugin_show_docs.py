@@ -74,7 +74,7 @@ def show_doc(window, doc):
     window.run_command('show_panel', {'panel': 'output.' + output_name})
 
 
-class show_go_doc_from_view(sublime_plugin.TextCommand):
+class ShowGoDocFromView(sublime_plugin.TextCommand):
     def run(self, args):
         view = self.view
         window = view.window()
@@ -96,7 +96,7 @@ class show_go_doc_from_view(sublime_plugin.TextCommand):
         show_doc(window, get_doc(cmd_wd, cmd_arg))
 
 
-class quick_show_go_doc_from_view(sublime_plugin.TextCommand):
+class QuickShowGoDocFromView(sublime_plugin.TextCommand):
     def run(self, args):
         view = self.view
 
@@ -141,7 +141,7 @@ class quick_show_go_doc_from_view(sublime_plugin.TextCommand):
                           'extend': False})
 
 
-class show_go_doc_from_panel(sublime_plugin.WindowCommand):
+class ShowGoDocFromPanel(sublime_plugin.WindowCommand):
     def run(self):
         window = self.window
         view = window.active_view()
@@ -169,7 +169,7 @@ class show_go_doc_from_panel(sublime_plugin.WindowCommand):
         window.run_command('select_all')
 
 
-class launch_browser_docs_from_view(sublime_plugin.TextCommand):
+class LaunchBrowserDocsFromView(sublime_plugin.TextCommand):
     def run(self, args):
         view = self.view
         # Show the stdlib documentation on the official site?
