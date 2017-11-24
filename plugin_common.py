@@ -1,5 +1,7 @@
-import sublime, sublime_plugin
-import subprocess, sys
+import sublime
+import sublime_plugin
+import subprocess
+import sys
 
 
 def save_to_disk(view):
@@ -15,6 +17,7 @@ def save_to_disk(view):
     # The tool operates with what's on the filesystem, not what's
     # in Sublime's memory, so it's essential to save.
     view.settings().set('Suppress_SublimeOnSaveBuild', True)
+    # TODO(DH): The setting set & erase should be done on all views since we're doing `save_all` rather than `save`?
     view.window().run_command('save_all')
     view.settings().erase('Suppress_SublimeOnSaveBuild')
 
