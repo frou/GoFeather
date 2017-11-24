@@ -1,4 +1,7 @@
+import sublime
 import sublime_plugin
+
+from .plugin_common import *
 
 
 class ShowRefactorResult(sublime_plugin.TextCommand):

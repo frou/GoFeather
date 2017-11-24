@@ -1,5 +1,7 @@
-import sublime, sublime_plugin
-import subprocess, sys
+import sublime
+import sublime_plugin
+
+from .plugin_common import *
 
 
 # TODO(DH): Similar to extract function, use godoctor's extract variable mode.
