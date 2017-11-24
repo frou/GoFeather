@@ -3,8 +3,6 @@ import sublime_plugin
 
 from .plugin_util import *
 
-# TODO(DH): Document this command in the README.
-
 
 # Uses: https://godoc.org/golang.org/x/tools/cmd/guru
 class QueryGoType(sublime_plugin.TextCommand):

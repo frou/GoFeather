@@ -3,12 +3,6 @@ import sublime_plugin
 
 from .plugin_util import *
 
-# TODO(DH): Document this plugin's functionality in GoFeather's README
-# Mention: go get -u golang.org/x/tools/cmd/gorename
-# and that `diff` must be on PATH for simulate mode to work.
-# Also, rewrite the README to be more comprehesible and have more screenshots
-# (with less huge font size too).
-
 
 class RenameSelectedIdentifier(sublime_plugin.TextCommand):
     def run(self, args, simulate=False):
