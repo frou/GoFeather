@@ -40,9 +40,6 @@ class RenameSelectedIdentifier(sublime_plugin.TextCommand):
         window.run_command('select_all')
 
 
-# ------------------------------------------------------------
-
-
 def do_rename(view, byte_offset, new_name, simulate):
     new_name = new_name.strip()
     if new_name == '':
@@ -67,3 +64,12 @@ def do_rename(view, byte_offset, new_name, simulate):
         "result": cmd_output.decode('utf-8'),
         "is_diff": simulate
     })
+
+
+class ShowRefactorResult(sublime_plugin.TextCommand):
+    def run(self, edit, result, is_diff):
+        view = self.view
+        view.set_scratch(True)
+        if is_diff:
+            view.set_syntax_file('Packages/Diff/Diff.sublime-syntax')
+        view.insert(edit, 0, result)
