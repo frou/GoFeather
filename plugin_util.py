@@ -10,21 +10,7 @@ class SettingsKeys:
 
 
 def save_to_disk(view):
-    # Enforce that the current file has Unix line-endings (LF as opposed to
-    # CRLF) and is encoded as UTF-8. It may seem obnoxious to automatically
-    # perform this, but, after all, it is the official format of Go source
-    # files (as written out by gofmt). This ensures that Sublime's notion
-    # of character offsets is interchangable with the gorename tool's
-    # notion of byte offsets.
-    view.run_command('set_line_ending', {'type': 'unix'})
-    view.run_command('set_encoding', {'encoding': 'utf-8'})
-
-    # The tool operates with what's on the filesystem, not what's
-    # in Sublime's memory, so it's essential to save.
-    view.settings().set('Suppress_SublimeOnSaveBuild', True)
-    # TODO(DH): The setting set & erase should be done on all views since we're doing `save_all` rather than `save`?
-    view.window().run_command('save_all')
-    view.settings().erase('Suppress_SublimeOnSaveBuild')
+    view.window().run_command('build', {'variant': 'Format'})
 
 
 def check_num_selections(view, n):
