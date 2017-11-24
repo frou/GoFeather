@@ -155,9 +155,6 @@ class ShowGoDocFromPanel(sublime_plugin.WindowCommand):
 
         type_str = window.settings().get(SettingsKeys.PANEL_QUERIED_TYPE, None)
         if type_str:
-            if type_str.startswith("*"):
-                label += ' pointer to a'
-                type_str = type_str[1:]
             placeholder = type_str
             is_written_input = False
 
