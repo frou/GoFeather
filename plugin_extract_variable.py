@@ -1,7 +1,7 @@
 import sublime
 import sublime_plugin
 
-from .plugin_common import *
+from .plugin_util import *
 
 
 # TODO(DH): Similar to extract function, use godoctor's extract variable mode.

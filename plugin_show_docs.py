@@ -1,7 +1,7 @@
 import sublime, sublime_plugin
 import os, subprocess, sys
 
-# TODO(DH): Use the .plugin_common functionality in here too.
+# TODO(DH): Use the .plugin_util functionality in here too.
 
 # This plugin uses `go doc` (Go 1.5+) which is different from `godoc`.
 

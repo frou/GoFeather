@@ -1,7 +1,7 @@
 import sublime
 import sublime_plugin
 
-from .plugin_common import *
+from .plugin_util import *
 
 # TODO(DH): Document this plugin's functionality in GoFeather's README
 # Mention: go get -u golang.org/x/tools/cmd/gorename
