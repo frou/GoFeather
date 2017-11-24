@@ -1,7 +1,14 @@
 import sublime
 import sublime_plugin
+
 import subprocess
 import sys
+import uuid
+
+
+class SettingsKeys:
+    PANEL_LAST_USER_INPUT = str(uuid.uuid4())
+    PANEL_QUERIED_TYPE = str(uuid.uuid4())
 
 
 def save_to_disk(view):

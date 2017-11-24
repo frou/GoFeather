@@ -1,12 +1,11 @@
 import sublime, sublime_plugin
 import os, subprocess, sys
 
+from .plugin_util import *
+
 # TODO(DH): Use the .plugin_util functionality in here too.
 
 # This plugin uses `go doc` (Go 1.5+) which is different from `godoc`.
-
-unique_settings_prefix = 'go_doc_'
-settings_key_panel_replay = unique_settings_prefix + 'panel_replay'
 
 
 def determine_wd_for_cmd(view):
@@ -20,8 +19,9 @@ def determine_wd_for_cmd(view):
     return (cmd_wd, cmd_wd_is_go_pkg)
 
 
-def submit_panel(window, cmd_wd, cmd_wd_is_go_pkg, s):
-    window.settings().set(settings_key_panel_replay, s)
+def submit_panel(window, cmd_wd, cmd_wd_is_go_pkg, s, save_for_replay):
+    if save_for_replay:
+        window.settings().set(SettingsKeys.PANEL_LAST_USER_INPUT, s)
     s = s.strip()
     cmd_arg = None if s == '' else s
 
@@ -104,24 +104,39 @@ class quick_show_go_doc_from_view(sublime_plugin.TextCommand):
 
         # Select the current word plus the character before it.
         view.run_command('move', {'by': 'wordends', 'forward': True})
-        view.run_command('move', {'by': 'words', 'forward': False, 'extend': True})
-        view.run_command('move', {'by': 'characters', 'forward': False, 'extend': True})
+        view.run_command('move',
+                         {'by': 'words',
+                          'forward': False,
+                          'extend': True})
+        view.run_command(
+            'move', {'by': 'characters',
+                     'forward': False,
+                     'extend': True})
 
         # Is the character before the current word a dot?
         provisional_selection = view.substr(view.sel()[0])
         if provisional_selection.startswith('.'):
             # Yes: Extend the selection to cover the word before the dot too.
-            view.run_command('move', {'by': 'words', 'forward': False, 'extend': True})
+            view.run_command('move',
+                             {'by': 'words',
+                              'forward': False,
+                              'extend': True})
         else:
             # No: Don't have the dot selected any more.
-            view.run_command('move', {'by': 'characters', 'forward': True, 'extend': True})
+            view.run_command(
+                'move', {'by': 'characters',
+                         'forward': True,
+                         'extend': True})
 
         # Get and show the documentation for the selection.
         view.run_command('show_go_doc_from_view')
 
         # End up with the caret at the start of the word it was initially in, and with no selection.
         view.run_command('move', {'by': 'characters', 'forward': True})
-        view.run_command('move', {'by': 'words', 'forward': False, 'extend': False})
+        view.run_command('move',
+                         {'by': 'words',
+                          'forward': False,
+                          'extend': False})
 
 
 class show_go_doc_from_panel(sublime_plugin.WindowCommand):
@@ -131,11 +146,23 @@ class show_go_doc_from_panel(sublime_plugin.WindowCommand):
 
         cmd_wd, cmd_wd_is_go_pkg = determine_wd_for_cmd(view)
 
+        label = 'Document'
+        placeholder = window.settings().get(SettingsKeys.PANEL_LAST_USER_INPUT,
+                                            '')
+        is_written_input = True
+
+        type_str = window.settings().get(SettingsKeys.PANEL_QUERIED_TYPE, None)
+        if type_str:
+            if type_str.startswith("*"):
+                label += ' pointer to a'
+                type_str = type_str[1:]
+            placeholder = type_str
+            is_written_input = False
+
         window.show_input_panel(
-            'Document',
-            window.settings().get(settings_key_panel_replay, ''),
-            lambda s: submit_panel(window, cmd_wd, cmd_wd_is_go_pkg, s), None,
-            None)
+            label, placeholder,
+            lambda s: submit_panel(window, cmd_wd, cmd_wd_is_go_pkg, s, is_written_input),
+            None, None)
         # Allow immediate type-over in the input panel.
         window.run_command('select_all')
 

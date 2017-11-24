@@ -5,6 +5,7 @@ from .plugin_util import *
 
 # TODO(DH): Document this command in the README.
 
+
 # Uses: https://godoc.org/golang.org/x/tools/cmd/guru
 class QueryGoType(sublime_plugin.TextCommand):
     def run(self, args, simulate=False):
@@ -28,5 +29,6 @@ class QueryGoType(sublime_plugin.TextCommand):
         json_obj = sublime.decode_value(cmd_output.decode('utf-8'))
         type_str = json_obj['value']['type']
 
-        window.settings().set('go_doc_panel_replay', type_str)
+        window.settings().set(SettingsKeys.PANEL_QUERIED_TYPE, type_str)
         window.run_command('show_go_doc_from_panel')
+        window.settings().erase(SettingsKeys.PANEL_QUERIED_TYPE)
