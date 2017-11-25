@@ -8,6 +8,8 @@ import sublime
 import sublime_plugin
 import subprocess
 
+# TODO(DH): Use plugin_util here too.
+
 
 class AutocompleteUsingGocode(sublime_plugin.ViewEventListener):
     @classmethod
