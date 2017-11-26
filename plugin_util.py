@@ -21,19 +21,24 @@ def check_num_selections(view, n):
     return ok
 
 
+def platform_startupinfo():
+    if sys.platform == 'win32':
+        si = subprocess.STARTUPINFO()
+        # Stop a visible cmd.exe window from appearing.
+        si.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+        si.wShowWindow = subprocess.SW_HIDE
+        return si
+    else:
+        return None
+
+
 def run_tool(cmd_parts):
     cmd_output = None
     try:
-        if sys.platform == 'win32':
-            # Stop a visible cmd.exe window from appearing.
-            si = subprocess.STARTUPINFO()
-            si.dwFlags |= subprocess.STARTF_USESHOWWINDOW
-            si.wShowWindow = subprocess.SW_HIDE
-            cmd_output = subprocess.check_output(
-                cmd_parts, stderr=subprocess.STDOUT, startupinfo=si)
-        else:
-            cmd_output = subprocess.check_output(
-                cmd_parts, stderr=subprocess.STDOUT)
+        cmd_output = subprocess.check_output(
+            cmd_parts,
+            stderr=subprocess.STDOUT,
+            startupinfo=platform_startupinfo())
     except subprocess.CalledProcessError as e:
         print(e.output)
         sublime.status_message(cmd_parts[0].upper() + ' FAILED')

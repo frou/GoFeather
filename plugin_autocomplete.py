@@ -8,7 +8,7 @@ import sublime
 import sublime_plugin
 import subprocess
 
-# TODO(DH): Use plugin_util here too.
+from .plugin_util import *
 
 
 class AutocompleteUsingGocode(sublime_plugin.ViewEventListener):
@@ -23,10 +23,14 @@ class AutocompleteUsingGocode(sublime_plugin.ViewEventListener):
             cmd.append(view_path)
         cmd.append("c{0}".format(locations[0]))
 
-        gocode = subprocess.Popen(
-            cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
-
         gocode_input = self.view.substr(sublime.Region(0, self.view.size()))
+
+        gocode = subprocess.Popen(
+            cmd,
+            stdin=subprocess.PIPE,
+            stdout=subprocess.PIPE,
+            startupinfo=platform_startupinfo())
+
         gocode_output = gocode.communicate(gocode_input.encode())[0].decode()
 
         result = []
