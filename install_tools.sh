@@ -10,14 +10,6 @@ get() {
 	go get -u "$1"
 }
 
-# case "$(uname)" in
-#     MINGW*)
-#         get -ldflags -H=windowsgui github.com/nsf/gocode
-#     ;;
-#     *)
-#         get github.com/nsf/gocode
-#     ;;
-# esac
 get github.com/nsf/gocode
 
 get github.com/godoctor/godoctor
