@@ -33,9 +33,6 @@ class ExtractSelectionAsFunction(sublime_plugin.TextCommand):
             None, None)
 
 
-# ------------------------------------------------------------
-
-
 def do_extraction(view, begin_line, begin_col, end_line, end_col, name):
     name = name.strip()
     if name == '':
