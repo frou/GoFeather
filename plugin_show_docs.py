@@ -171,11 +171,13 @@ class LaunchBrowserDocsFromView(sublime_plugin.TextCommand):
             sublime.status_message('TOO MANY SELECTIONS')
             return
         launcher = 'xdg-open'
+        via_shell = False
         if sys.platform == 'darwin':
             launcher = 'open'
         elif sys.platform == 'win32':
             launcher = 'start'
+            via_shell=True
         if default_docs:
-            run_tool([launcher, 'https://golang.org/pkg/'], wd='.')
+            run_tool([launcher, 'https://golang.org/pkg/'], wd='.', shell=via_shell)
         else:
-            run_tool([launcher, 'https://godoc.org/' + pkg.lower()], wd='.')
+            run_tool([launcher, 'https://godoc.org/' + pkg.lower()], wd='.', shell=via_shell)
