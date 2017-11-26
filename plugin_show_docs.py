@@ -1,14 +1,10 @@
 import sublime
 import sublime_plugin
 import os
-import subprocess
 import sys
 
+# TODO(DH): Make use of check_num_selections too.
 from .plugin_util import *
-
-# TODO(DH): Use the .plugin_util functionality in here too.
-
-# This plugin uses `go doc` (Go 1.5+) which is different from `godoc`.
 
 
 def determine_wd_for_cmd(view):
@@ -36,6 +32,7 @@ def submit_panel(window, cmd_wd, cmd_wd_is_go_pkg, s, save_for_replay):
 
 
 def get_doc(cmd_wd, cmd_arg):
+    # `go doc` (Go 1.5+) has different capabilities to `godoc`.
     cmd = [
         'go',
         'doc',
@@ -48,21 +45,11 @@ def get_doc(cmd_wd, cmd_arg):
             cmd.append('-u')
         cmd.append(cmd_arg)
     try:
-        cmd_output = run_process(cmd_wd, cmd)
+        cmd_output = run_tool(cmd, wd=cmd_wd)
     except:
         sublime.status_message('FAILED: ' + ' '.join(cmd))
         return
     return cmd_output.decode('utf-8')
-
-
-def run_process(wd, cmd):
-    if sys.platform == 'win32':
-        si = subprocess.STARTUPINFO()
-        si.dwFlags |= subprocess.STARTF_USESHOWWINDOW
-        si.wShowWindow = subprocess.SW_HIDE
-        return subprocess.check_output(cmd, cwd=wd, startupinfo=si, shell=True)
-    else:
-        return subprocess.check_output(cmd, cwd=wd)
 
 
 def show_doc(window, doc):
@@ -189,6 +176,6 @@ class LaunchBrowserDocsFromView(sublime_plugin.TextCommand):
         elif sys.platform == 'win32':
             launcher = 'start'
         if default_docs:
-            run_process('.', [launcher, 'https://golang.org/pkg/'])
+            run_tool([launcher, 'https://golang.org/pkg/'], wd='.')
         else:
-            run_process('.', [launcher, 'https://godoc.org/' + pkg.lower()])
+            run_tool([launcher, 'https://godoc.org/' + pkg.lower()], wd='.')

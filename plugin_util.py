@@ -32,11 +32,13 @@ def platform_startupinfo():
         return None
 
 
-def run_tool(cmd_parts):
+def run_tool(cmd_parts, shell=False, wd=None):
     cmd_output = None
     try:
         cmd_output = subprocess.check_output(
             cmd_parts,
+            cwd=wd,
+            shell=shell,
             stderr=subprocess.STDOUT,
             startupinfo=platform_startupinfo())
     except subprocess.CalledProcessError as e:
