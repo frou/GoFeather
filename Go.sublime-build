@@ -29,11 +29,19 @@
         },
         {
             "name": "Format",
-            "cmd": ["goimports", "-w", "."]
-            // I wish goimports had native support for ignoring vendor directories (like `go fmt` (but not gofmt) does)
-            // https://github.com/golang/go/issues/22173
-            // "shell": true,
-            // "cmd": "goimports -w $(find . -type f -name '*.go' -not -path './vendor/*')"
+
+            // When goimports/gofmt are used to format code, they do not employ
+            // the smarts to know that vendor directories should be skipped.
+            // `go fmt` (as distinct from `gofmt`) does, but unfortunately
+            // there is no equivalent `go imports`.
+            "shell": true,
+            "cmd": "goimports -w \\$(find . -type f -name '*.go' -not -path './vendor/*')",
+
+            "windows": {
+                "shell": false,
+                // TODO(DH): Need to find a way to skip files in vendor dirs as above.
+                "cmd": ["goimports", "-w", "."]
+            }
         },
         {
             "name": "Lint",

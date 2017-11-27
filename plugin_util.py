@@ -24,7 +24,7 @@ def check_num_selections(view, n):
 def platform_startupinfo():
     if sys.platform == 'win32':
         si = subprocess.STARTUPINFO()
-        # Stop a visible cmd.exe window from appearing.
+        # Stop a visible console window from appearing.
         si.dwFlags |= subprocess.STARTF_USESHOWWINDOW
         si.wShowWindow = subprocess.SW_HIDE
         return si

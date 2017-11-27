@@ -4,7 +4,6 @@ import sublime_plugin
 from .plugin_util import *
 
 
-# Uses: https://godoc.org/golang.org/x/tools/cmd/guru
 class QueryGoType(sublime_plugin.TextCommand):
     def run(self, args, simulate=False):
         view = self.view

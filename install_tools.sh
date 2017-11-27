@@ -1,19 +1,19 @@
 #!/bin/sh
 
-# This script will install the underlying command-line tools that are made use
-# of by this Sublime package.
+# This script will install (or update) the underlying command-line tools that
+# are made use of by this Sublime package.
 
 set -e
 set -x
 
-get() {
+upsert() {
 	go get -u "$1"
 }
 
-get github.com/nsf/gocode
+upsert github.com/nsf/gocode
 
-get github.com/godoctor/godoctor
+upsert github.com/godoctor/godoctor
 
-get golang.org/x/tools/cmd/guru
+upsert golang.org/x/tools/cmd/guru
 
-get golang.org/x/tools/cmd/gorename
+upsert golang.org/x/tools/cmd/gorename
