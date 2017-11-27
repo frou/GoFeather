@@ -29,18 +29,17 @@
         },
         {
             "name": "Format",
-
             // When goimports/gofmt are used to format code, they do not employ
             // the smarts to know that vendor directories should be skipped.
             // `go fmt` (as distinct from `gofmt`) does, but unfortunately
             // there is no equivalent `go imports`.
+
             "shell": true,
             "cmd": "goimports -w \\$(find . -type f -name '*.go' -not -path './vendor/*')",
 
             "windows": {
-                "shell": false,
-                // TODO(DH): Need to find a way to skip files in vendor dirs as above.
-                "cmd": ["goimports", "-w", "."]
+                "shell": true,
+                "cmd": "for /f usebackq %F in (`dir /b /s *.go ^| findstr /V /C:\\vendor\\`) do goimports -w %F"
             }
         },
         {
