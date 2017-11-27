@@ -35,11 +35,11 @@
             // there is no equivalent `go imports`.
 
             "shell": true,
-            "cmd": "goimports -w \\$(find . -type f -name '*.go' -not -path './vendor/*')",
+            "cmd": "find . -type f -name '*.go' -not -path './vendor/*' -print0 | xargs -0 goimports -w",
 
             "windows": {
                 "shell": true,
-                "cmd": "for /f usebackq %F in (`dir /b /s *.go ^| findstr /V /C:\\vendor\\`) do goimports -w %F"
+                "cmd": "for /f usebackq %F in (`dir /b /s *.go ^| findstr /V /C:\\vendor\\`) do goimports -w \"%F\""
             }
         },
         {
