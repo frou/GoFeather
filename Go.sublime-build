@@ -43,6 +43,10 @@
             }
         },
         {
+            "name": "Generate",
+            "cmd": "go generate"
+        },
+        {
             "name": "Lint",
             "shell": true,
             "cmd": "golint | grep -E -v '(should have comment|comment .* should be of the form|unexported .* which can be annoying to use)'"
