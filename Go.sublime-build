@@ -34,12 +34,10 @@
             // `go fmt` (as distinct from `gofmt`) does, but unfortunately
             // there is no equivalent `go imports`.
 
-            "shell": true,
-            "cmd": "find . -type f -name '*.go' -not -path './vendor/*' -print0 | xargs -0 goimports -w",
+            "shell_cmd": "find . -type f -name '*.go' -not -path './vendor/*' -print0 | xargs -0 goimports -w",
 
             "windows": {
-                "shell": true,
-                "cmd": "for /f usebackq %F in (`dir /b /s *.go ^| findstr /V /C:\\vendor\\`) do goimports -w \"%F\""
+                "shell_cmd": "for /f usebackq %F in (`dir /b /s *.go ^| findstr /V /C:\\vendor\\`) do goimports -w \"%F\""
             }
         },
         {
@@ -48,13 +46,11 @@
         },
         {
             "name": "Lint",
-            "shell": true,
-            "cmd": "golint | grep -E -v '(should have comment|comment .* should be of the form|unexported .* which can be annoying to use)'"
+            "shell_cmd": "golint | grep -E -v '(should have comment|comment .* should be of the form|unexported .* which can be annoying to use)'"
         },
         {
             "name": "Analyze",
-            "shell": true,
-            "cmd": "echo VET ; go tool vet . ; echo MEGACHECK ; megacheck -unused.enabled=false"
+            "shell_cmd": "echo VET ; go tool vet . ; echo MEGACHECK ; megacheck -unused.enabled=false"
         }
     ]
 }
