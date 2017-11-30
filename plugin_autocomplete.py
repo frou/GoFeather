@@ -126,7 +126,8 @@ def hint_and_replacement(category, name, go_type):
             hint += " ()"
             replacement += "()"
         if returns:
-            hint += "\t" + ", ".join(returns)
+            if len(returns) > 0:
+                hint += "\t" + ", ".join(returns)
     else:
         hint += "\t" + go_type
     return hint, replacement
