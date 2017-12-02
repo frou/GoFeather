@@ -10,16 +10,10 @@ upsert() {
 	go get -u "$1"
 }
 
-upsert github.com/golang/lint/golint
-
-upsert golang.org/x/tools/cmd/goimports
-
-upsert honnef.co/go/tools/cmd/megacheck
-
-upsert github.com/nsf/gocode
-
 upsert github.com/godoctor/godoctor
-
-upsert golang.org/x/tools/cmd/guru
-
+upsert github.com/golang/lint/golint
+upsert github.com/nsf/gocode
+upsert golang.org/x/tools/cmd/goimports
 upsert golang.org/x/tools/cmd/gorename
+upsert golang.org/x/tools/cmd/guru
+upsert honnef.co/go/tools/cmd/megacheck
