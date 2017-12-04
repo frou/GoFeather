@@ -20,6 +20,10 @@
             "cmd": ["go", "test"]
         },
         {
+            "name": "Generate",
+            "cmd": ["go", "generate"]
+        },
+        {
             "name": "Format",
             // When goimports/gofmt are used to format code, they do not employ
             // the smarts to know that vendor directories should be skipped.
@@ -33,16 +37,13 @@
             }
         },
         {
-            "name": "Generate",
-            "cmd": ["go", "generate"]
-        },
-        {
-            "name": "Lint",
-            "shell_cmd": "golint | grep -E -v '(should have comment|comment .* should be of the form|unexported .* which can be annoying to use)'"
-        },
-        {
             "name": "Analyze",
-            "shell_cmd": "echo VET ; go tool vet . ; echo MEGACHECK ; megacheck -unused.enabled=false"
+
+            "shell_cmd": "echo Vet ; echo --- ; go vet ; echo ; echo Megacheck ; echo --------- ; megacheck ; echo ; echo Lint ; echo ---- ; golint",
+
+            "windows": {
+                "shell_cmd": "echo Vet & echo --- & go vet & echo. & echo Megacheck & echo --------- & megacheck & echo. & echo Lint & echo ---- & golint"
+            }
         }
     ]
 }

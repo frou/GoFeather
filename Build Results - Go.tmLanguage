@@ -24,6 +24,14 @@
 
         <dict>
             <key>name</key>
+            <string>comment.golint-mundane-suggestions.build-results-go</string>
+
+            <key>match</key>
+            <string>(exported \w+ [\w\.]+ should have comment (\(or a comment on this block\) )?or be unexported$)</string>
+        </dict>
+
+        <dict>
+            <key>name</key>
             <string>entity.package.build-results-go</string>
 
             <key>match</key>
