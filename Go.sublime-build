@@ -8,10 +8,6 @@
     "variants":
     [
         {
-            "name": "Build (Single File)",
-            "cmd": ["go", "build", "$file"]
-        },
-        {
             "name": "Install",
             "cmd": ["go", "install"]
         },
@@ -22,10 +18,6 @@
         {
             "name": "Test",
             "cmd": ["go", "test"]
-        },
-        {
-            "name": "Run (Single File)",
-            "cmd": ["go", "run", "$file"]
         },
         {
             "name": "Format",
