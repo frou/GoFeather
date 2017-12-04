@@ -6,14 +6,14 @@
 set -e
 set -x
 
-upsert() {
+upstall() {
 	go get -u "$1"
 }
 
-upsert github.com/godoctor/godoctor
-upsert github.com/golang/lint/golint
-upsert github.com/nsf/gocode
-upsert golang.org/x/tools/cmd/goimports
-upsert golang.org/x/tools/cmd/gorename
-upsert golang.org/x/tools/cmd/guru
-upsert honnef.co/go/tools/cmd/megacheck
+upstall github.com/godoctor/godoctor
+upstall github.com/golang/lint/golint
+upstall github.com/nsf/gocode
+upstall golang.org/x/tools/cmd/goimports
+upstall golang.org/x/tools/cmd/gorename
+upstall golang.org/x/tools/cmd/guru
+upstall honnef.co/go/tools/cmd/megacheck
