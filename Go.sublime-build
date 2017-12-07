@@ -25,15 +25,19 @@
         },
         {
             "name": "Format",
-            // When goimports/gofmt are used to format code, they do not employ
-            // the smarts to know that vendor directories should be skipped.
-            // `go fmt` (as distinct from `gofmt`) does, but unfortunately
-            // there is no equivalent `go imports`.
 
-            "shell_cmd": "find . -type f -name '*.go' -not -path './vendor/*' -print0 | xargs -0 goimports -w",
+            // Format the files in the current package.
+            "shell_cmd": "goimports -w *.go",
+
+            // Format the files in the current package and all (non-vendored) sub-packages.
+            //"shell_cmd": "find . -type f -name '*.go' -not -path './vendor/*' -print0 | xargs -0 goimports -w",
 
             "windows": {
-                "shell_cmd": "for /f usebackq %F in (`dir /b /s *.go ^| findstr /V /C:\\vendor\\`) do goimports -w \"%F\""
+                // Format the files in the current package.
+                "shell_cmd": "for /f usebackq %F in (`dir /b *.go`) do goimports -w \"%F\""
+
+                // Format the files in the current package and all (non-vendored) sub-packages.
+                //"shell_cmd": "for /f usebackq %F in (`dir /b /s *.go ^| findstr /V /C:\\vendor\\`) do goimports -w \"%F\""
             }
         },
         {
