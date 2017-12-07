@@ -38,12 +38,11 @@
         },
         {
             "name": "Analyze",
+            // TODO(DH): --format={{...}} to produce an output that aligns: path:line:col: | linter | severity | message
+            // https://golang.org/pkg/text/template/
+            "cmd": ["gometalinter", "--config=$packages/GoFeather/gometalinter_config.json"],
 
-            "shell_cmd": "echo Vet ; echo --- ; go vet ; echo ; echo Megacheck ; echo --------- ; megacheck ; echo ; echo Lint ; echo ---- ; golint",
-
-            "windows": {
-                "shell_cmd": "echo Vet & echo --- & go vet & echo. & echo Megacheck & echo --------- & megacheck & echo. & echo Lint & echo ---- & golint"
-            }
+            "word_wrap": false
         }
     ]
 }

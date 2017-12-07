@@ -1,0 +1,13 @@
+{
+  "Enable": [
+    "vet",
+    "golint",
+    "megacheck"
+  ],
+  "Sort": [
+    "linter",
+    "path",
+    "line",
+    "column"
+  ]
+}
