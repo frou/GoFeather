@@ -9,5 +9,6 @@
     "path",
     "line",
     "column"
-  ]
+  ],
+  "Deadline": "60s"
 }
