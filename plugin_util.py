@@ -9,9 +9,9 @@ class SettingsKeys:
     PANEL_QUERIED_TYPE = str(uuid.uuid4())
 
 
-def save_to_disk(view):
+def save_and_format(window):
     # This will ensure the file is UTF-8 with no BOM and with LF line-endings.
-    view.window().run_command('build', {'variant': 'Format'})
+    window.run_command('build', {'variant': 'Format'})
 
 
 def check_num_selections(view, n):
