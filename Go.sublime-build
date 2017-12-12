@@ -26,23 +26,26 @@
         {
             "name": "Format",
 
-            // Format the files in the current package.
+            // Format the current file.
+            // "cmd": ["goimports", "-w", "$file"]
+
+            // Format all files in the same package as the current file.
             "shell_cmd": "goimports -w *.go",
 
-            // Format the files in the current package and all (non-vendored) sub-packages.
+            // Format all files in the same package as the current file, and in (non-vendored) sub-packages.
             //"shell_cmd": "find . -type f -name '*.go' -not -path './vendor/*' -print0 | xargs -0 goimports -w",
 
             "windows": {
-                // Format the files in the current package.
+                // Format all files in the same package as the current file.
                 "shell_cmd": "for /f usebackq %F in (`dir /b *.go`) do goimports -w \"%F\""
 
-                // Format the files in the current package and all (non-vendored) sub-packages.
+                // Format all files in the same package as the current file, and in (non-vendored) sub-packages.
                 //"shell_cmd": "for /f usebackq %F in (`dir /b /s *.go ^| findstr /V /C:\\vendor\\`) do goimports -w \"%F\""
             }
         },
         {
             "name": "Analyze",
-            // TODO(DH): --format={{...}} to produce an output that aligns: path:line:col: | linter | severity | message
+            // TODO(DH): Use --format={{...}} to produce an output that aligns: path:line:col: | linter | severity | message
             // https://golang.org/pkg/text/template/
             "cmd": ["gometalinter", "--config=$packages/GoFeather/gometalinter_config.json"],
 
