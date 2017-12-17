@@ -2,6 +2,7 @@
   "Enable": [
     "vet",
     "golint",
+    "errcheck",
     "megacheck"
   ],
   "Sort": [
