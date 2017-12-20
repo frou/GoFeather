@@ -25,9 +25,7 @@
         },
         {
             "name": "Format",
-
-            // Format the current file.
-            // "cmd": ["goimports", "-w", "$file"]
+            //"cmd": ["goimports", "-w", "$file"],
 
             // Format all files in the same package as the current file.
             "shell_cmd": "goimports -w *.go",
@@ -41,6 +39,12 @@
 
                 // Format all files in the same package as the current file, and in (non-vendored) sub-packages.
                 //"shell_cmd": "for /f usebackq %F in (`dir /b /s *.go ^| findstr /V /C:\\vendor\\`) do goimports -w \"%F\""
+
+                // NOTE: the above could be replaced with:
+                //   "shell_cmd": null,
+                //   "cmd": ["bash", "-c", "..."]
+                // where ... is the same string that's used in the matching non-Windows case.
+                // Obviously, this would be making the assumption that bash has been installed on the Windows system.
             }
         },
         {
