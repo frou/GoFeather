@@ -33,6 +33,7 @@ def platform_startupinfo():
 
 
 def run_tool(cmd_parts, shell=False, wd=None):
+    # print("GoFeather: running tool %s" % cmd_parts)
     cmd_output = None
     try:
         cmd_output = subprocess.check_output(

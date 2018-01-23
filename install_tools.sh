@@ -23,6 +23,6 @@ upstall golang.org/x/tools/cmd/guru
 # The following should provide a smooth install/update of gometalinter and its
 # linters:
 GML="github.com/alecthomas/gometalinter"
-rm -rf "$GOPATH/src/$GML"
+rm -rf "$GOPATH/src/$GML" # Possibly contains work the user cares about...?
 upstall "$GML"
 gometalinter --install --update
