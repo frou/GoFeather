@@ -32,6 +32,7 @@ class AutocompleteUsingGocode(sublime_plugin.ViewEventListener):
             startupinfo=platform_startupinfo())
 
         gocode_output = gocode.communicate(gocode_input.encode())[0].decode()
+        # print(gocode_output)
 
         result = []
         for line in filter(bool, gocode_output.split("\n")):
@@ -124,7 +125,11 @@ def hint_and_replacement(category, name, go_type):
             replacement += "(" + ", ".join(sargs) + ")"
         else:
             hint += " ()"
-            replacement += "()"
+            # Have the () itself be a snippet, to normalise the number of
+            # keyboard interactions to deal with the argument list. i.e. no
+            # matter the number of arguments, at least one tab press is
+            # required to advance beyond it.
+            replacement += "${1:()}"
         if returns:
             if len(returns) > 0:
                 hint += "\t" + ", ".join(returns)
