@@ -8,7 +8,7 @@ import sublime
 import sublime_plugin
 import subprocess
 
-from .plugin_util import *
+from .util import *
 
 
 class AutocompleteUsingGocode(sublime_plugin.ViewEventListener):

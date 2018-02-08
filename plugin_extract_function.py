@@ -1,7 +1,7 @@
 import sublime
 import sublime_plugin
 
-from .plugin_util import *
+from .util import *
 
 
 class ExtractSelectionAsFunction(sublime_plugin.TextCommand):

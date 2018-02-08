@@ -4,7 +4,7 @@ import os
 import sys
 
 # TODO(DH): Make use of check_num_selections too.
-from .plugin_util import *
+from .util import *
 
 
 def determine_wd_for_cmd(view):
