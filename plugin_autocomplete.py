@@ -10,6 +10,14 @@ import subprocess
 
 from .util import *
 
+# TODO(DH): Need to filter the completions returned from gocode slightly. For
+# example, when typing the following ( with | representing caret position ):
+#
+# func Foobar|() {
+# }
+#
+# A completion "func    Foobar (...)" should not be presented, because we are
+# in the midst of defining that function, not writing a call to it!
 
 class AutocompleteUsingGocode(sublime_plugin.ViewEventListener):
     @classmethod
