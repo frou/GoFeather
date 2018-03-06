@@ -144,3 +144,9 @@ def hint_and_replacement(category, name, go_type):
     else:
         hint += "\t" + go_type
     return hint, replacement
+
+# TODO(DH): Emit outer and inner snippet for last argument for a variadic func
+#     e.g. fmt.Errorf(format string, a ...interface{})
+# which allows the entire thing including the preceding ", " to be deleted with
+# one keystroke if so desired. (Similar to what I did for "optional" args in
+# tern_for_sublime).
