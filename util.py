@@ -9,11 +9,12 @@ class SettingsKeys:
     PANEL_QUERIED_TYPE = str(uuid.uuid4())
 
 
+# TODO(DH): Make this a decorator? https://www.thecodeship.com/patterns/guide-to-python-function-decorators/
 def save_and_format(window):
     # This will ensure the file is UTF-8 with no BOM and with LF line-endings.
     window.run_command('build', {'variant': 'Format'})
 
-
+# TODO(DH): Make this a decorator? https://www.thecodeship.com/patterns/guide-to-python-function-decorators/
 def check_num_selections(view, n):
     ok = len(view.sel()) == n
     if not ok:
