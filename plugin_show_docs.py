@@ -46,11 +46,13 @@ def get_doc(cmd_wd, cmd_arg):
         cmd.append(cmd_arg)
     try:
         cmd_output = run_tool(cmd, wd=cmd_wd)
+        if cmd_output:
+            return cmd_output.decode('utf-8')
     except:
-        sublime.status_message('FAILED: ' + ' '.join(cmd))
-        return
-    return cmd_output.decode('utf-8')
+        pass
 
+    sublime.status_message('FAILED: ' + ' '.join(cmd))
+    return None
 
 def show_doc(window, doc):
     panel_name_suffix = 'show_go_doc'
@@ -89,6 +91,7 @@ class ShowGoDocFromView(sublime_plugin.TextCommand):
 class QuickShowGoDocFromView(sublime_plugin.TextCommand):
     def run(self, args):
         view = self.view
+        window = view.window()
 
         if len([sl for sl in view.sel() if not sl.empty()]) != 0:
             sublime.status_message('TOO MANY SELECTIONS')
@@ -100,14 +103,17 @@ class QuickShowGoDocFromView(sublime_plugin.TextCommand):
                          {'by': 'words',
                           'forward': False,
                           'extend': True})
+
+        # Is the character before the current word a dot?
+
         view.run_command(
             'move', {'by': 'characters',
                      'forward': False,
                      'extend': True})
 
-        # Is the character before the current word a dot?
-        provisional_selection = view.substr(view.sel()[0])
-        if provisional_selection.startswith('.'):
+        provisional_sel_str = view.substr(view.sel()[0])
+
+        if provisional_sel_str.startswith('.'):
             # Yes: Extend the selection to cover the word before the dot too.
             view.run_command('move',
                              {'by': 'words',
@@ -120,8 +126,36 @@ class QuickShowGoDocFromView(sublime_plugin.TextCommand):
                          'forward': True,
                          'extend': True})
 
-        # Get and show the documentation for the selection.
-        view.run_command('show_go_doc_from_view')
+        adjusted_sel = view.sel()[0]
+        adjusted_sel_str = view.substr(adjusted_sel)
+
+        # ------------------------------------------------------------
+
+        byte_offset = adjusted_sel.begin()
+        guru_cmd = [
+            'guru', '-json', 'describe',
+            view.file_name() + ':#' + str(byte_offset)
+        ]
+        guru_cmd_output = run_tool(guru_cmd)
+        if guru_cmd_output:
+            # print(guru_cmd)
+            json_obj = sublime.decode_value(guru_cmd_output.decode('utf-8'))
+
+            desc_str = json_obj['desc']
+            if desc_str == "identifier":
+                type_str = json_obj['value']['type']
+                # *os.File -> os.File
+                type_str = type_str.lstrip("*")
+                if "." in adjusted_sel_str:
+                    # f.Close -> os.File.Close
+                    adjusted_sel_str = "%s.%s" % (type_str, adjusted_sel_str.split(".")[1])
+                elif not type_str.startswith("func("):
+                    adjusted_sel_str = type_str
+
+        cmd_wd, _ = determine_wd_for_cmd(view)
+        show_doc(
+            window,
+            get_doc(cmd_wd, adjusted_sel_str))
 
         # End up with the caret at the start of the word it was initially in, and with no selection.
         view.run_command('move', {'by': 'characters', 'forward': True})
