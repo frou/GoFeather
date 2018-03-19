@@ -66,28 +66,6 @@ def show_doc(window, doc):
     window.run_command('show_panel', {'panel': panel_name_full})
 
 
-class ShowGoDocFromView(sublime_plugin.TextCommand):
-    def run(self, args):
-        view = self.view
-        window = view.window()
-
-        cmd_wd, cmd_wd_is_go_pkg = determine_wd_for_cmd(view)
-
-        non_empty_selections = [sl for sl in view.sel() if not sl.empty()]
-        if len(non_empty_selections) == 0:
-            if not cmd_wd_is_go_pkg:
-                sublime.status_message('NOT IN A GO PACKAGE')
-                return
-            cmd_arg = None
-        elif len(non_empty_selections) == 1:
-            cmd_arg = view.substr(non_empty_selections[0])
-        else:
-            sublime.status_message('TOO MANY SELECTIONS')
-            return
-
-        show_doc(window, get_doc(cmd_wd, cmd_arg))
-
-
 class QuickShowGoDocFromView(sublime_plugin.TextCommand):
     def run(self, args):
         view = self.view
