@@ -3,6 +3,17 @@ import sublime_plugin
 
 from .util import *
 
+# TODO(DH): The _shows_docs plugin can get the doc for e.g. a package-qualified identifier. What about getting the doc for a method/field that is preceded by a variable name rather than a package name?
+# This can currently be approximated with:
+# (cursor on variable)
+# Shift+F9
+# (manuallly adding `.MethodName` as a suffix in the input panel)
+# Return
+#
+# QueryGoType could be removed? Then QuickShowGoDocFromView could be updated to
+# assume the prefix is a package name, then, if that fails, assume the prefix
+# is a variable name, lookup its type, then synthesize a second
+# ShowGoDocFromView/QuickShowGoDocFromView.
 
 class QueryGoType(sublime_plugin.TextCommand):
     def run(self, args, simulate=False):
