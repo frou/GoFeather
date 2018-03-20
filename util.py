@@ -44,6 +44,6 @@ def run_tool(cmd_parts, shell=False, wd=None):
             stderr=subprocess.STDOUT,
             startupinfo=platform_startupinfo())
     except subprocess.CalledProcessError as e:
-        print(e.output)
-        sublime.status_message(cmd_parts[0].upper() + ' FAILED')
+        print("\n%s failed. Its stderr was:\n%s" % (cmd_parts, e.output.decode('utf-8')))
+        sublime.status_message(("%s command failed - see console" % (cmd_parts[0])).upper())
     return cmd_output

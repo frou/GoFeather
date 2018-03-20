@@ -46,17 +46,12 @@ def get_doc(cmd_wd, cmd_arg):
     if cmd_arg:
         cmd.append(cmd_arg)
 
-    try:
-        # print(cmd)
-        cmd_output = run_tool(cmd, wd=cmd_wd)
-        if cmd_output:
-            return cmd_output.decode('utf-8')
-    except:
-        # TODO(DH): Surface the exception in the console/status-bar?
-        pass
-
-    sublime.status_message('FAILED: ' + ' '.join(cmd))
-    return None
+    # print(cmd)
+    cmd_output = run_tool(cmd, wd=cmd_wd)
+    if cmd_output:
+        return cmd_output.decode('utf-8')
+    else:
+        return None
 
 def show_doc(window, doc):
     panel_name_suffix = 'show_go_doc'
@@ -79,7 +74,7 @@ class quick_show_go_doc_from_view(sublime_plugin.TextCommand):
             sublime.status_message('TOO MANY SELECTIONS')
             return
 
-        # TODO(DH): Need to format too?
+        # TODO(DH): Need to format too? Why is save_and_format(window) not working well?
         view.run_command('save')
 
         # Select the current word plus the character before it.
