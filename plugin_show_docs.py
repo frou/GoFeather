@@ -74,8 +74,7 @@ class quick_show_go_doc_from_view(sublime_plugin.TextCommand):
             sublime.status_message('TOO MANY SELECTIONS')
             return
 
-        # TODO(DH): Need to format too? Why is save_and_format(window) not working well?
-        view.run_command('save')
+        save_and_format(window)
 
         # Select the current word plus the character before it.
         view.run_command('move', {'by': 'wordends', 'forward': True})

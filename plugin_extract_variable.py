@@ -10,3 +10,5 @@ class ExtractSelectionAsVariable(sublime_plugin.TextCommand):
         view = self.view
         window = view.window()
         print("V")
+
+# TODO(DH): Add a plugin to make use of guru's "implements" subcmd as well.
