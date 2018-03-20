@@ -36,19 +36,23 @@ def get_doc(cmd_wd, cmd_arg):
     cmd = [
         'go',
         'doc',
+        # Don't suppress documentation for `main` packages.
+        '-cmd',
+        # Symbol matching honors case (paths not affected).
         '-c',
+        # Show unexported symbols as well as exported.
+        '-u'
     ]
     if cmd_arg:
-        # Most of the interesting identifiers in the pseudo-package builtin are
-        # considered unexported because they start with lowercase.
-        if cmd_arg == 'builtin' or cmd_arg.startswith('builtin.'):
-            cmd.append('-u')
         cmd.append(cmd_arg)
+
     try:
+        # print(cmd)
         cmd_output = run_tool(cmd, wd=cmd_wd)
         if cmd_output:
             return cmd_output.decode('utf-8')
     except:
+        # TODO(DH): Surface the exception in the console/status-bar?
         pass
 
     sublime.status_message('FAILED: ' + ' '.join(cmd))
@@ -75,7 +79,8 @@ class quick_show_go_doc_from_view(sublime_plugin.TextCommand):
             sublime.status_message('TOO MANY SELECTIONS')
             return
 
-        # TODO(DH): get save_and_format(window) working well here.
+        # TODO(DH): Need to format too?
+        view.run_command('save')
 
         # Select the current word plus the character before it.
         view.run_command('move', {'by': 'wordends', 'forward': True})
@@ -108,7 +113,7 @@ class quick_show_go_doc_from_view(sublime_plugin.TextCommand):
 
         adjusted_sel = view.sel()[0]
         adjusted_sel_str = view.substr(adjusted_sel)
-
+        # print(adjusted_sel_str)
         # ------------------------------------------------------------
 
         byte_offset = adjusted_sel.begin()
@@ -132,6 +137,7 @@ class quick_show_go_doc_from_view(sublime_plugin.TextCommand):
                 elif not type_str.startswith("func("):
                     adjusted_sel_str = type_str
 
+        # print(adjusted_sel_str)
         cmd_wd, _ = determine_wd_for_cmd(view)
         show_doc(
             window,
