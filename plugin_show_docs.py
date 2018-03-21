@@ -110,26 +110,30 @@ class quick_show_go_doc_from_view(sublime_plugin.TextCommand):
         # print(adjusted_sel_str)
         # ------------------------------------------------------------
 
-        byte_offset = adjusted_sel.begin()
-        guru_cmd = [
-            'guru', '-json', 'describe',
-            view.file_name() + ':#' + str(byte_offset)
-        ]
-        guru_cmd_output = run_tool(guru_cmd)
-        if guru_cmd_output:
-            # print(guru_cmd)
-            json_obj = sublime.decode_value(guru_cmd_output.decode('utf-8'))
+        file_path = view.file_name()
+        # Only examine the selection using `guru` if the view is backed by a
+        # file on disk that guru can read.
+        if file_path:
+            byte_offset = adjusted_sel.begin()
+            guru_cmd = [
+                'guru', '-json', 'describe', "%s:#%d" %(file_path, byte_offset)
+            ]
+            guru_cmd_output = run_tool(guru_cmd)
+            if guru_cmd_output:
+                # print(guru_cmd)
+                json_obj = sublime.decode_value(guru_cmd_output.decode('utf-8'))
 
-            desc_str = json_obj['desc']
-            if desc_str == "identifier":
-                type_str = json_obj['value']['type']
-                # *os.File -> os.File
-                type_str = type_str.lstrip("*")
-                if "." in adjusted_sel_str:
-                    # f.Close -> os.File.Close
-                    adjusted_sel_str = "%s.%s" % (type_str, adjusted_sel_str.split(".")[1])
-                elif not type_str.startswith("func("):
-                    adjusted_sel_str = type_str
+                desc_str = json_obj['desc']
+                if desc_str == "identifier":
+                    type_str = json_obj['value']['type']
+                    # *os.File -> os.File
+                    type_str = type_str.lstrip("*")
+                    if "." in adjusted_sel_str:
+                        # f.Close -> os.File.Close
+                        adjusted_sel_str = "%s.%s" % (type_str, adjusted_sel_str.split(".")[1])
+                    elif not type_str.startswith("func("):
+                        # f -> os.File
+                        adjusted_sel_str = type_str
 
         # print(adjusted_sel_str)
         cmd_wd, _ = determine_wd_for_cmd(view)
