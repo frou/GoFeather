@@ -104,16 +104,16 @@ class quick_show_go_doc_from_view(sublime_plugin.TextCommand):
                              'forward': True,
                              'extend': True})
 
-        adjusted_sel = view.sel()[0]
-        adjusted_sel_str = view.substr(adjusted_sel)
-        # print(adjusted_sel_str)
+        synthetic_sel = view.sel()[0]
+        go_doc_query = view.substr(synthetic_sel)
+        # print(go_doc_query)
         # ------------------------------------------------------------
 
         file_path = view.file_name()
         # Only examine the selection using `guru` if the view is backed by a
         # file on disk that guru can read.
         if file_path:
-            byte_offset = adjusted_sel.begin()
+            byte_offset = synthetic_sel.begin()
             guru_cmd = [
                 'guru', '-json', 'describe', "%s:#%d" %(file_path, byte_offset)
             ]
@@ -127,18 +127,18 @@ class quick_show_go_doc_from_view(sublime_plugin.TextCommand):
                     type_str = json_obj['value']['type']
                     # *os.File -> os.File
                     type_str = type_str.lstrip("*")
-                    if "." in adjusted_sel_str:
+                    if "." in go_doc_query:
                         # f.Close -> os.File.Close
-                        adjusted_sel_str = "%s.%s" % (type_str, adjusted_sel_str.split(".")[1])
+                        go_doc_query = "%s.%s" % (type_str, go_doc_query.split(".")[1])
                     elif not type_str.startswith("func("):
                         # f -> os.File
-                        adjusted_sel_str = type_str
+                        go_doc_query = type_str
 
-        # print(adjusted_sel_str)
+        # print(go_doc_query)
         cmd_wd, _ = determine_wd_for_cmd(view)
         show_doc(
             window,
-            get_doc(cmd_wd, adjusted_sel_str))
+            get_doc(cmd_wd, go_doc_query))
 
         # End up with the caret at the start of the word it was initially in, and with no selection.
         view.run_command('move', {'by': 'characters', 'forward': True})
