@@ -85,25 +85,24 @@ class quick_show_go_doc_from_view(sublime_plugin.TextCommand):
 
         # Is the character before the current word a dot?
 
-        view.run_command(
-            'move', {'by': 'characters',
-                     'forward': False,
-                     'extend': True})
-
-        provisional_sel_str = view.substr(view.sel()[0])
-
-        if provisional_sel_str.startswith('.'):
-            # Yes: Extend the selection to cover the word before the dot too.
-            view.run_command('move',
-                             {'by': 'words',
-                              'forward': False,
-                              'extend': True})
-        else:
-            # No: Don't have the dot selected any more.
+        if view.sel()[0].begin() > 0:
             view.run_command(
                 'move', {'by': 'characters',
-                         'forward': True,
+                         'forward': False,
                          'extend': True})
+
+            if view.substr(view.sel()[0]).startswith('.'):
+                # Yes: Extend the selection to cover the word before the dot too.
+                view.run_command('move',
+                                 {'by': 'words',
+                                  'forward': False,
+                                  'extend': True})
+            else:
+                # No: Don't have the extra character selected any more.
+                view.run_command(
+                    'move', {'by': 'characters',
+                             'forward': True,
+                             'extend': True})
 
         adjusted_sel = view.sel()[0]
         adjusted_sel_str = view.substr(adjusted_sel)
