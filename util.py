@@ -23,6 +23,16 @@ def check_num_selections(view, n):
         sublime.status_message('EXPECTED %d SELECTIONS' % n)
     return ok
 
+def show_doc(window, doc):
+    panel_name_suffix = 'show_go_doc'
+    panel_name_full = 'output.' + panel_name_suffix
+    if doc is None:
+        if window.active_panel() == panel_name_full:
+            window.run_command("hide_panel")
+        return
+    output = window.create_output_panel(panel_name_suffix)
+    output.run_command('append', {'characters': doc})
+    window.run_command('show_panel', {'panel': panel_name_full})
 
 def platform_startupinfo():
     if sys.platform == 'win32':
@@ -37,7 +47,6 @@ def platform_startupinfo():
 
 def run_tool(cmd_parts, shell=False, wd=None):
     # print("GoFeather: running tool %s" % cmd_parts)
-    cmd_output = None
     try:
         cmd_output = subprocess.check_output(
             cmd_parts,
@@ -45,7 +54,7 @@ def run_tool(cmd_parts, shell=False, wd=None):
             shell=shell,
             stderr=subprocess.STDOUT,
             startupinfo=platform_startupinfo())
+        return cmd_output.decode('utf-8')
     except subprocess.CalledProcessError as e:
         print("\n%s failed. Its stderr was:\n%s" % (cmd_parts, e.output.decode('utf-8')))
         sublime.status_message(("%s command failed - see console" % (cmd_parts[0])).upper())
-    return cmd_output

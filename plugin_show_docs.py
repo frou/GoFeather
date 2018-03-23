@@ -49,21 +49,9 @@ def get_doc(cmd_wd, cmd_arg):
     # print(cmd)
     cmd_output = run_tool(cmd, wd=cmd_wd)
     if cmd_output:
-        return cmd_output.decode('utf-8')
+        return cmd_output
     else:
         return None
-
-def show_doc(window, doc):
-    panel_name_suffix = 'show_go_doc'
-    panel_name_full = 'output.' + panel_name_suffix
-    if doc is None:
-        if window.active_panel() == panel_name_full:
-            window.run_command("hide_panel")
-        return
-    output = window.create_output_panel(panel_name_suffix)
-    output.run_command('append', {'characters': doc})
-    window.run_command('show_panel', {'panel': panel_name_full})
-
 
 class quick_show_go_doc_from_view(sublime_plugin.TextCommand):
     def run(self, args):
@@ -120,7 +108,7 @@ class quick_show_go_doc_from_view(sublime_plugin.TextCommand):
             guru_cmd_output = run_tool(guru_cmd)
             if guru_cmd_output:
                 # print(guru_cmd)
-                json_obj = sublime.decode_value(guru_cmd_output.decode('utf-8'))
+                json_obj = sublime.decode_value(guru_cmd_output)
 
                 desc_str = json_obj['desc']
                 if desc_str == "identifier":

@@ -55,7 +55,7 @@ def do_rename(view, byte_offset, new_name, simulate):
         simulate = False
 
     view.window().new_file().run_command("show_refactor_result", {
-        "result": cmd_output.decode('utf-8'),
+        "result": cmd_output,
         "is_diff": simulate
     })
 
