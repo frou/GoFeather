@@ -4,7 +4,7 @@ import sublime_plugin
 from .util import *
 
 
-class rename_selected_identifier(sublime_plugin.TextCommand):
+class rename_current_identifier(sublime_plugin.TextCommand):
     def run(self, args, simulate=False):
         view = self.view
         window = view.window()
