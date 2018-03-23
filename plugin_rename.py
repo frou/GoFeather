@@ -21,9 +21,9 @@ class rename_selected_identifier(sublime_plugin.TextCommand):
         selected_text = view.substr(sel0)
         byte_offset = sel0.begin()
 
-        input_label = 'Semantically rename'
+        input_label = 'Rename'
         if simulate:
-            input_label = 'Simulate semantically renaming'
+            input_label = 'Simulate renaming'
         input_label += ' "' + selected_text + '" to'
 
         window.show_input_panel(
