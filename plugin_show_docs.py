@@ -28,7 +28,7 @@ def submit_panel(window, cmd_wd, cmd_wd_is_go_pkg, s, save_for_replay):
         sublime.status_message('NOT IN A GO PACKAGE')
         return
 
-    show_doc(window, get_doc(cmd_wd, cmd_arg))
+    show_gofeather_output_panel(window, get_doc(cmd_wd, cmd_arg))
 
 
 def get_doc(cmd_wd, cmd_arg):
@@ -124,7 +124,7 @@ class quick_show_go_doc_from_view(sublime_plugin.TextCommand):
 
         # print(go_doc_query)
         cmd_wd, _ = determine_wd_for_cmd(view)
-        show_doc(
+        show_gofeather_output_panel(
             window,
             get_doc(cmd_wd, go_doc_query))
 

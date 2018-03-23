@@ -23,15 +23,15 @@ def check_num_selections(view, n):
         sublime.status_message('EXPECTED %d SELECTIONS' % n)
     return ok
 
-def show_doc(window, doc):
-    panel_name_suffix = 'show_go_doc'
+def show_gofeather_output_panel(window, content):
+    panel_name_suffix = 'gofeather'
     panel_name_full = 'output.' + panel_name_suffix
-    if doc is None:
+    if content is None:
         if window.active_panel() == panel_name_full:
             window.run_command("hide_panel")
         return
     output = window.create_output_panel(panel_name_suffix)
-    output.run_command('append', {'characters': doc})
+    output.run_command('append', {'characters': content})
     window.run_command('show_panel', {'panel': panel_name_full})
 
 def platform_startupinfo():

@@ -32,4 +32,4 @@ class ImplementsOrImplementedBy(sublime_plugin.TextCommand):
         ]
         guru_cmd_output = run_tool(guru_cmd)
         if guru_cmd_output:
-            show_doc(window, guru_cmd_output)
+            show_gofeather_output_panel(window, guru_cmd_output)
