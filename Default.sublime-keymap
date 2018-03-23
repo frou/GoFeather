@@ -7,5 +7,4 @@
     {"keys": ["shift+alt+r"], "command": "rename_selected_identifier",    "args": {"simulate": true}, "context": [{"key": "selector", "operator": "equal", "operand": "source.go"}]},
     {"keys": ["alt+f"],       "command": "extract_selection_as_function", "args": {},                 "context": [{"key": "selector", "operator": "equal", "operand": "source.go"}]},
     {"keys": ["alt+i"],       "command": "implements_or_implemented_by",  "args": {},                 "context":  [{"key": "selector", "operator": "equal", "operand": "source.go"}]},
-    // TODO(DH): Rename all commands to snake_case in the .py files too.
 ]

@@ -3,7 +3,7 @@ import sublime_plugin
 
 from .util import *
 
-class ImplementsOrImplementedBy(sublime_plugin.TextCommand):
+class implements_or_implemented_by(sublime_plugin.TextCommand):
     def run(self, args):
         view = self.view
         window = view.window()

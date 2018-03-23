@@ -4,7 +4,7 @@ import sublime_plugin
 from .util import *
 
 
-class ExtractSelectionAsFunction(sublime_plugin.TextCommand):
+class extract_selection_as_function(sublime_plugin.TextCommand):
     def run(self, args):
         view = self.view
         window = view.window()

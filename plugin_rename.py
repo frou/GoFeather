@@ -4,7 +4,7 @@ import sublime_plugin
 from .util import *
 
 
-class RenameSelectedIdentifier(sublime_plugin.TextCommand):
+class rename_selected_identifier(sublime_plugin.TextCommand):
     def run(self, args, simulate=False):
         view = self.view
         window = view.window()
@@ -60,10 +60,11 @@ def do_rename(view, byte_offset, new_name, simulate):
     })
 
 
-class ShowRefactorResult(sublime_plugin.TextCommand):
+class show_refactor_result(sublime_plugin.TextCommand):
     def run(self, edit, result, is_diff):
         view = self.view
         view.set_scratch(True)
+        view.set_name("Rename simulation")
         if is_diff:
             view.set_syntax_file('Packages/Diff/Diff.sublime-syntax')
         view.insert(edit, 0, result)
