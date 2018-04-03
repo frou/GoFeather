@@ -58,7 +58,7 @@
             <string>string.quoted.double.go</string>
 
             <key>match</key>
-            <string>"(|.*?[^\\]|.*?(?&lt;!\\)(\\\\)*)"</string>
+            <string>".*?(?&lt;!\\)(\\\\)*"</string>
         </dict>
 
         <!-- Constant -->
