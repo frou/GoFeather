@@ -25,4 +25,4 @@ upstall golang.org/x/tools/cmd/guru
 GML="github.com/alecthomas/gometalinter"
 rm -rf "$GOPATH/src/$GML" # Possibly contains work the user cares about...? TODO(DH): Pass -I flag to rm?
 upstall "$GML"
-gometalinter --install --update
+gometalinter --install
