@@ -19,6 +19,14 @@
     <key>patterns</key>
     <array>
         <dict>
+            <key>name</key>
+            <string>comment.template.go</string>
+
+            <key>match</key>
+            <string>{{/\*.*?\*/}}</string>
+        </dict>
+
+        <dict>
             <key>match</key>
             <string>({{)(.*?)(}})</string>
 
