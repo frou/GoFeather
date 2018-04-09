@@ -28,7 +28,7 @@
 
         <dict>
             <key>match</key>
-            <string>({{)(.*?)(}})</string>
+            <string>({{)(if|else if|else|end|range|template|block|with|define)?(\s(.*?)|)(}})</string>
 
             <key>name</key>
             <string></string>
@@ -47,7 +47,13 @@
                     <string>keyword.template.go</string>
                 </dict>
 
-                <key>3</key>
+                <key>4</key>
+                <dict>
+                    <key>name</key>
+                    <string>markup.template.go</string>
+                </dict>
+
+                <key>5</key>
                 <dict>
                     <key>name</key>
                     <string>support.template.go</string>
