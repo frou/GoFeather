@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>name</key>
+    <string>GoFeather (Template)</string>
+
+    <key>scopeName</key>
+    <string>source.go</string>
+
+    <key>fileTypes</key>
+    <array>
+        <string>gotemplate</string>
+    </array>
+
+    <key>author</key>
+    <string>https://github.com/frou</string>
+
+    <key>patterns</key>
+    <array>
+        <dict>
+            <key>match</key>
+            <string>({{)(.*?)(}})</string>
+
+            <key>name</key>
+            <string></string>
+
+            <key>captures</key>
+            <dict>
+                <key>1</key>
+                <dict>
+                    <key>name</key>
+                    <string>support.template.go</string>
+                </dict>
+
+                <key>2</key>
+                <dict>
+                    <key>name</key>
+                    <string>keyword.template.go</string>
+                </dict>
+
+                <key>3</key>
+                <dict>
+                    <key>name</key>
+                    <string>support.template.go</string>
+                </dict>
+            </dict>
+        </dict>
+    </array>
+</dict>
+</plist>
