@@ -24,8 +24,11 @@
             <key>name</key>
             <string>comment.template.go</string>
 
-            <key>match</key>
-            <string>{{/\*.*?\*/}}</string>
+            <key>begin</key>
+            <string>{{/\*</string>
+
+            <key>end</key>
+            <string>\*/}}</string>
         </dict>
 
         <dict>
