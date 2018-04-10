@@ -11,6 +11,8 @@
     <key>fileTypes</key>
     <array>
         <string>gotemplate</string>
+        <string>gohtml</string>
+        <string>tmpl</string>
     </array>
 
     <key>author</key>
