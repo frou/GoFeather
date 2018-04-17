@@ -1,0 +1,26 @@
+[
+  {
+    "caption": "Preferences",
+    "id": "preferences",
+    "children": [
+      {
+        "caption": "Package Settings",
+        "id": "package-settings",
+        "children": [
+          {
+            "caption": "GoFeather",
+            "children": [
+              {
+                "caption": "Key Bindings",
+                "command": "open_file",
+                "args": {
+                  "file": "${packages}/GoFeather/Default.sublime-keymap"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]
