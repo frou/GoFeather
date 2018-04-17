@@ -1,3 +1,4 @@
+// NOTE: Keep in sync with `Default.sublime-commands` file
 [
     {"keys": ["f9"],          "command": "quick_show_go_doc_from_view",   "context": [{"key": "selector", "operator": "equal", "operand": "source.go"}]},
     {"keys": ["shift+f9"],    "command": "show_go_doc_from_panel",        "context": [{"key": "selector", "operator": "equal", "operand": "source.go"}]},

@@ -1,0 +1,32 @@
+// NOTE: Keep in sync with `Default.sublime-keymap` file
+[
+  {
+    "caption": "GoFeather: Document current identifier",
+    "command": "quick_show_go_doc_from_view"
+  },
+  {
+    "caption": "GoFeather: Open documentation panel",
+    "command": "show_go_doc_from_panel"
+  },
+  {
+    "caption": "GoFeather: Open documentation website",
+    "command": "launch_browser_docs_from_view"
+  },
+  {
+    "caption": "GoFeather: Rename current identifier",
+    "command": "rename_current_identifier"
+  },
+  {
+    "caption": "GoFeather: Simulate renaming current identifier",
+    "command": "rename_current_identifier",
+    "args": {"simulate": true}
+  },
+  {
+    "caption": "GoFeather: Query interface implementations",
+    "command": "query_current_identifier_implements_or_implemented_by"
+  },
+  {
+    "caption": "GoFeather: Extract selection as a new function",
+    "command": "extract_selection_as_function"
+  }
+]
