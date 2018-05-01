@@ -11,9 +11,14 @@ class SettingsKeys:
 
 # TODO(DH): Make this a decorator? https://www.thecodeship.com/patterns/guide-to-python-function-decorators/
 def save_and_format(window):
-    if not window.active_view().file_name():
+    view = window.active_view()
+    if not view.file_name():
         return
-    # This will ensure the file is UTF-8 with no BOM and with LF line-endings.
+    if not view.is_dirty():
+        return
+    #view.run_command('save')
+    # This will save, and then ensure Go source files are UTF-8 with no BOM and
+    # with LF line-endings.
     window.run_command('build', {'variant': 'Format'})
 
 # TODO(DH): Make this a decorator? https://www.thecodeship.com/patterns/guide-to-python-function-decorators/

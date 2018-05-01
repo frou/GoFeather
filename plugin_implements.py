@@ -8,7 +8,7 @@ class query_current_identifier_implements_or_implemented_by(sublime_plugin.TextC
         view = self.view
         window = view.window()
 
-        # save_and_format(window)
+        save_and_format(window)
 
         if not check_num_selections(view, 1):
             return
