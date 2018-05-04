@@ -68,6 +68,9 @@ def get_doc(cmd_wd, cmd_arg):
 #    and so, ultimately, `go doc` needs to look up:
 #        github.com/hashicorp/consul/api.Catalog.Service
 #    and show the doc for that in the panel
+#
+# Also, the arg list () will not always be empty. There can be N tokens
+# inside those parens.
 
 class quick_show_go_doc_from_view(sublime_plugin.TextCommand):
     def run(self, args):
