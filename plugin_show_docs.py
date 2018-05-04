@@ -53,6 +53,22 @@ def get_doc(cmd_wd, cmd_arg):
     else:
         return None
 
+# TODO(DH): When pressing F9 with the cursor at | in e.g.
+#
+# client.Catalog().S|ervice
+#
+# The presence of the () before the dot currently messes things up. It's the
+# type of the _return-value_ of Catalog's function type that needs to be
+# discovered using `guru`. i.e.
+#
+#    client.Catalog has type:
+#        func (c *Client) Catalog() *Catalog
+#    The fully qualified name of    ^^^^^^^^ is:
+#        github.com/hashicorp/consul/api.Catalog
+#    and so, ultimately, `go doc` needs to look up:
+#        github.com/hashicorp/consul/api.Catalog.Service
+#    and show the doc for that in the panel
+
 class quick_show_go_doc_from_view(sublime_plugin.TextCommand):
     def run(self, args):
         view = self.view
