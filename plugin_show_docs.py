@@ -70,7 +70,16 @@ def get_doc(cmd_wd, cmd_arg):
 #    and show the doc for that in the panel
 #
 # Also, the arg list () will not always be empty. There can be N tokens
-# inside those parens.
+# inside those parens. `skip_to_balanced_pair` in plugin_autocomplete.py
+# might be useful.
+#
+# Simpler example:
+#   s := bufio.NewScanner(nil)
+#   s.Err().E|rror()
+# Want to end up querying
+#   go doc error.Error
+#                                     ______/---------------------------\______
+# Error -> .Error -> ().Error -> Err().Error -> [ Err -> error ] -> error.Error
 
 class quick_show_go_doc_from_view(sublime_plugin.TextCommand):
     def run(self, args):
@@ -205,3 +214,17 @@ class launch_browser_docs_from_view(sublime_plugin.TextCommand):
             run_tool([launcher, 'https://golang.org/pkg/'], wd='.', shell=via_shell)
         else:
             run_tool([launcher, 'https://godoc.org/' + pkg.lower()], wd='.', shell=via_shell)
+
+# class guru_info(sublime_plugin.TextCommand):
+#     def run(self, args):
+#         view = self.view
+#         sel0 = view.sel()[0]
+
+#         file_path = view.file_name()
+#         byte_offset = sel0.begin()
+
+#         guru_cmd = [
+#             'guru', '-json', 'describe', "%s:#%d" %(file_path, byte_offset)
+#         ]
+#         guru_cmd_output = run_tool(guru_cmd)
+#         print(sublime.decode_value(guru_cmd_output))

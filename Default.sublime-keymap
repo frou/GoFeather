@@ -8,4 +8,5 @@
     {"keys": ["shift+alt+r"], "command": "rename_current_identifier",                             "args": {"simulate": true}, "context": [{"key": "selector", "operator": "equal", "operand": "source.go"}]},
     {"keys": ["alt+i"],       "command": "query_current_identifier_implements_or_implemented_by", "args": {},                 "context": [{"key": "selector", "operator": "equal", "operand": "source.go"}]},
     {"keys": ["alt+f"],       "command": "extract_selection_as_function",                         "args": {},                 "context": [{"key": "selector", "operator": "equal", "operand": "source.go"}]},
+    // {"keys": ["alt+g"],       "command": "guru_info",                         "args": {},                                     "context": [{"key": "selector", "operator": "equal", "operand": "source.go"}]},
 ]
