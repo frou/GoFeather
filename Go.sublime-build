@@ -49,9 +49,7 @@
         },
         {
             "name": "Analyze",
-            // TODO(DH): Use --format={{...}} to produce an output that aligns: path:line:col: | linter | severity | message
-            // https://golang.org/pkg/text/template/
-            "cmd": ["gometalinter", "--config=$packages/GoFeather/gometalinter_config.json"],
+            "cmd": ["gometalinter", "--config=$packages/GoFeather/gometalinter_config.json", "--format={{printf \"%v:%v:%v:\" .Path .Line .Col | printf \"%-25v\"}}  {{.Linter | printf \"%-10v\"}}  {{.Severity | printf \"%-10v\"}}  {{.Message}}"],
 
             "word_wrap": false
         }
