@@ -49,7 +49,7 @@
         },
         {
             "name": "Analyze",
-            "cmd": ["gometalinter", "--config=$packages/GoFeather/gometalinter_config.json", "--format={{printf \"%v:%v:%v:\" .Path .Line .Col | printf \"%-25v\"}}  {{.Linter | printf \"%-10v\"}}  {{.Severity | printf \"%-10v\"}}  {{.Message}}"],
+            "cmd": ["gometalinter", "--config=$packages/GoFeather/gometalinter_config.json"],
 
             "word_wrap": false
         }

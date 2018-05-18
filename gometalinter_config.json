@@ -13,5 +13,6 @@
     "line",
     "column"
   ],
+  "Format": "{{printf \"%v:%v:%v:\" .Path .Line .Col | printf \"%-25v\"}}  {{.Linter | printf \"%-10v\"}}  {{.Severity | printf \"%-10v\"}}  {{.Message}}",
   "Deadline": "60s"
 }
