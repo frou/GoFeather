@@ -27,7 +27,18 @@
             <string>comment.golint-mundane-suggestions.build-results-go</string>
 
             <key>match</key>
-            <string>^.+\b(exported \w+ [\w\.]+ should have comment (\(or a comment on this block\) )?or be unexported)\b</string>
+            <string>(?x)
+            ^
+            .+?:\s+
+            golint\s+
+            \w+\s+
+            (
+                exported\s\w+\s[\w\.]+\sshould\shave\scomment\s(\(or\sa\scomment\son\sthis\sblock\)\s)?or\sbe\sunexported
+                |
+                (const|var|func(\s(parameter|result))?|type)\s\w+\sshould\sbe\s\w+
+            )
+            $
+        </string>
         </dict>
 
         <dict>
