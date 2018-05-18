@@ -24,7 +24,7 @@
 
         <dict>
             <key>name</key>
-            <string>comment.golint-mundane-suggestions.build-results-go</string>
+            <string>comment.mundane-suggestions.golint.build-results-go</string>
 
             <key>match</key>
             <string>(?x)
@@ -38,7 +38,24 @@
                 (const|var|func(\s(parameter|result))?|type)\s\w+\sshould\sbe\s\w+
             )
             $
-        </string>
+            </string>
+        </dict>
+
+        <dict>
+            <key>name</key>
+            <string>comment.mundane-suggestions.gas.build-results-go</string>
+
+            <key>match</key>
+            <string>(?x)
+            ^
+            .+?:\s+
+            gas\s+
+            \w+\s+
+            (
+                Errors\sunhandled\..*
+            )
+            $
+            </string>
         </dict>
 
         <dict>
