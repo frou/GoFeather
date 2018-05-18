@@ -4,6 +4,7 @@
     {"keys": ["shift+f9"],    "command": "show_go_doc_from_panel",        "context": [{"key": "selector", "operator": "equal", "operand": "source.go"}]},
     {"keys": ["alt+f9"],      "command": "launch_browser_docs_from_view", "context": [{"key": "selector", "operator": "equal", "operand": "source.go"}]},
 
+    // Chords
     {"keys": ["alt+r", "r"],  "command": "rename_current_identifier",                             "args": {},                 "context": [{"key": "selector", "operator": "equal", "operand": "source.go"}]},
     {"keys": ["alt+r", "s"],  "command": "rename_current_identifier",                             "args": {"simulate": true}, "context": [{"key": "selector", "operator": "equal", "operand": "source.go"}]},
     {"keys": ["alt+r", "i"],  "command": "query_current_identifier_implements_or_implemented_by", "args": {},                 "context": [{"key": "selector", "operator": "equal", "operand": "source.go"}]},
