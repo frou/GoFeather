@@ -3,7 +3,8 @@
     "vet",
     "golint",
     "errcheck",
-    "megacheck"
+    "megacheck",
+    "interfacer"
   ],
   "Sort": [
     "linter",
