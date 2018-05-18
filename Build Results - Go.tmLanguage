@@ -35,7 +35,7 @@
             (
                 exported\s\w+\s[\w\.]+\sshould\shave\scomment\s(\(or\sa\scomment\son\sthis\sblock\)\s)?or\sbe\sunexported
                 |
-                (const|var|func(\s(parameter|result))?|type)\s\w+\sshould\sbe\s\w+
+                (const|var|func(\s(parameter|result))?|method|type)\s\w+\sshould\sbe\s\w+
             )
             $
             </string>
