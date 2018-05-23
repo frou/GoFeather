@@ -48,7 +48,7 @@
             }
         },
         {
-            "name": "Analyze",
+            "name": "Lint",
             "cmd": ["gometalinter", "--config=$packages/GoFeather/gometalinter_config.json"],
 
             "word_wrap": false
