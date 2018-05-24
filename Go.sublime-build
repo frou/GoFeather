@@ -49,8 +49,13 @@
         },
         {
             "name": "Lint",
-            // Similar to above variants, this currently operates on the current file's package, but could operate on sub-packages too, with a ./... argument in this case.
             "cmd": ["gometalinter", "--config=$packages/GoFeather/gometalinter_config.json"],
+
+            "word_wrap": false
+        },
+        {
+            "name": "Lint (incl. subpackages)",
+            "cmd": ["gometalinter", "--config=$packages/GoFeather/gometalinter_config.json", "./..."],
 
             "word_wrap": false
         }
