@@ -58,6 +58,14 @@
             "cmd": ["gometalinter", "--config=$packages/GoFeather/gometalinter_config.json", "./..."],
 
             "word_wrap": false
+        },
+        // TODO(DH): Decide whether this alternate linter is worth properly integrating.
+        {
+          "name": "Format and Lint (golangci-lint fast)",
+          "cmd": ["format-and-lint-go"],
+          "windows": {
+            "cmd": ["bash", "~/workspace/bin/format-and-lint-go"]
+          }
         }
     ]
 }
