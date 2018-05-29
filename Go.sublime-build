@@ -61,7 +61,7 @@
         },
         // TODO(DH): Decide whether this alternate linter is worth properly integrating.
         {
-          "name": "Format and Lint (golangci-lint fast)",
+          "name": "Format and Lint (golangci-lint)",
           "cmd": ["format-and-lint-go"],
           "windows": {
             "cmd": ["bash", "~/workspace/bin/format-and-lint-go"]
