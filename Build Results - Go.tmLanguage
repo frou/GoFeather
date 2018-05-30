@@ -29,14 +29,15 @@
             <key>match</key>
             <string>(?x)
             ^
-            .+?:\s+
-            golint\s+
-            \w+\s+
+            .+?:
+            \s+
             (
                 exported\s\w+\s[\w\.]+\sshould\shave\scomment\s(\(or\sa\scomment\son\sthis\sblock\)\s)?or\sbe\sunexported
                 |
                 (const|var|func(\s(parameter|result))?|method|type)\s\w+\sshould\sbe\s\w+
             )
+            \s+
+            \(golint\)
             $
             </string>
         </dict>
@@ -48,12 +49,31 @@
             <key>match</key>
             <string>(?x)
             ^
-            .+?:\s+
-            gas\s+
-            \w+\s+
+            .+?:
+            \s+
             (
                 Errors\sunhandled\..*
             )
+            \s+
+            \(gas\)
+            $
+            </string>
+        </dict>
+
+        <dict>
+            <key>name</key>
+            <string>comment.mundane-suggestions.errcheck.build-results-go</string>
+
+            <key>match</key>
+            <string>(?x)
+            ^
+            .+?:
+            \s+
+            (
+                Error\sreturn\svalue\sof\s`\w+\.(Close)`\sis\snot\schecked
+            )
+            \s+
+            \(errcheck\)
             $
             </string>
         </dict>

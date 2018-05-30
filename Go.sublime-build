@@ -47,25 +47,15 @@
                 // Obviously, this would be making the assumption that bash has been installed on the Windows system.
             }
         },
+        // TODO(DH): Integrate the out-of-repo `format-and-lint-go` script into GoFeather.
+        // This variant is intended to be run automatically on file save.
         {
-            "name": "Lint",
-            "cmd": ["gometalinter", "--config=$packages/GoFeather/gometalinter_config.json"],
-
-            "word_wrap": false
-        },
-        {
-            "name": "Lint (incl. subpackages)",
-            "cmd": ["gometalinter", "--config=$packages/GoFeather/gometalinter_config.json", "./..."],
-
-            "word_wrap": false
-        },
-        // TODO(DH): Decide whether this alternate linter is worth properly integrating.
-        {
-          "name": "Format and Lint (golangci-lint)",
+          "name": "Format and Lint",
           "cmd": ["format-and-lint-go"],
           "windows": {
             "cmd": ["bash", "~/workspace/bin/format-and-lint-go"]
-          }
+          },
+          "word_wrap": false
         }
     ]
 }
