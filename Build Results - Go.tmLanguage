@@ -22,6 +22,7 @@
             <string>^\[.+\]$</string>
         </dict>
 
+<!--
         <dict>
             <key>name</key>
             <string>comment.mundane-suggestions.golint.build-results-go</string>
@@ -77,6 +78,7 @@
             $
             </string>
         </dict>
+-->
 
         <dict>
             <key>name</key>
