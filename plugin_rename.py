@@ -33,6 +33,14 @@ class rename_current_identifier(sublime_plugin.TextCommand):
         # Allow immediate type-over in the input panel.
         window.run_command('select_all')
 
+    # TODO(DH): It should be the position of the mouse pointer, not the caret, that determines what is being renamed. See:
+    # https://github.com/tomv564/LSP/commit/064883ce3955a5123bab54942bd83c0b827c5832
+    # https://forum.sublimetext.com/t/get-point-under-mouse/29801/5
+    #
+    # For presence in right-click context menu
+    # def is_visible(self):
+    #     # TODO(DH): Use scope instead? Or syntax (see settings_indicate_js in tern package).
+    #     return self.view.file_name().endswith(".go")
 
 def do_rename(view, byte_offset, new_name, simulate):
     new_name = new_name.strip()

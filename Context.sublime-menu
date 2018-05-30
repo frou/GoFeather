@@ -1,0 +1,5 @@
+// http://docs.sublimetext.info/en/latest/customization/menus.html
+// TODO(DH): Have the commands that make sense from Default.sublime-keymap be available in the right click menu too.
+[
+    //{ "command": "rename_current_identifier" }
+]
