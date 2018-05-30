@@ -50,10 +50,26 @@
         // TODO(DH): Integrate the out-of-repo `format-and-lint-go` script into GoFeather.
         // This variant is intended to be run automatically on file save.
         {
-          "name": "Format and Lint",
-          "cmd": ["format-and-lint-go"],
+          "name": "Format and Lint (low-strength)",
+          "cmd": ["format-and-lint-go", "low"],
           "windows": {
-            "cmd": ["bash", "~/workspace/bin/format-and-lint-go"]
+            "cmd": ["bash", "~/workspace/bin/format-and-lint-go", "low"]
+          },
+          "word_wrap": false
+        },
+        {
+          "name": "Format and Lint (medium-strength)",
+          "cmd": ["format-and-lint-go", "medium"],
+          "windows": {
+            "cmd": ["bash", "~/workspace/bin/format-and-lint-go", "medium"]
+          },
+          "word_wrap": false
+        },
+        {
+          "name": "Format and Lint (high-strength)",
+          "cmd": ["format-and-lint-go", "high"],
+          "windows": {
+            "cmd": ["bash", "~/workspace/bin/format-and-lint-go", "high"]
           },
           "word_wrap": false
         }
