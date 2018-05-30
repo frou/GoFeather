@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
     <key>name</key>
-    <string>GoFeather</string>
+    <string>GoFeather (Go)</string>
 
     <key>scopeName</key>
     <string>source.go</string>

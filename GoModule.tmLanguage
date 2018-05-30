@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>name</key>
+    <string>GoFeather (Module)</string>
+
+    <key>scopeName</key>
+    <string>source.go-module</string>
+
+    <key>fileTypes</key>
+    <array>
+        <string>mod</string>
+    </array>
+
+    <key>author</key>
+    <string>https://github.com/frou</string>
+
+    <key>patterns</key>
+    <array>
+        <!-- Comment -->
+        <dict>
+            <key>name</key>
+            <string>comment.line.double-slash.go-module</string>
+
+            <key>begin</key>
+            <string>//</string>
+
+            <key>end</key>
+            <string>^</string>
+        </dict>
+
+        <!-- String -->
+        <dict>
+            <key>name</key>
+            <string>string.quoted.other.raw.go-module</string>
+
+            <key>begin</key>
+            <string>`</string>
+
+            <key>end</key>
+            <string>`</string>
+        </dict>
+
+        <dict>
+            <key>name</key>
+            <string>string.quoted.double.go-module</string>
+
+            <key>match</key>
+            <string>".*?(?&lt;!\\)(\\\\)*"</string>
+        </dict>
+
+        <!-- Constant -->
+        <dict>
+            <key>name</key>
+            <string>constant.semantic-version.go-module</string>
+
+            <key>match</key>
+            <string>(?x)
+                \b
+                v(\d+\.\d+.\d+)                         # version
+                 (-[0-9A-Za-z-]+(\.[0-9A-Za-z-]+)*)?    # prerelease identifiers
+                (\+[0-9A-Za-z-]+(\.[0-9A-Za-z-]+)*)?    # build metadata identifiers
+                \b
+            </string>
+        </dict>
+
+        <!-- Storage -->
+
+        <!-- Keyword -->
+        <dict>
+            <key>name</key>
+            <string>keyword.other.go-module</string>
+
+            <key>match</key>
+            <string>\b(exclude|module|replace|require)\b</string>
+        </dict>
+
+        <!-- Entity -->
+        <!-- Support -->
+    </array>
+</dict>
+</plist>
