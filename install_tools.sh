@@ -15,3 +15,4 @@ upstall github.com/nsf/gocode
 upstall golang.org/x/tools/cmd/goimports
 upstall golang.org/x/tools/cmd/gorename
 upstall golang.org/x/tools/cmd/guru
+upstall github.com/golangci/golangci-lint/cmd/golangci-lint
