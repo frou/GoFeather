@@ -36,7 +36,7 @@ class AutocompleteUsingGocode(sublime_plugin.ViewEventListener):
         result = []
         for line in filter(bool, gocode_output.split("\n")):
             components = line.split(",,")
-            result.append(hint_and_replacement(*components))
+            result.append(hint_and_replacement(components[0], components[1], components[2]))
 
         return (result, sublime.INHIBIT_WORD_COMPLETIONS)
 
