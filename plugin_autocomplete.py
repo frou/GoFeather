@@ -13,7 +13,7 @@ from .util import *
 class AutocompleteUsingGocode(sublime_plugin.ViewEventListener):
     @classmethod
     def is_applicable(cls, settings):
-        return settings.get("syntax") == "Packages/GoFeather/Go.tmLanguage"
+        return settings_indicate_go(settings)
 
     def on_query_completions(self, prefix, locations):
         cmd = ["gocode", "-f=csv", "autocomplete"]

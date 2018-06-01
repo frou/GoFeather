@@ -63,3 +63,6 @@ def run_tool(cmd_parts, shell=False, wd=None):
     except subprocess.CalledProcessError as e:
         print("\n%s failed. Its stderr was:\n%s" % (cmd_parts, e.output.decode('utf-8')))
         sublime.status_message(("%s command failed - see console" % (cmd_parts[0])).upper())
+
+def settings_indicate_go(view_settings):
+  return view_settings.get("syntax") == "Packages/GoFeather/Go.tmLanguage"
