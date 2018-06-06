@@ -2,7 +2,8 @@
 [
     {"keys": ["f9"],          "command": "quick_show_go_doc_from_view",   "context": [{"key": "selector", "operator": "equal", "operand": "source.go"}]},
     {"keys": ["shift+f9"],    "command": "show_go_doc_from_panel",        "context": [{"key": "selector", "operator": "equal", "operand": "source.go"}]},
-    {"keys": ["alt+f9"],      "command": "launch_browser_docs_from_view", "context": [{"key": "selector", "operator": "equal", "operand": "source.go"}]},
+
+    {"keys": ["shift+f1"],    "command": "launch_browser_docs_from_view", "context": [{"key": "selector", "operator": "equal", "operand": "source.go"}]},
 
     // Chords
     {"keys": ["alt+r", "alt+r"],  "command": "rename_current_identifier",                             "args": {},                 "context": [{"key": "selector", "operator": "equal", "operand": "source.go"}]},
