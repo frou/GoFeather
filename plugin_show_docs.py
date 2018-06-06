@@ -90,7 +90,7 @@ class quick_show_go_doc_from_view(sublime_plugin.TextCommand):
             sublime.status_message('TOO MANY SELECTIONS')
             return
 
-        save_and_format(window)
+        save_if_needed(view)
 
         # Select the current word plus the character before it.
         view.run_command('move', {'by': 'wordends', 'forward': True})

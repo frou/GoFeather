@@ -10,16 +10,12 @@ class SettingsKeys:
 
 
 # TODO(DH): Make this a decorator? https://www.thecodeship.com/patterns/guide-to-python-function-decorators/
-def save_and_format(window):
-    view = window.active_view()
+def save_if_needed(view):
     if not view.file_name():
         return
     if not view.is_dirty():
         return
-    #view.run_command('save')
-    # This will save, and then ensure Go source files are UTF-8 with no BOM and
-    # with LF line-endings.
-    window.run_command('build', {'variant': 'Format'})
+    view.run_command('save')
 
 # TODO(DH): Make this a decorator? https://www.thecodeship.com/patterns/guide-to-python-function-decorators/
 def check_num_selections(view, n):

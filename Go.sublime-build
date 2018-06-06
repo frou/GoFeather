@@ -23,33 +23,16 @@
             "name": "Generate",
             "cmd": ["go", "generate"]
         },
-        {
-            "name": "Format",
-            //"cmd": ["goimports", "-w", "$file"],
-
-            // Format all files in the same package as the current file.
-            "shell_cmd": "goimports -w *.go",
-
-            // Format all files in the same package as the current file, and in (non-vendored) sub-packages.
-            //"shell_cmd": "find . -type f -name '*.go' -not -path './vendor/*' -print0 | xargs -0 goimports -w",
-
-            "windows": {
-                // Format all files in the same package as the current file.
-                "shell_cmd": "for /f usebackq %F in (`dir /b *.go`) do goimports -w \"%F\""
-
-                // Format all files in the same package as the current file, and in (non-vendored) sub-packages.
-                //"shell_cmd": "for /f usebackq %F in (`dir /b /s *.go ^| findstr /V /C:\\vendor\\`) do goimports -w \"%F\""
-
-                // NOTE: the above could be replaced with:
-                //   "shell_cmd": null,
-                //   "cmd": ["bash", "-c", "..."]
-                // where ... is the same string that's used in the matching non-Windows case.
-                // Obviously, this would be making the assumption that bash has been installed on the Windows system.
-            }
-        },
         // TODO(DH): Integrate the out-of-repo `format-and-lint-go` script into GoFeather.
-        // This variant is intended to be run automatically on file save.
         {
+          "name": "Format",
+          "cmd": ["format-and-lint-go", "nolint"],
+          "windows": {
+            "cmd": ["bash", "~/workspace/bin/format-and-lint-go", "nolint"]
+          }
+        },
+        {
+          // This variant is intended to be run automatically on file save (using e.g. my BuildOnSave pacakge).
           "name": "Format and Lint (low-strength)",
           "cmd": ["format-and-lint-go", "low"],
           "windows": {
