@@ -33,7 +33,7 @@
         },
         {
           // This variant is intended to be run automatically on file save (using e.g. my BuildOnSave pacakge).
-          "name": "Format and Lint (low-strength)",
+          "name": "Format and Lint",
           "cmd": ["format-and-lint-go", "low"],
           "windows": {
             "cmd": ["bash", "~/workspace/bin/format-and-lint-go", "low"]
@@ -41,7 +41,7 @@
           "word_wrap": false
         },
         {
-          "name": "Format and Lint (medium-strength)",
+          "name": "Format and Lint (Medium)",
           "cmd": ["format-and-lint-go", "medium"],
           "windows": {
             "cmd": ["bash", "~/workspace/bin/format-and-lint-go", "medium"]
@@ -49,7 +49,7 @@
           "word_wrap": false
         },
         {
-          "name": "Format and Lint (high-strength)",
+          "name": "Format and Lint (High)",
           "cmd": ["format-and-lint-go", "high"],
           "windows": {
             "cmd": ["bash", "~/workspace/bin/format-and-lint-go", "high"]
