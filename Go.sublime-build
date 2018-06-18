@@ -1,7 +1,9 @@
 {
     "selector": "source.go",
     "file_regex": "^\\s*(.+?):([0-9]+)(?::([0-9]+))?:?\\s*(.+)$",
+
     "syntax": "Packages/GoFeather/Build Results - Go.tmLanguage",
+    "word_wrap": false,
 
     "cmd": ["go", "build"],
 
@@ -38,7 +40,6 @@
           "windows": {
             "cmd": ["bash", "~/workspace/bin/format-and-lint-go", "low"]
           },
-          "word_wrap": false
         },
         {
           "name": "Format and Lint (Medium)",
@@ -46,7 +47,6 @@
           "windows": {
             "cmd": ["bash", "~/workspace/bin/format-and-lint-go", "medium"]
           },
-          "word_wrap": false
         },
         {
           "name": "Format and Lint (High)",
@@ -54,7 +54,6 @@
           "windows": {
             "cmd": ["bash", "~/workspace/bin/format-and-lint-go", "high"]
           },
-          "word_wrap": false
         }
     ]
 }
