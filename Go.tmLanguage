@@ -13,6 +13,9 @@
         <string>go</string>
     </array>
 
+    <key>firstLineMatch</key>
+    <string>^package\s</string>
+
     <key>author</key>
     <string>https://github.com/frou</string>
 
