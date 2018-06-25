@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
     <key>name</key>
-    <string>Build Results - Go</string>
+    <string>BuildResultsGo</string>
 
     <key>scopeName</key>
     <string>source.build-results-go</string>
