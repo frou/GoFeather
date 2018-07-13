@@ -16,7 +16,8 @@ class AutocompleteUsingGocode(sublime_plugin.ViewEventListener):
         return settings_indicate_go(settings)
 
     def on_query_completions(self, prefix, locations):
-        cmd = ["gocode", "-f=csv", "autocomplete"]
+        # TODO(DH): Use -source flag so that it's not built packages being inspected? https://github.com/mdempsky/gocode/commit/7282f446b501b064690f39640b70e1ef54806c60
+        cmd = ["gocode", "-f=csv", "-builtin", "autocomplete"]
         view_path = self.view.file_name()
         if view_path:
             cmd.append(view_path)
