@@ -10,14 +10,7 @@ upstall() {
 	go get -u "$@"
 }
 
-case "$(uname)" in
-	MINGW* | MSYS*)
-		upstall -ldflags -H=windowsgui github.com/mdempsky/gocode
-		;;
-	*)
-		upstall github.com/mdempsky/gocode
-		;;
-esac
+upstall github.com/mdempsky/gocode
 upstall github.com/godoctor/godoctor
 upstall golang.org/x/tools/cmd/goimports
 upstall golang.org/x/tools/cmd/gorename
