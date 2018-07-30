@@ -9,6 +9,7 @@ from .util import *
 # https://github.com/tomv564/LSP/commit/064883ce3955a5123bab54942bd83c0b827c5832
 # https://forum.sublimetext.com/t/get-point-under-mouse/29801/5
 # Could my command(s) just manually run a (view|window) "drag_select" command (with no args) as the first thing it does?
+# TODO(DH): See "TerminusOpenContextUrlCommand" in Terminus for a probably good implementation?
 
 class gofeather_dispatch_contextmenu_click(sublime_plugin.TextCommand):
     def want_event(self):
