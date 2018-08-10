@@ -25,34 +25,33 @@
             "name": "Generate",
             "cmd": ["go", "generate"]
         },
-        // TODO(DH): Integrate the out-of-repo `format-and-lint-go` script into GoFeather.
         {
           "name": "Format",
-          "cmd": ["format-and-lint-go", "nolint"],
+          "cmd": ["$packages/GoFeather/format-and-lint-go.sh", "nolint"],
           "windows": {
-            "cmd": ["bash", "~/workspace/bin/format-and-lint-go", "nolint"]
+            "cmd": ["bash", "$packages/GoFeather/format-and-lint-go.sh", "nolint"]
           }
         },
         {
           // This variant is intended to be run automatically on file save (using e.g. my BuildOnSave pacakge).
           "name": "Format and Lint",
-          "cmd": ["format-and-lint-go", "low"],
+          "cmd": ["$packages/GoFeather/format-and-lint-go.sh", "low"],
           "windows": {
-            "cmd": ["bash", "~/workspace/bin/format-and-lint-go", "low"]
+            "cmd": ["bash", "$packages/GoFeather/format-and-lint-go.sh", "low"]
           },
         },
         {
           "name": "Format and Lint (Medium)",
-          "cmd": ["format-and-lint-go", "medium"],
+          "cmd": ["$packages/GoFeather/format-and-lint-go.sh", "medium"],
           "windows": {
-            "cmd": ["bash", "~/workspace/bin/format-and-lint-go", "medium"]
+            "cmd": ["bash", "$packages/GoFeather/format-and-lint-go.sh", "medium"]
           },
         },
         {
           "name": "Format and Lint (High)",
-          "cmd": ["format-and-lint-go", "high"],
+          "cmd": ["$packages/GoFeather/format-and-lint-go.sh", "high"],
           "windows": {
-            "cmd": ["bash", "~/workspace/bin/format-and-lint-go", "high"]
+            "cmd": ["bash", "$packages/GoFeather/format-and-lint-go.sh", "high"]
           },
         }
     ]
