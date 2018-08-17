@@ -27,32 +27,20 @@
         },
         {
           "name": "Format",
-          "cmd": ["$packages/GoFeather/format-and-lint-go.sh", "nolint"],
-          "windows": {
-            "cmd": ["bash", "$packages/GoFeather/format-and-lint-go.sh", "nolint"]
-          }
+          "cmd": ["$packages/GoFeather/format-and-lint-go.sh", "nolint"]
         },
         {
           // This variant is intended to be run automatically on file save (using e.g. my BuildOnSave pacakge).
           "name": "Format and Lint",
-          "cmd": ["$packages/GoFeather/format-and-lint-go.sh", "low"],
-          "windows": {
-            "cmd": ["bash", "$packages/GoFeather/format-and-lint-go.sh", "low"]
-          },
+          "cmd": ["$packages/GoFeather/format-and-lint-go.sh", "low"]
         },
         {
           "name": "Format and Lint (Medium)",
-          "cmd": ["$packages/GoFeather/format-and-lint-go.sh", "medium"],
-          "windows": {
-            "cmd": ["bash", "$packages/GoFeather/format-and-lint-go.sh", "medium"]
-          },
+          "cmd": ["$packages/GoFeather/format-and-lint-go.sh", "medium"]
         },
         {
           "name": "Format and Lint (High)",
-          "cmd": ["$packages/GoFeather/format-and-lint-go.sh", "high"],
-          "windows": {
-            "cmd": ["bash", "$packages/GoFeather/format-and-lint-go.sh", "high"]
-          },
+          "cmd": ["$packages/GoFeather/format-and-lint-go.sh", "high"]
         }
     ]
 }
