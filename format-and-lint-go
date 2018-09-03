@@ -57,14 +57,23 @@ if test -n "$CHOSEN_LINTERS"; then
 	#     LintersSettings in https://github.com/golangci/golangci-lint/blob/master/pkg/config/config.go
 	# for which linter-specific flags are available.
 
-	# shellcheck disable=SC2086
-	golangci-lint run \
+	LINTER="golangci-lint"
+	LINTER_CONSTANT_ARGS="run \
 		--no-config \
 		--out-format tab \
 		--print-issued-lines=false \
 		--errcheck.check-blank=false \
 		--errcheck.check-type-assertions \
 		--gocyclo.min-complexity 10 \
-		--gofmt.simplify=false \
-		$CHOSEN_LINTERS
+		--gofmt.simplify=false"
+
+	ISSUE_EXCLUSIONS_PATH="$0.exclusions"
+	ISSUE_EXCLUSIONS_REGEX="($(grep -E -v '^#.*$' "$ISSUE_EXCLUSIONS_PATH" 2>/dev/null | paste -s -d"|" - || true))"
+	if test "$ISSUE_EXCLUSIONS_REGEX" = "()"; then
+		# shellcheck disable=SC2086
+		$LINTER $LINTER_CONSTANT_ARGS $CHOSEN_LINTERS
+	else
+		# shellcheck disable=SC2086
+		$LINTER $LINTER_CONSTANT_ARGS --exclude "$ISSUE_EXCLUSIONS_REGEX" $CHOSEN_LINTERS
+	fi
 fi

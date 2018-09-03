@@ -1,0 +1,9 @@
+# I disagree with the Go party line about naming method receivers:
+#
+# https://github.com/golang/go/wiki/CodeReviewComments#receiver-names
+#
+# Regardless of how much Go has deconstructed the notion of "OOP", the variable
+# representing the method receiver DOES have a unique cognitive status to the
+# human reader of a method body. As such, it should not be given an
+# inconspicuous name such as a 1 or 2 letter abbreviation of its type.
+don't use generic names such as
