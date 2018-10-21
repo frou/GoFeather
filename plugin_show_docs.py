@@ -53,34 +53,6 @@ def get_doc(cmd_wd, cmd_arg):
     else:
         return None
 
-# TODO(DH): When pressing F9 with the cursor at | in e.g.
-#
-# client.Catalog().S|ervice
-#
-# The presence of the () before the dot currently messes things up. It's the
-# type of the _return-value_ of Catalog's function type that needs to be
-# discovered using `guru`. i.e.
-#
-#    client.Catalog has type:
-#        func (c *Client) Catalog() *Catalog
-#    The fully qualified name of    ^^^^^^^^ is:
-#        github.com/hashicorp/consul/api.Catalog
-#    and so, ultimately, `go doc` needs to look up:
-#        github.com/hashicorp/consul/api.Catalog.Service
-#    and show the doc for that in the panel
-#
-# Also, the arg list () will not always be empty. There can be N tokens
-# inside those parens. `skip_to_balanced_pair` in plugin_autocomplete.py
-# might be useful.
-#
-# Simpler example:
-#   s := bufio.NewScanner(nil)
-#   s.Err().E|rror()
-# Want to end up querying
-#   go doc error.Error
-#                                     ______/---------------------------\______
-# Error -> .Error -> ().Error -> Err().Error -> [ Err -> error ] -> error.Error
-
 class quick_show_go_doc_from_view(sublime_plugin.TextCommand):
     def run(self, args):
         view = self.view
@@ -90,78 +62,15 @@ class quick_show_go_doc_from_view(sublime_plugin.TextCommand):
             sublime.status_message('TOO MANY SELECTIONS')
             return
 
+        # TODO(DH): Possibly feed in unsaved file(s) rather than saving? https://github.com/zmb3/gogetdoc#unsaved-files
         save_if_needed(view)
 
-        # Select the current word plus the character before it.
-        view.run_command('move', {'by': 'wordends', 'forward': True})
-        view.run_command('move',
-                         {'by': 'words',
-                          'forward': False,
-                          'extend': True})
-
-        # Is the character before the current word a dot?
-
-        if view.sel()[0].begin() > 0:
-            view.run_command(
-                'move', {'by': 'characters',
-                         'forward': False,
-                         'extend': True})
-
-            if view.substr(view.sel()[0]).startswith('.'):
-                # Yes: Extend the selection to cover the word before the dot too.
-                view.run_command('move',
-                                 {'by': 'words',
-                                  'forward': False,
-                                  'extend': True})
-            else:
-                # No: Don't have the extra character selected any more.
-                view.run_command(
-                    'move', {'by': 'characters',
-                             'forward': True,
-                             'extend': True})
-
-        synthetic_sel = view.sel()[0]
-        go_doc_query = view.substr(synthetic_sel)
-        # print(go_doc_query)
-        # ------------------------------------------------------------
-
-        file_path = view.file_name()
-        # Only examine the selection using `guru` if the view is backed by a
-        # file on disk that guru can read.
-        if file_path:
-            byte_offset = synthetic_sel.begin()
-            guru_cmd = [
-                'guru', '-json', 'describe', "%s:#%d" %(file_path, byte_offset)
-            ]
-            guru_cmd_output = run_tool(guru_cmd)
-            if guru_cmd_output:
-                # print(guru_cmd)
-                json_obj = sublime.decode_value(guru_cmd_output)
-
-                desc_str = json_obj['desc']
-                if desc_str == "identifier":
-                    type_str = json_obj['value']['type']
-                    # *os.File -> os.File
-                    type_str = type_str.lstrip("*")
-                    if "." in go_doc_query:
-                        # f.Close -> os.File.Close
-                        go_doc_query = "%s.%s" % (type_str, go_doc_query.split(".")[1])
-                    elif not type_str.startswith("func("):
-                        # f -> os.File
-                        go_doc_query = type_str
-
-        # print(go_doc_query)
-        cmd_wd, _ = determine_wd_for_cmd(view)
-        show_gofeather_output_panel(
-            window,
-            get_doc(cmd_wd, go_doc_query))
-
-        # End up with the caret at the start of the word it was initially in, and with no selection.
-        view.run_command('move', {'by': 'characters', 'forward': True})
-        view.run_command('move',
-                         {'by': 'words',
-                          'forward': False,
-                          'extend': False})
+        byte_offset = view.sel()[0].begin()
+        gogetdoc_cmd = [
+            # '-u',
+            'gogetdoc', '-pos', "%s:#%d" % (view.file_name(), byte_offset)
+        ]
+        show_gofeather_output_panel(window, run_tool(gogetdoc_cmd))
 
 
 class show_go_doc_from_panel(sublime_plugin.WindowCommand):
