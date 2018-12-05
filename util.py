@@ -32,6 +32,7 @@ def show_gofeather_output_panel(window, content):
             window.run_command("hide_panel")
         return
     output = window.create_output_panel(panel_name_suffix)
+    output.settings().set('spell_check', False)
     output.run_command('append', {'characters': content})
     window.run_command('show_panel', {'panel': panel_name_full})
 
