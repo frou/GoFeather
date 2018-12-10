@@ -10,21 +10,34 @@ import subprocess
 
 from .util import *
 
+# class (sublime_plugin.ViewEventListener):
+#     def on_query_completions(self, prefix, locations):
+
 class AutocompleteUsingGocode(sublime_plugin.ViewEventListener):
     @classmethod
     def is_applicable(cls, settings):
         return settings_indicate_go(settings)
 
-    def on_query_completions(self, prefix, locations):
+    def __init__(self, view):
+        self._view = view
+        self._running = False
+        self._completions = None
+        self._location = 0
+        self._prefix = ""
+
+    def fetch_query_completions(self, prefix, location):
+        self._running = True
+        self._location = location
+
         # TODO(DH): Use -source flag so that it's not built packages being inspected? https://github.com/mdempsky/gocode/commit/7282f446b501b064690f39640b70e1ef54806c60
         # TODO(DH): Will -source be usably performant when this is merged? https://github.com/mdempsky/gocode/issues/28
         cmd = ["gocode", "-f=csv", "-builtin", "-unimported-packages", "autocomplete"]
-        view_path = self.view.file_name()
+        view_path = self._view.file_name()
         if view_path:
             cmd.append(view_path)
-        cmd.append("c{0}".format(locations[0]))
+        cmd.append("c{0}".format(location))
 
-        gocode_input = self.view.substr(sublime.Region(0, self.view.size()))
+        gocode_input = self._view.substr(sublime.Region(0, self._view.size()))
 
         gocode = subprocess.Popen(
             cmd,
@@ -40,8 +53,54 @@ class AutocompleteUsingGocode(sublime_plugin.ViewEventListener):
             components = line.split(",,")
             result.append(hint_and_replacement(components[0], components[1], components[2]))
 
-        return (result, sublime.INHIBIT_WORD_COMPLETIONS)
+        # Exit conditions:
+        if len(result) == 0:
+            return
 
+        if self._prefix != prefix:
+            return
+
+        # Check if this query completions request is for the "latest" location
+        if self._location != location:
+            return
+
+        self._completions = result
+        self._running = False
+
+        self.open_query_completions()
+
+    def open_query_completions(self):
+        """Opens (forced) the sublime autocomplete window"""
+
+        self._view.run_command("hide_auto_complete")
+        sublime.set_timeout(
+            lambda: self._view.run_command("auto_complete")
+        )
+
+    def on_query_completions(self, prefix, locations):
+        loc = locations[0]
+
+        if not self._view.match_selector(loc, "source.go"):
+            return []
+
+        if self._completions:
+            completions = self._completions
+
+            self._completions = None
+            self._prefix = ""
+
+            return (completions, sublime.INHIBIT_WORD_COMPLETIONS)
+
+        if self._running and len(prefix) != 0:
+            return []
+
+        self._prefix = prefix
+
+        sublime.set_timeout_async(
+            lambda: self.fetch_query_completions(prefix, loc)
+        )
+
+        return []
 
 # go to balanced pair, e.g.:
 # ((abc(def)))
