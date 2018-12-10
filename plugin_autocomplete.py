@@ -80,6 +80,9 @@ class AutocompleteUsingGocode(sublime_plugin.ViewEventListener):
     def on_query_completions(self, prefix, locations):
         loc = locations[0]
 
+        # Return this to cause Sublime to not even attempt to offer ANY kind of completions at this time.
+        dont_complete = ([], sublime.INHIBIT_WORD_COMPLETIONS | sublime.INHIBIT_EXPLICIT_COMPLETIONS)
+
         if self._completions:
             completions = self._completions
 
@@ -89,7 +92,7 @@ class AutocompleteUsingGocode(sublime_plugin.ViewEventListener):
             return (completions, sublime.INHIBIT_WORD_COMPLETIONS)
 
         if self._running and len(prefix) != 0:
-            return []
+            return dont_complete
 
         self._prefix = prefix
 
@@ -97,7 +100,7 @@ class AutocompleteUsingGocode(sublime_plugin.ViewEventListener):
             lambda: self.fetch_query_completions(prefix, loc)
         )
 
-        return []
+        return dont_complete
 
 # go to balanced pair, e.g.:
 # ((abc(def)))
