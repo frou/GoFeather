@@ -10,8 +10,6 @@ import subprocess
 
 from .util import *
 
-# class (sublime_plugin.ViewEventListener):
-#     def on_query_completions(self, prefix, locations):
 
 class AutocompleteUsingGocode(sublime_plugin.ViewEventListener):
     @classmethod
@@ -70,8 +68,6 @@ class AutocompleteUsingGocode(sublime_plugin.ViewEventListener):
         self.open_query_completions()
 
     def open_query_completions(self):
-        """Opens (forced) the sublime autocomplete window"""
-
         self.view.run_command("hide_auto_complete")
         sublime.set_timeout(
             lambda: self.view.run_command("auto_complete")
@@ -101,6 +97,7 @@ class AutocompleteUsingGocode(sublime_plugin.ViewEventListener):
         )
 
         return dont_complete
+
 
 # go to balanced pair, e.g.:
 # ((abc(def)))
