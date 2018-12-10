@@ -80,9 +80,6 @@ class AutocompleteUsingGocode(sublime_plugin.ViewEventListener):
     def on_query_completions(self, prefix, locations):
         loc = locations[0]
 
-        if not self._view.match_selector(loc, "source.go"):
-            return []
-
         if self._completions:
             completions = self._completions
 
