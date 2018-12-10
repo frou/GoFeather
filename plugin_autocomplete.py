@@ -41,7 +41,8 @@ class AutocompleteUsingGocode(sublime_plugin.ViewEventListener):
             cmd,
             stdin=subprocess.PIPE,
             stdout=subprocess.PIPE,
-            startupinfo=platform_startupinfo())
+            startupinfo=platform_startupinfo(),
+        )
 
         gocode_output = gocode.communicate(gocode_input.encode())[0].decode()
         # print(gocode_output)
@@ -49,7 +50,9 @@ class AutocompleteUsingGocode(sublime_plugin.ViewEventListener):
         result = []
         for line in filter(bool, gocode_output.split("\n")):
             components = line.split(",,")
-            result.append(hint_and_replacement(components[0], components[1], components[2]))
+            result.append(
+                hint_and_replacement(components[0], components[1], components[2])
+            )
 
         # Exit conditions:
         if len(result) == 0:
@@ -69,15 +72,16 @@ class AutocompleteUsingGocode(sublime_plugin.ViewEventListener):
 
     def open_query_completions(self):
         self.view.run_command("hide_auto_complete")
-        sublime.set_timeout(
-            lambda: self.view.run_command("auto_complete")
-        )
+        sublime.set_timeout(lambda: self.view.run_command("auto_complete"))
 
     def on_query_completions(self, prefix, locations):
         loc = locations[0]
 
         # Return this to cause Sublime to not even attempt to offer ANY kind of completions at this time.
-        dont_complete = ([], sublime.INHIBIT_WORD_COMPLETIONS | sublime.INHIBIT_EXPLICIT_COMPLETIONS)
+        dont_complete = (
+            [],
+            sublime.INHIBIT_WORD_COMPLETIONS | sublime.INHIBIT_EXPLICIT_COMPLETIONS,
+        )
 
         if self._completions:
             completions = self._completions
@@ -92,9 +96,7 @@ class AutocompleteUsingGocode(sublime_plugin.ViewEventListener):
 
         self._prefix = prefix
 
-        sublime.set_timeout_async(
-            lambda: self.fetch_query_completions(prefix, loc)
-        )
+        sublime.set_timeout_async(lambda: self.fetch_query_completions(prefix, loc))
 
         return dont_complete
 
@@ -130,11 +132,11 @@ def split_balanced(s):
     i = 0
     beg = 0
     while i < len(s):
-        if s[i] == ',':
+        if s[i] == ",":
             out.append(s[beg:i].strip())
             beg = i + 1
             i += 1
-        elif s[i] == '(':
+        elif s[i] == "(":
             i = skip_to_balanced_pair(s, i, "(", ")")
             if i == -1:
                 i = len(s)
@@ -157,10 +159,10 @@ def extract_arguments_and_returns(sig):
     end = skip_to_balanced_pair(sig, beg, "(", ")")
     if end == -1:
         return [], []
-    args = split_balanced(sig[beg + 1:end])
+    args = split_balanced(sig[beg + 1 : end])
 
     # find the rest of the string, these are returns
-    sig = sig[end + 1:].strip()
+    sig = sig[end + 1 :].strip()
     sig = sig[1:-1] if sig.startswith("(") and sig.endswith(")") else sig
     returns = split_balanced(sig)
 
@@ -193,6 +195,7 @@ def hint_and_replacement(category, name, go_type):
     else:
         hint += "\t" + go_type
     return hint, replacement
+
 
 # TODO(DH): Emit outer and inner snippet for last argument for a variadic func
 #     e.g. fmt.Errorf(format string, a ...interface{})
