@@ -19,7 +19,7 @@ class AutocompleteUsingGocode(sublime_plugin.ViewEventListener):
         return settings_indicate_go(settings)
 
     def __init__(self, view):
-        self._view = view
+        super().__init__(view)
         self._running = False
         self._completions = None
         self._location = 0
@@ -32,12 +32,12 @@ class AutocompleteUsingGocode(sublime_plugin.ViewEventListener):
         # TODO(DH): Use -source flag so that it's not built packages being inspected? https://github.com/mdempsky/gocode/commit/7282f446b501b064690f39640b70e1ef54806c60
         # TODO(DH): Will -source be usably performant when this is merged? https://github.com/mdempsky/gocode/issues/28
         cmd = ["gocode", "-f=csv", "-builtin", "-unimported-packages", "autocomplete"]
-        view_path = self._view.file_name()
+        view_path = self.view.file_name()
         if view_path:
             cmd.append(view_path)
         cmd.append("c{0}".format(location))
 
-        gocode_input = self._view.substr(sublime.Region(0, self._view.size()))
+        gocode_input = self.view.substr(sublime.Region(0, self.view.size()))
 
         gocode = subprocess.Popen(
             cmd,
@@ -72,9 +72,9 @@ class AutocompleteUsingGocode(sublime_plugin.ViewEventListener):
     def open_query_completions(self):
         """Opens (forced) the sublime autocomplete window"""
 
-        self._view.run_command("hide_auto_complete")
+        self.view.run_command("hide_auto_complete")
         sublime.set_timeout(
-            lambda: self._view.run_command("auto_complete")
+            lambda: self.view.run_command("auto_complete")
         )
 
     def on_query_completions(self, prefix, locations):
