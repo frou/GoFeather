@@ -6,7 +6,7 @@ import sys
 # TODO(DH): Make use of check_num_selections too.
 from .util import *
 
-# TODO(DH): Have a toggle-able model where simply clicking to place the caret automatically queries docs for that position.
+# TODO(DH): Have a toggle-able model where simply clicking to place the caret automatically queries docs for that position. See my Miniatures/ShowOffset.py for a possible approach. Also have an indication in the status line when this is active.
 
 def determine_wd_for_cmd(view):
     view_fs_path = view.file_name()
