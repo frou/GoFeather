@@ -62,5 +62,4 @@ def run_tool(cmd_parts, shell=False, wd=None):
         sublime.status_message(("%s command failed - see console" % (cmd_parts[0])).upper())
 
 def settings_indicate_go(view_settings):
-  # return view_settings.get("syntax") == "Packages/GoFeather/Go.tmLanguage"
-  return view_settings.get("syntax") == "Packages/GoFeather/Go.sublime-syntax"
+  return view_settings.get("syntax") == "Packages/Go/Go.sublime-syntax"

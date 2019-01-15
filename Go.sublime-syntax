@@ -1,1 +1,11 @@
-../Go/Go.sublime-syntax
+%YAML 1.2
+---
+
+name: GoFeather (Go)
+file_extensions:
+  - go
+
+contexts:
+  main:
+    - match: ""
+      push: "Packages/Go/Go.sublime-syntax"
