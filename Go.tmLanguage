@@ -10,7 +10,7 @@
 
     <key>fileTypes</key>
     <array>
-        <string>go</string>
+        <string>go-old</string>
     </array>
 
     <key>firstLineMatch</key>
