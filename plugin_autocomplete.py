@@ -10,6 +10,11 @@ import subprocess
 
 from .util import *
 
+# TODO(DH): Did I write stuff that is now obsoleted by this PR? https://github.com/mdempsky/gocode/pull/91
+
+# TODO(DH): Port additional changes from guy's async completions work:
+# https://github.com/nsf/gocode/pull/531#issuecomment-445950433
+# https://github.com/stamblerre/gocode/pull/15
 
 class AutocompleteUsingGocode(sublime_plugin.ViewEventListener):
     @classmethod

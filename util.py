@@ -15,6 +15,7 @@ def save_if_needed(view):
         return
     if not view.is_dirty():
         return
+    # TODO(DH): If I can't find a way to do a synchronous view save, just get rid of the whole automated saving aspect and show a dialog telling the user to save first. Alternatively, is it practical to busy-wait?
     view.run_command('save')
 
 # TODO(DH): Make this a decorator? https://www.thecodeship.com/patterns/guide-to-python-function-decorators/

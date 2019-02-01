@@ -8,6 +8,9 @@ from .util import *
 
 # TODO(DH): Have a toggle-able model where simply clicking to place the caret automatically queries docs for that position. See my Miniatures/ShowOffset.py for a possible approach. Also have an indication in the status line when this is active.
 
+# TODO(DH): Use *InputHandler classes from ST API rather than input panel? These give nice palette UI like the stock 'View Package File' command?
+
+
 def determine_wd_for_cmd(view):
     view_fs_path = view.file_name()
     if view_fs_path:
