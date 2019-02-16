@@ -67,7 +67,7 @@ class quick_show_go_doc_from_view(sublime_plugin.TextCommand):
             return
 
         # TODO(DH): Possibly feed in unsaved file(s) rather than saving? https://github.com/zmb3/gogetdoc#unsaved-files
-        save_if_needed(view)
+        ensure_saved_to_disk(view)
 
         byte_offset = view.sel()[0].begin()
         gogetdoc_cmd = [

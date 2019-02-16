@@ -10,7 +10,7 @@ class extract_selection_as_function(sublime_plugin.TextCommand):
         view = self.view
         window = view.window()
 
-        save_if_needed(view)
+        ensure_saved_to_disk(view)
 
         if not check_num_selections(view, 1):
             return

@@ -10,13 +10,18 @@ class SettingsKeys:
 
 
 # TODO(DH): Make this a decorator? https://www.thecodeship.com/patterns/guide-to-python-function-decorators/
-def save_if_needed(view):
-    if not view.file_name():
-        return
+def ensure_saved_to_disk(view):
     if not view.is_dirty():
         return
-    # TODO(DH): If I can't find a way to do a synchronous view save, just get rid of the whole automated saving aspect and show a dialog telling the user to save first. Alternatively, is it practical to busy-wait?
+
+    bos_previously_enabled = not view.settings().has("BuildOnSaveDeactivated")
+    if bos_previously_enabled:
+        view.run_command("build_on_save_disable")
+
     view.run_command('save')
+
+    if bos_previously_enabled:
+        view.run_command("build_on_save_enable")
 
 # TODO(DH): Make this a decorator? https://www.thecodeship.com/patterns/guide-to-python-function-decorators/
 def check_num_selections(view, n):
