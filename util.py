@@ -9,7 +9,7 @@ class SettingsKeys:
     PANEL_QUERIED_TYPE = str(uuid.uuid4())
 
 
-# TODO(DH): Make this a decorator? https://www.thecodeship.com/patterns/guide-to-python-function-decorators/
+# TODU(DH): Make this a decorator? https://www.thecodeship.com/patterns/guide-to-python-function-decorators/
 def ensure_saved_to_disk(view):
     if not view.is_dirty():
         return
@@ -23,7 +23,7 @@ def ensure_saved_to_disk(view):
     if bos_previously_enabled:
         view.run_command("build_on_save_enable")
 
-# TODO(DH): Make this a decorator? https://www.thecodeship.com/patterns/guide-to-python-function-decorators/
+# TODU(DH): Make this a decorator? https://www.thecodeship.com/patterns/guide-to-python-function-decorators/
 def check_num_selections(view, n):
     ok = len(view.sel()) == n
     if not ok:

@@ -17,13 +17,13 @@ class query_current_identifier_implements_or_implemented_by(sublime_plugin.TextC
         # Only examine the selection using `guru` if the view is backed by a
         # file on disk that guru can read.
         if not file_path:
-            # TODO(DH): Communicate error to user?
+            # TODU(DH): Communicate error to user?
             return
 
         sel0 = view.sel()[0]
 
         byte_offset = sel0.begin()
-        # TODO(DH): Pass the -json flag to get structured output, and then
+        # TODU(DH): Pass the -json flag to get structured output, and then
         # construct a nice readable presentation to present in the output
         # panel. Can PATH:LINE patterns in a generic output panel be made
         # clickable?
