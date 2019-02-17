@@ -1,6 +1,6 @@
 // http://docs.sublimetext.info/en/latest/customization/menus.html
-// TODU(DH): Have the commands that make sense from Default.sublime-keymap be available in the right click menu too.
+// @todo #4 Commands bound to keyboard keys should be available in the right-click context menu too.
 [
-    // TODU(DH): Call the same command with different arguments to indicate which refactoring to do?
+    // Call the same command with different arguments to indicate which refactoring to do?
     { "command": "gofeather_dispatch_contextmenu_click" }
 ]
