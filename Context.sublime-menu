@@ -2,33 +2,46 @@
 [
     {
       "command": "gofeather_dispatch_contextmenu_click",
-      "args": {"mode": "lookup_docs"},
+      "args": {
+        "mode": "lookup_docs",
+        "relocate_caret": true
+      },
       "caption": "Lookup Documentation"
     },
     {
       "command": "gofeather_dispatch_contextmenu_click",
-      "args": {"mode": "launch_docs"},
+      "args": {
+        "mode": "launch_docs",
+      },
       "caption": "View Documentation in Browser"
     },
     // { "caption": "-" },
     {
       "command": "gofeather_dispatch_contextmenu_click",
-      "args": {"mode": "rename"},
+      "args": {
+        "mode": "rename"
+      },
       "caption": "Rename"
     },
     {
       "command": "gofeather_dispatch_contextmenu_click",
-      "args": {"mode": "simulate_rename"},
+      "args": {
+        "mode": "simulate_rename"
+      },
       "caption": "Rename (Simulate)"
     },
     {
       "command": "gofeather_dispatch_contextmenu_click",
-      "args": {"mode": "extract_function"},
+      "args": {
+        "mode": "extract_function"
+      },
       "caption": "Extract as Function"
     },
     {
       "command": "gofeather_dispatch_contextmenu_click",
-      "args": {"mode": "query_interface"},
+      "args": {
+        "mode": "query_interface"
+      },
       "caption": "Query Interface Implementation"
     }
 ]
