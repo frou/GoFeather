@@ -3,5 +3,3 @@ errors:
 format:
   - short-title
   - title-length=100
-tags:
-  - pdd
