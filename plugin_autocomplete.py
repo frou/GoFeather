@@ -10,6 +10,8 @@ import subprocess
 
 from .util import *
 
+# @issue Convert in-code TODOs to a form the GitHub todo bot will pick up on
+
 # TODU(DH): Did I write stuff that is now obsoleted by this PR? https://github.com/mdempsky/gocode/pull/91
 
 # TODU(DH): Port additional changes from guy's async completions work:
