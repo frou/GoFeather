@@ -202,5 +202,5 @@ def hint_and_replacement(category, name, go_type):
     return hint, replacement
 
 
-# @issue Completion emission for a variadic function parameter should be a nested snippet
+# @issue Completion snippet emitted for a variadic function parameter should be nested
 # @body Because a variadic function parameter can be satisfied by zero arguments, the snippet emitted should be a snippet within a snippet so that the entire thing can be deleted by pressing backspace/delete just once. i.e. initially `, a ...interface{}` will be selected, and *if* tab is then pressed, just `a ...interface{}` will selected.
