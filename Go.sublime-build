@@ -22,6 +22,11 @@
             "cmd": ["go", "test"]
         },
         {
+            "name": "Run",
+            "cmd": ["go", "run", "$file"],
+            "allow_auto_hide": false
+        },
+        {
             "name": "Generate",
             "cmd": ["go", "generate"]
         },
