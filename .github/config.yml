@@ -1,7 +1,0 @@
-# https://github.com/JasonEtco/todo#configuring-for-your-project
-todo:
-  keyword:
-    - "@todo"
-    - "@issue"
-  bodyKeyword: "@body"
-  label: false
