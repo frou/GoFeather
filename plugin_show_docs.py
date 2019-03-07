@@ -3,12 +3,12 @@ import sublime_plugin
 import os
 import sys
 
-# TODU(DH): Make use of check_num_selections too.
+# TODO(DH): Make use of check_num_selections too.
 from .util import *
 
-# TODU(DH): Have a toggle-able model where simply clicking to place the caret automatically queries docs for that position. See my Miniatures/ShowOffset.py for a possible approach. Also have an indication in the status line when this is active.
+# TODO(DH): Have a toggle-able model where simply clicking to place the caret automatically queries docs for that position. See my Miniatures/ShowOffset.py for a possible approach. Also have an indication in the status line when this is active.
 
-# TODU(DH): Use *InputHandler classes from ST API rather than input panel? These give nice palette UI like the stock 'View Package File' command?
+# TODO(DH): Use *InputHandler classes from ST API rather than input panel? These give nice palette UI like the stock 'View Package File' command?
 
 
 def determine_wd_for_cmd(view):
@@ -66,7 +66,7 @@ class quick_show_go_doc_from_view(sublime_plugin.TextCommand):
             sublime.status_message('TOO MANY SELECTIONS')
             return
 
-        # TODU(DH): Possibly feed in unsaved file(s) rather than saving? https://github.com/zmb3/gogetdoc#unsaved-files
+        # TODO(DH): Possibly feed in unsaved file(s) rather than saving? https://github.com/zmb3/gogetdoc#unsaved-files
         ensure_saved_to_disk(view)
 
         byte_offset = view.sel()[0].begin()

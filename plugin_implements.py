@@ -22,7 +22,7 @@ class query_interface_implementation(sublime_plugin.TextCommand):
         # Only examine the selection using `guru` if the view is backed by a
         # file on disk that guru can read.
         if not file_path:
-            # TODU(DH): Communicate error to user?
+            # TODO(DH): Communicate error to user?
             return
 
         sel0 = view.sel()[0]

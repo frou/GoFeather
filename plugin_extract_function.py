@@ -3,7 +3,7 @@ import sublime_plugin
 
 from .util import *
 
-# TODU(DH): Compare my integrations with this refined looking Emacs package: https://github.com/microamp/godoctor.el
+# TODO(DH): Compare my integrations with this refined looking Emacs package: https://github.com/microamp/godoctor.el
 
 class extract_selection_as_function(sublime_plugin.TextCommand):
     def run(self, args):

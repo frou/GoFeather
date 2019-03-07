@@ -3,7 +3,7 @@ import sublime_plugin
 
 from .util import *
 
-# TODU(DH): Is it worth integrating this tool too? https://godoc.org/golang.org/x/tools/cmd/eg https://rakyll.org/eg/
+# TODO(DH): Is it worth integrating this tool too? https://godoc.org/golang.org/x/tools/cmd/eg https://rakyll.org/eg/
 
 class rename_current_identifier(sublime_plugin.TextCommand):
     def run(self, args, simulate=False):

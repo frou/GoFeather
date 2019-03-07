@@ -10,9 +10,9 @@ import subprocess
 
 from .util import *
 
-# TODU(DH): Did I write stuff that is now obsoleted by this PR? https://github.com/mdempsky/gocode/pull/91
+# TODO(DH): Did I write stuff that is now obsoleted by this PR? https://github.com/mdempsky/gocode/pull/91
 
-# TODU(DH): Port additional changes from guy's async completions work:
+# TODO(DH): Port additional changes from guy's async completions work:
 # https://github.com/nsf/gocode/pull/531#issuecomment-445950433
 # https://github.com/stamblerre/gocode/pull/15
 
@@ -32,8 +32,8 @@ class AutocompleteUsingGocode(sublime_plugin.ViewEventListener):
         self._running = True
         self._location = location
 
-        # TODU(DH): Use -source flag so that it's not built packages being inspected? https://github.com/mdempsky/gocode/commit/7282f446b501b064690f39640b70e1ef54806c60
-        # TODU(DH): Will -source be usably performant when this is merged? https://github.com/mdempsky/gocode/issues/28
+        # TODO(DH): Use -source flag so that it's not built packages being inspected? https://github.com/mdempsky/gocode/commit/7282f446b501b064690f39640b70e1ef54806c60
+        # TODO(DH): Will -source be usably performant when this is merged? https://github.com/mdempsky/gocode/issues/28
         cmd = ["gocode", "-f=csv", "-builtin", "-unimported-packages", "autocomplete"]
         view_path = self.view.file_name()
         if view_path:
