@@ -8,7 +8,7 @@ from .plugin_show_docs import submit_panel as show_documentation
 
 divider_indicator = "\t"
 
-class query_current_identifier_implements_or_implemented_by(sublime_plugin.TextCommand):
+class query_interface_implementation(sublime_plugin.TextCommand):
     def run(self, args):
         view = self.view
         window = view.window()

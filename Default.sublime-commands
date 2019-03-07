@@ -23,7 +23,7 @@
   },
   {
     "caption": "GoFeather: Query interface implementations",
-    "command": "query_current_identifier_implements_or_implemented_by"
+    "command": "query_interface_implementation"
   },
   {
     "caption": "GoFeather: Extract selection as a new function",
