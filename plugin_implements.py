@@ -44,7 +44,7 @@ class query_interface_implementation(sublime_plugin.TextCommand):
             sublime.error_message("Doesn't implement any known interfaces.\n\nIsn't implemented by any known types.")
             return
 
-        dividers_needed = implemented_by_something
+        dividers_needed = True#implemented_by_something
 
         results = []
         if implements_something:
