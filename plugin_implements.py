@@ -49,13 +49,13 @@ class query_interface_implementation(sublime_plugin.TextCommand):
         results = []
         if implements_something:
             if dividers_needed:
-                results.append(self.make_divider("IMPLEMENTS"))
+                results.append(self.make_divider("𝙄𝙢𝙥𝙡𝙚𝙢𝙚𝙣𝙩𝙨"))
             for desc in decoded_json["from"]:
                 results.append(desc["name"])
 
         if implemented_by_something:
             if dividers_needed:
-                results.append(self.make_divider("IMPLEMENTED BY"))
+                results.append(self.make_divider("𝙄𝙢𝙥𝙡𝙚𝙢𝙚𝙣𝙩𝙚𝙙 𝙗𝙮"))
             for desc in decoded_json["to"]:
                 results.append(desc["name"])
 
@@ -97,4 +97,4 @@ class query_interface_implementation(sublime_plugin.TextCommand):
             False)
 
     def make_divider(self, text):
-        return "%s %s" % (divider_indicator, text)
+        return "%s%s" % (text, divider_indicator)
