@@ -37,13 +37,13 @@ class query_interface_implementation(sublime_plugin.TextCommand):
             return
         decoded_json = sublime.decode_value(guru_cmd_output)
 
-        is_itself_interface = decoded_json["type"]["kind"] == "interface"
+        subject_is_interface = decoded_json["type"]["kind"] == "interface"
         implements_something = "from" in decoded_json
-        implemented_by_something = is_itself_interface and "to" in decoded_json
+        implemented_by_something = subject_is_interface and "to" in decoded_json
 
         if not implements_something and not implemented_by_something:
             err_msg = "Doesn't implement any known interfaces."
-            if is_itself_interface:
+            if subject_is_interface:
                 err_msg += "\n\nIsn't implemented by any known types."
             sublime.error_message(err_msg)
             return
