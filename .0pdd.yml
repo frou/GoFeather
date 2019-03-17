@@ -3,3 +3,7 @@ errors:
 format:
   - short-title
   - title-length=100
+alerts:
+  suppress:
+    - on-found-puzzle
+    - on-scope

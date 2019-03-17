@@ -16,6 +16,9 @@ from .util import *
 # https://github.com/nsf/gocode/pull/531#issuecomment-445950433
 # https://github.com/stamblerre/gocode/pull/15
 
+# TODO: Integrate this tool to generate methods stubs for interfaces: https://github.com/josharian/impl
+
+
 class AutocompleteUsingGocode(sublime_plugin.ViewEventListener):
     @classmethod
     def is_applicable(cls, settings):
@@ -34,7 +37,13 @@ class AutocompleteUsingGocode(sublime_plugin.ViewEventListener):
 
         # TODO(DH): Use -source flag so that it's not built packages being inspected? https://github.com/mdempsky/gocode/commit/7282f446b501b064690f39640b70e1ef54806c60
         # TODO(DH): Will -source be usably performant when this is merged? https://github.com/mdempsky/gocode/issues/28
-        cmd = ["gocode", "-f=csv", "-builtin", "-unimported-packages", "autocomplete"]
+        cmd = [
+            "gocode",
+            "-f=csv",
+            "-builtin",
+            "-unimported-packages",
+            "autocomplete",
+        ]
         view_path = self.view.file_name()
         if view_path:
             cmd.append(view_path)
@@ -56,7 +65,9 @@ class AutocompleteUsingGocode(sublime_plugin.ViewEventListener):
         for line in filter(bool, gocode_output.split("\n")):
             components = line.split(",,")
             result.append(
-                hint_and_replacement(components[0], components[1], components[2])
+                hint_and_replacement(
+                    components[0], components[1], components[2]
+                )
             )
 
         # Exit conditions:
@@ -85,7 +96,8 @@ class AutocompleteUsingGocode(sublime_plugin.ViewEventListener):
         # Return this to cause Sublime to not even attempt to offer ANY kind of completions at this time.
         dont_complete = (
             [],
-            sublime.INHIBIT_WORD_COMPLETIONS | sublime.INHIBIT_EXPLICIT_COMPLETIONS,
+            sublime.INHIBIT_WORD_COMPLETIONS
+            | sublime.INHIBIT_EXPLICIT_COMPLETIONS,
         )
 
         if self._completions:
@@ -101,7 +113,9 @@ class AutocompleteUsingGocode(sublime_plugin.ViewEventListener):
 
         self._prefix = prefix
 
-        sublime.set_timeout_async(lambda: self.fetch_query_completions(prefix, loc))
+        sublime.set_timeout_async(
+            lambda: self.fetch_query_completions(prefix, loc)
+        )
 
         return dont_complete
 
