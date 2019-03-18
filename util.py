@@ -1,8 +1,10 @@
 import sublime
+import sublime_extra
 import subprocess
 import sys
 import uuid
 
+# TODO: Integrate these into sublime_extra
 
 class SettingsKeys:
     PANEL_LAST_USER_INPUT = str(uuid.uuid4())
@@ -42,17 +44,6 @@ def show_gofeather_output_panel(window, content):
     output.run_command('append', {'characters': content})
     window.run_command('show_panel', {'panel': panel_name_full})
 
-def platform_startupinfo():
-    if sys.platform == 'win32':
-        si = subprocess.STARTUPINFO()
-        # Stop a visible console window from appearing.
-        si.dwFlags |= subprocess.STARTF_USESHOWWINDOW
-        si.wShowWindow = subprocess.SW_HIDE
-        return si
-    else:
-        return None
-
-
 def run_tool(cmd_parts, shell=False, wd=None):
     # print("GoFeather: running tool %s" % cmd_parts)
     try:
@@ -61,7 +52,7 @@ def run_tool(cmd_parts, shell=False, wd=None):
             cwd=wd,
             shell=shell,
             stderr=subprocess.STDOUT,
-            startupinfo=platform_startupinfo())
+            startupinfo=sublime_extra.xplatform.subprocess_startupinfo())
         return cmd_output.decode('utf-8')
     except subprocess.CalledProcessError as e:
         print("\n%s failed. Its stderr was:\n%s" % (cmd_parts, e.output.decode('utf-8')))
