@@ -6,7 +6,7 @@
     <string>GoFeather (Template)</string>
 
     <key>scopeName</key>
-    <string>source.go</string>
+    <string>source.go-template</string>
 
     <key>fileTypes</key>
     <array>
@@ -22,7 +22,7 @@
     <array>
         <dict>
             <key>name</key>
-            <string>comment.template.go</string>
+            <string>comment.go-template</string>
 
             <key>begin</key>
             <string>{{/\*</string>
@@ -43,31 +43,31 @@
                 <key>1</key>
                 <dict>
                     <key>name</key>
-                    <string>support.template.go</string>
+                    <string>support.go-template</string>
                 </dict>
 
                 <key>4</key>
                 <dict>
                     <key>name</key>
-                    <string>keyword.template.go</string>
+                    <string>keyword.go-template</string>
                 </dict>
 
                 <key>6</key>
                 <dict>
                     <key>name</key>
-                    <string>keyword.template.go</string>
+                    <string>keyword.go-template</string>
                 </dict>
 
                 <key>7</key>
                 <dict>
                     <key>name</key>
-                    <string>markup.template.go</string>
+                    <string>markup.go-template</string>
                 </dict>
 
                 <key>8</key>
                 <dict>
                     <key>name</key>
-                    <string>support.template.go</string>
+                    <string>support.go-template</string>
                 </dict>
             </dict>
         </dict>
