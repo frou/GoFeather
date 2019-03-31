@@ -3,6 +3,8 @@
 # This script will install (or update) the underlying command-line tools that
 # are made use of by this Sublime package.
 
+# @todo #0 Port this to Python and have it be callable from the Command Palette
+
 set -e
 set -x
 
