@@ -14,13 +14,13 @@
 
     // Toggle between HTML and GoTemplate syntax highlighting
     {
-        "keys": ["alt+t"],
+        "keys": ["f5"],
         "command": "set_file_type",
         "args": {"syntax": "Packages/HTML/HTML.sublime-syntax"},
         "context": [{"key": "selector", "operator": "equal", "operand": "source.go-template"}]
     },
     {
-        "keys": ["alt+t"],
+        "keys": ["f5"],
         "command": "set_file_type",
         "args": {"syntax": "Packages/GoFeather/GoTemplate.tmLanguage"},
         "context": [{"key": "selector", "operator": "equal", "operand": "text.html"}]
