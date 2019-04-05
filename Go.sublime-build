@@ -3,7 +3,6 @@
     "file_regex": "^\\s*(.+?):([0-9]+)(?::([0-9]+))?:?\\s*(.+)$",
 
     "syntax": "Packages/GoFeather/BuildResultsGo.tmLanguage",
-    "word_wrap": false,
 
     "cmd": ["go", "build"],
 
