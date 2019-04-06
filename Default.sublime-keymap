@@ -26,3 +26,7 @@
         "context": [{"key": "selector", "operator": "equal", "operand": "text.html"}]
     },
 ]
+
+
+// TODO: Some of the more advanced "context" stuff like "num_selections" and "selection_empty" could be made use of?
+// https://www.sublimetext.com/docs/3/key_bindings.html
