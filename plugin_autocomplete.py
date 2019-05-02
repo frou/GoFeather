@@ -6,7 +6,6 @@
 
 import sublime
 import sublime_plugin
-import sublime_extra
 import subprocess
 
 from .util import *
@@ -56,7 +55,7 @@ class AutocompleteUsingGocode(sublime_plugin.ViewEventListener):
             cmd,
             stdin=subprocess.PIPE,
             stdout=subprocess.PIPE,
-            startupinfo=sublime_extra.xplatform.subprocess_startupinfo(),
+            startupinfo=platform_startupinfo(),
         )
 
         gocode_output = gocode.communicate(gocode_input.encode())[0].decode()
