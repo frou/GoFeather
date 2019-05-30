@@ -22,6 +22,10 @@ from .util import *
 class AutocompleteUsingGocode(sublime_plugin.ViewEventListener):
     @classmethod
     def is_applicable(cls, settings):
+        if settings.get('lsp_language'):
+            # If github.com/tomv564/LSP is in use, don't compete against it to provide autocompletion.
+            return False
+
         return settings_indicate_go(settings)
 
     def __init__(self, view):
