@@ -127,17 +127,3 @@ class launch_browser_docs_from_view(sublime_plugin.TextCommand):
             run_tool([launcher, 'https://golang.org/pkg/'], wd='.', shell=via_shell)
         else:
             run_tool([launcher, 'https://godoc.org/' + pkg.lower()], wd='.', shell=via_shell)
-
-# class guru_info(sublime_plugin.TextCommand):
-#     def run(self, args):
-#         view = self.view
-#         sel0 = view.sel()[0]
-
-#         file_path = view.file_name()
-#         byte_offset = sel0.begin()
-
-#         guru_cmd = [
-#             'guru', '-json', 'describe', "%s:#%d" %(file_path, byte_offset)
-#         ]
-#         guru_cmd_output = run_tool(guru_cmd)
-#         print(sublime.decode_value(guru_cmd_output))
