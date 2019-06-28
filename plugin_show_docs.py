@@ -6,7 +6,7 @@ import sys
 # TODO(DH): Make use of check_num_selections too.
 from .util import *
 
-# TODO(DH): Have a toggle-able model where simply clicking to place the caret automatically queries docs for that position. See my Miniatures/ShowOffset.py for a possible approach. Also have an indication in the status line when this is active.
+# TODO(DH): Have a toggle-able mode where simply clicking to place the caret automatically queries docs for that position. See my Miniatures/ShowOffset.py for a possible approach. Also have an indication in the status line when this is active.
 
 # TODO(DH): Use *InputHandler classes from ST API rather than input panel? These give nice palette UI like the stock 'View Package File' command?
 
