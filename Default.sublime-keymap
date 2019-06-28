@@ -11,20 +11,6 @@
     {"keys": ["alt+r", "alt+i"],        "command": "query_interface_implementation", "args": {},                 "context": [{"key": "selector", "operator": "equal", "operand": "source.go"}]},
     {"keys": ["alt+r", "alt+f"],        "command": "extract_selection_as_function",  "args": {},                 "context": [{"key": "selector", "operator": "equal", "operand": "source.go"}]},
     // {"keys": ["alt+r", "alt+g"],        "command": "guru_info",                      "args": {},                 "context": [{"key": "selector", "operator": "equal", "operand": "source.go"}]},
-
-    // Toggle between HTML and GoTemplate syntax highlighting
-    {
-        "keys": ["f5"],
-        "command": "set_file_type",
-        "args": {"syntax": "Packages/HTML/HTML.sublime-syntax"},
-        "context": [{"key": "selector", "operator": "equal", "operand": "source.go-template"}]
-    },
-    {
-        "keys": ["f5"],
-        "command": "set_file_type",
-        "args": {"syntax": "Packages/GoFeather/GoTemplate.tmLanguage"},
-        "context": [{"key": "selector", "operator": "equal", "operand": "text.html"}]
-    },
 ]
 
 
