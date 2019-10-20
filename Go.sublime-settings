@@ -1,8 +1,0 @@
-{
-  "auto_complete_triggers": [
-    {
-      "characters": ".",
-      "selector": "source.go -comment -string -constant"
-    }
-  ]
-}
