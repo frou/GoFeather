@@ -67,5 +67,5 @@ class show_refactor_result(sublime_plugin.TextCommand):
         view.set_scratch(True)
         view.set_name("Simulated renaming")
         if is_diff:
-            view.set_syntax_file('Packages/Diff/Diff.sublime-syntax')
+            view.assign_syntax('Packages/Diff/Diff.sublime-syntax')
         view.insert(edit, 0, result)
