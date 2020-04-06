@@ -19,12 +19,6 @@
     <key>author</key>
     <string>https://github.com/frou</string>
 
-    <!-- @todo #0 Pick plugins with value from GoFeather's carcass to use in a new Goverlay package
-    -->
-
-    <!-- @todo #0 Archive the GoFeather repo (make it readonly) on GitHub
-    -->
-
     <key>patterns</key>
     <array>
         <!-- Comment -->
